@@ -1,0 +1,206 @@
+<% randn = rand(1..3) %>
+<% if randn == 1%>
+  <div class="container-fluid head pink">
+<% elsif randn == 2%>
+  <div class="container-fluid head blue">
+<% elsif randn == 3%>
+  <div class="container-fluid head green">
+<% end %>
+<% if !@lecturesPS.empty? %>
+  <% day = @days.where(id: @lecturesPS.first.day_id).first %>
+<% elsif !@lectures1.empty? %>
+  <% day = @days.where(id: @lectures1.first.day_id).first %>
+<% elsif !@lectures2.empty? %>
+  <% day = @days.where(id: @lectures2.first.day_id).first %>
+<% elsif !@lectures3.empty? %>
+  <% day = @days.where(id: @lectures3.first.day_id).first %>
+<% elsif !@lectures4.empty? %>
+  <% day = @days.where(id: @lectures4.first.day_id).first %>
+<% end %>
+<% if @lecturesPS.empty? && @lectures1.empty? && @lectures2.empty? && @lectures3.empty? && @lectures4.empty? %>
+  <h1>Empty schedule</h1>
+  <h1 class="sub">Add lectures</h1>
+<% else %>
+  <h1><%= day.name %> schedule</h1>
+  <h1 class="sub"><%= day.date %></h1>
+<% end %>
+</div>
+
+<div class="container marketing schedule">
+
+<!--
+        <div class="col-lg-12">
+          <a href="../lecture"><div class="plenary-session">
+            <h4>The Traditional Monday Plenary Session</h4>
+            <p>Donec id elit non mi porta gravida at eget metus. Maecenas faucibus mollis interdum.</p>
+            <p>9:30-11:00 The Diamond LT03</p>
+          </div></a>
+        </div>
+-->
+
+        <div class="col-lg-12">
+          <% @lecturesPS.each do |f| %>
+          <a href="../lecture?id=<%=f.id%>">
+             <div class="plenary-session">
+             <h4>Plenary Session</h4>
+              <p><%= f.start_time %> - <%= f.end_time %></p>
+             </div>
+            </a>
+         <% end %>
+
+<!--
+         <div class="col-lg-12">
+           <% @lecturesCB.each do |f| %>
+            <a href="../lecture?id=<%=f.id%>">
+              <div class="plenary-session">
+              <h4>Coffee Break</h4>
+               <p><%= f.start_time %> - <%= f.end_time %></p>
+              </div>
+            </a>
+          <% end %>
+-->
+
+
+        <div class="col-lg-3">
+          <% @lectures1.each do |f| %>
+          <% if !f.is_break %>
+           <a href="../lecture?id=<%=f.id%>">
+             <div class="lecture-slot column-blue">
+              <p><b><%= f.lecture_title %></b></p>
+              <% @speakerS = Speaker.where("email = '#{f.key_speaker}'").first %>
+              <p><% if !@speakerS.nil? %>
+                <% if !@speakerS.forename.empty? && !@speakerS.surname.empty?%>
+                  <%= @speakerS.forename %> <%= @speakerS.surname %>
+                <%end%>
+              <% else %>
+               Speaker not registered
+              <% end %></p>
+              <p><%= f.start_time %> - <%= f.end_time %></p>
+              <p><%= f.location %></p>
+             </div>
+           </a>
+          <% else %>
+            <div class="lecture-slot column-blue">
+              <p><b><%= f.lecture_title %></b></p>
+             <p><%= f.start_time %> - <%= f.end_time %></p>
+            </div>
+         <% end %>
+         <% end %>
+       </div>
+
+        <div class="col-lg-3">
+          <% @lectures2.each do |f| %>
+          <% if !f.is_break %>
+           <a href="../lecture?id=<%=f.id%>">
+             <div class="lecture-slot column-pink">
+              <p><b><%= f.lecture_title %></b></p>
+              <% @speakerS = Speaker.where("email = '#{f.key_speaker}'").first %>
+              <p><% if !@speakerS.nil? %>
+                <% if !@speakerS.forename.empty? && !@speakerS.surname.empty?%>
+                  <%= @speakerS.forename %> <%= @speakerS.surname %>
+                <%end%>
+              <% else %>
+               Speaker not registered
+              <% end %></p>
+              <p><%= f.start_time %> - <%= f.end_time %></p>
+              <p><%= f.location %></p>
+             </div>
+           </a>
+          <% else %>
+            <div class="lecture-slot column-pink">
+              <p><b><%= f.lecture_title %></b></p>
+             <p><%= f.start_time %> - <%= f.end_time %></p>
+            </div>
+         <% end %>
+         <% end %>
+        </div>
+
+
+        <div class="col-lg-3">
+          <% @lectures3.each do |f| %>
+          <% if !f.is_break %>
+           <a href="../lecture?id=<%=f.id%>">
+             <div class="lecture-slot column-orange">
+              <p><b><%= f.lecture_title %></b></p>
+              <% @speakerS = Speaker.where("email = '#{f.key_speaker}'").first %>
+              <p><% if !@speakerS.nil? %>
+                <% if !@speakerS.forename.empty? && !@speakerS.surname.empty?%>
+                  <%= @speakerS.forename %> <%= @speakerS.surname %>
+                <%end%>
+              <% else %>
+               Speaker not registered
+              <% end %></p>
+              <p><%= f.start_time %> - <%= f.end_time %></p>
+              <p><%= f.location %></p>
+             </div>
+           </a>
+          <% else %>
+            <div class="lecture-slot column-orange">
+              <p><b><%= f.lecture_title %></b></p>
+             <p><%= f.start_time %> - <%= f.end_time %></p>
+            </div>
+         <% end %>
+         <% end %>
+        </div>
+
+        <div class="col-lg-3">
+          <% @lectures4.each do |f| %>
+          <% if !f.is_break %>
+           <a href="../lecture?id=<%=f.id%>">
+             <div class="lecture-slot column-purple">
+              <p><b><%= f.lecture_title %></b></p>
+              <% @speakerS = Speaker.where("email = '#{f.key_speaker}'").first %>
+              <p><% if !@speakerS.nil? %>
+                <% if !@speakerS.forename.empty? && !@speakerS.surname.empty?%>
+                  <%= @speakerS.forename %> <%= @speakerS.surname %>
+                <%end%>
+              <% else %>
+               Speaker not registered
+              <% end %></p>
+              <p><%= f.start_time %> - <%= f.end_time %></p>
+              <p><%= f.location %></p>
+             </div>
+           </a>
+          <% else %>
+            <div class="lecture-slot column-purple">
+              <p><b><%= f.lecture_title %></b></p>
+             <p><%= f.start_time %> - <%= f.end_time %></p>
+            </div>
+         <% end %>
+         <% end %>
+       </div>
+
+</div>
+
+<div class="container marketing schedule">
+  <h1>Schedule labelling</h1>
+  <h1 class="sub">How to interpret the colors</h1>
+  <div class="col-lg-3">
+       <div class="lecture-slot column-blue">
+        <p>Blue indicates</p>
+        <p>that the lecture is in</p>
+        <p>SPLITTING</p>
+       </div>
+  </div>
+  <div class="col-lg-3">
+       <div class="lecture-slot column-pink">
+        <p>Pink indicates</p>
+        <p>that the lecture is in</p>
+        <p>Insertion</p>
+       </div>
+  </div>
+  <div class="col-lg-3">
+       <div class="lecture-slot column-orange">
+        <p>Orange indicates</p>
+        <p>that the lecture is in</p>
+        <p>Enabling</p>
+       </div>
+  </div>
+  <div class="col-lg-3">
+       <div class="lecture-slot column-purple">
+        <p>Purple indicates</p>
+        <p>that the lecture is in</p>
+        <p>Extra</p>
+       </div>
+  </div>
+</div>

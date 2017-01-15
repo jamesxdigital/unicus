@@ -1,0 +1,53 @@
+<% randn = rand(1..3) %>
+<% if randn == 1%>
+  <div class="container-fluid head pink">
+<% elsif randn == 2%>
+  <div class="container-fluid head blue">
+<% elsif randn == 3%>
+  <div class="container-fluid head green">
+<% end %>
+  <h1>Conference Speakers</h1>
+  <h2 class="sub">Read more about our speakers</h1>
+</div>
+
+<% if !@speakerA.nil? %>
+<div class="container marketing">
+            <% @speakerA.each do |q| %>
+            <% if q.to_display == "1" %>
+          <div class="col-lg-3 col-sm-6" >
+            <%= image_tag q.avatar_url(:normal) %>
+            <h2><%= q.full_name%></h2>
+            <p><%= q.organisation%></p>
+            <p><a class="btn btn-default" href="/speaker?id=<%=q.id%>" role="button">Read more &raquo;</a></p>
+          </div>
+          <% end %>
+        <% end %>
+          <!-- /.col-lg-4 -->
+
+            <!-- <nav>
+              <ul class="pagination">
+                <li>
+                  <a href="#" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                  </a>
+                </li>
+                <li><a href="#">1</a></li>
+                <li><a href="#">2</a></li>
+                <li><a href="#">3</a></li>
+                <li><a href="#">4</a></li>
+                <li><a href="#">5</a></li>
+                <li>
+                  <a href="#" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                  </a>
+                </li>
+              </ul>
+          </nav> -->
+          <% else %>
+          <div class="container marketing">
+            <h2 class= "sub"> No speakers to be displayed! </h2>
+          </div>
+
+          <% end %>
+
+</div>

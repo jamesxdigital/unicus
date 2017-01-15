@@ -1,0 +1,27 @@
+<!-- - content_for :title, 'Browser Not Compatible'
+
+.page-header
+  %h1 Browser Not Compatible
+
+%p.lead It appears that you are using a web browser without JavaScript which prevents us offering you a rich online experience.
+
+%p.lead.margin-bottom-40 Please enable JavaScript in your web browser settings, use a different web browser,
+or alternatively contact the CiCS Helpdesk for assistance. -->
+
+
+<% randn = rand(1..3) %>
+<% if randn == 1%>
+  <div class="container-fluid head pink">
+<% elsif randn == 2%>
+  <div class="container-fluid head blue">
+<% elsif randn == 3%>
+  <div class="container-fluid head green">
+<% end %>
+  <h1>Warning</h1>
+  <h1 class="sub">Browser Not Compatible</h1>
+</div>
+
+<div class="container">
+<h1 class="error_code">Oops!</h1>
+<p class="error_description">It appears that you are using a web browser without JavaScript which prevents us offering you a rich online experience. Please enable JavaScript in your web browser settings or use a different web browser</p>
+</div>

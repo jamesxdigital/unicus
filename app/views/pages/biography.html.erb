@@ -1,0 +1,104 @@
+<% randn = rand(1..3) %>
+<% if randn == 1%>
+  <div class="container-fluid head pink">
+<% elsif randn == 2%>
+  <div class="container-fluid head blue">
+<% elsif randn == 3%>
+  <div class="container-fluid head green">
+<% end %>
+  <h1>Biography</h1>
+  <h2 class="sub">Tell us more about yourself</h1>
+</div>
+
+<div class="container">
+  <%= form_for @speaker, url:biography_path do |f| %>
+
+  <% if @speaker.errors.any? %>
+   <div class="alert alert-danger" role="alert">
+     <h2><%= pluralize(@speaker.errors.count, "error") %> prohibited this post from being saved:</h2>
+
+     <ul>
+     <% @speaker.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+  <% end %>
+
+  <form>
+    <div class="form-group">
+      <%= label_tag "Title" %><br>
+      <%= f.select(:speaker_title, [['Prof.'], ['Dr.'],['Mr.'],['Mrs.'],['Ms.']]) %>
+    </div>
+
+    <div class="form-group">
+      <%=label_tag "Forename" %><br>
+      <%= f.text_field :forename, :class => "form-control", :value => (@speaker.forename || "") %>
+    </div>
+
+    <div class="form-group">
+      <%=label_tag "Surname" %><br>
+      <%= f.text_field :surname, :class => "form-control", :value => (@speaker.surname || "") %>
+    </div>
+
+    <div class="form-group">
+      <%=label_tag "Organisation" %><br>
+      <%= f.text_field :organisation, :class => "form-control", :value => (@speaker.organisation || "") %>
+    </div>
+
+    <div class="form-group">
+      <%=label_tag "Contact Email (visible in your speaker page)" %><br>
+      <%= f.email_field :display_email, :class => "form-control", :value => (@speaker.display_email || "") %>
+    </div>
+
+    <div class="form-group">
+      <%=label_tag "Biography" %><br>
+      <%= f.text_area :biography, :class => "form-control", :value => (@speaker.biography || "") %>
+    </div>
+
+    <div class="form-group">
+      <%=label_tag "Academic Background" %><br>
+      <%= f.text_area :academic_background, :class => "form-control", :value => (@speaker.academic_background || "") %>
+    </div>
+
+    <div class="form-group">
+      <%=label_tag "Website" %><br>
+      <%= f.url_field :website, :class => "form-control", :value => (@speaker.website || "") %>
+    </div>
+
+    <div class="form-group">
+      <%=label_tag "Facebook" %><br>
+      <%= f.url_field :facebook, :class => "form-control", :value => (@speaker.facebook || "") %>
+    </div>
+
+    <div class="form-group">
+      <%=label_tag "Twitter" %><br>
+      <%= f.url_field :twitter, :class => "form-control", :value => (@speaker.twitter || "") %>
+    </div>
+
+    <div class="form-group">
+      <%=label_tag "LinkedIn" %><br>
+      <%= f.url_field :linkedIn, :class => "form-control", :value => (@speaker.linkedIn || "") %>
+    </div>
+
+    <div class="form-group">
+      <%=label_tag "Photo Upload (* JPG JPEG GIF PNG)" %><br>
+      <div class="field">
+        <%= f.file_field :avatar %>
+        <%= f.hidden_field :avatar_cache %>
+        <%=label_tag "Remove Photo" %>
+        <%= f.check_box :remove_avatar %>
+      </div>
+
+      <br /><div class="form-group">
+        <%= label_tag "Display speaker" %>
+        <%= f.check_box :to_display %>
+      </div>
+
+      <br>
+    </br>
+
+    <%=submit_tag "Submit", :class=>"btn btn-default" %>
+  </form>
+</div>
+<% end %>

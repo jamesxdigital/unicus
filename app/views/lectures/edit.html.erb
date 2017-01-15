@@ -1,0 +1,75 @@
+<div class="col-xs-12 col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+  <h1 class="page-header">Edit Lecture Information</h1>
+
+<%= form_for :lecture, url: lecture_path(@lecture), method: :patch do |f| %>
+  <% if @lecture.errors.any? %>
+  <div class="alert alert-danger">
+    <h2><%= pluralize(@lecture.errors.count, "error") %> prohibited
+      this lecture from being saved:</h2>
+    <ul>
+    <% @lecture.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+  <% end %>
+
+    <form>
+      <div class="form-group">
+        <%=label_tag "Lecture Title" %><br>
+        <%= f.text_field :lecture_title, :class => "form-control", :placeholder => "Example: Why is Wordpress the best?" %>
+      </div>
+
+      <div class="form-group">
+        <%= label_tag "This is not a lecture " %>
+        <%= f.check_box :is_break %>
+      </div><br>
+
+      <div class="form-group">
+        <%= label_tag "Select Lecture Day" %><br>
+        <%= f.collection_select(:day_id, Day.all, :id, :date, :prompt => true) %>
+      </div>
+
+      <div class="form-group">
+        <%= label_tag "Select Day Column" %><br>
+        <%= f.select(:column_name, [['Splitting'], ['Insertion'],['Enabling'],['Extra'],['Plenary Session']]) %>
+      </div>
+
+      <div class="form-group">
+        <%=label_tag "Start Time" %><br>
+        <%= f.text_field :start_time, :class => "form-control" %>
+      </div>
+
+      <div class="form-group">
+        <%=label_tag "End Time" %><br>
+        <%= f.text_field :end_time, :class => "form-control", :placeholder => "Example: 15:00" %>
+      </div>
+
+      <div class="form-group">
+        <%=label_tag "Location" %><br>
+        <%= f.text_field :location, :class => "form-control", :placeholder => "Diamond LT03" %>
+      </div>
+
+
+      <div class="form-group">
+        <%=label_tag "Key Speaker" %><br>
+        <%= f.text_field :key_speaker, :class => "form-control", :placeholder => "Email address" %>
+      </div>
+
+
+        <div class="form-group">
+          <%=label_tag "Description" %><br>
+          <%= f.text_area :description, :class => "form-control", :placeholder => "Example:" %>
+        </div>
+
+      <div class="form-group">
+        <label for="lecture_file">File input</label>
+        <input type="file" id="lecture_file">
+        <p class="help-block">This file can be downloaded by the users</p>
+      </div>
+      <%=submit_tag "Save Changes", :class=>"btn btn-default" %>
+      <%= link_to 'Cancel', lectures_path, :class=>"btn btn-default" %>
+
+    </form>
+  </div>
+  <% end %>

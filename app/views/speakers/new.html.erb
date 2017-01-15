@@ -1,0 +1,82 @@
+<div class="col-xs-12 col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+  <h1 class="page-header">Add a speaker</h1>
+
+  <%= form_for :speaker, url:speakers_path do |f| %>
+
+  <% if @speaker.errors.any? %>
+   <div class="alert alert-danger" role="alert">
+     <h2><%= pluralize(@speaker.errors.count, "error") %> prohibited this post from being saved:</h2>
+
+     <ul>
+     <% @speaker.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+  <% end %>
+
+  <form>
+
+    <div class="form-group">
+      <%= label_tag "Title" %><br>
+      <%= f.select(:speaker_title, [['Prof.'], ['Dr.'],['Mr.'],['Mrs.'],['Ms.']]) %>
+    </div>
+
+    <div class="form-group">
+      <%=label_tag "Forename" %><br>
+      <%= f.text_field :forename, :class => "form-control" %>
+    </div>
+
+    <div class="form-group">
+      <%=label_tag "Surname" %><br>
+      <%= f.text_field :surname, :class => "form-control" %>
+    </div>
+
+    <div class="form-group">
+      <%=label_tag "Organisation" %><br>
+      <%= f.text_field :organisation, :class => "form-control" %>
+    </div>
+
+    <div class="form-group">
+      <%=label_tag "Email" %><br>
+      <%= f.email_field :email, :class => "form-control" %>
+    </div>
+
+    <div class="form-group">
+      <%=label_tag "Biography" %><br>
+      <%= f.text_area :biography, :class => "form-control" %>
+    </div>
+
+    <div class="form-group">
+      <%=label_tag "Academic Background" %><br>
+      <%= f.text_area :academic_background, :class => "form-control" %>
+    </div>
+
+    <div class="form-group">
+      <%=label_tag "Website" %><br>
+      <%= f.url_field :website, :class => "form-control" %>
+    </div>
+
+    <div class="form-group">
+      <%=label_tag "Fackbook" %><br>
+      <%= f.text_field :facebook, :class => "form-control" %>
+    </div>
+
+    <div class="form-group">
+      <%=label_tag "Twitter" %><br>
+      <%= f.text_field :twitter, :class => "form-control" %>
+    </div>
+
+    <div class="form-group">
+      <%=label_tag "Photo" %><br>
+      <div class="field">
+        <%= f.file_field :avatar %>
+        <%= f.hidden_field :avatar_cache %>
+      </div>
+      
+      <br>
+    </br>
+    <%=submit_tag "Submit", :class=>"btn btn-default" %>
+  </form>
+</div>
+<% end %>

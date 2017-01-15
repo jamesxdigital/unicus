@@ -1,0 +1,13 @@
+development:
+  adapter: postgresql
+  database: hut-21_dev
+  host: localhost
+  min_messages: warning
+  username:
+
+test:
+  adapter: postgresql
+  database: hut-21_test
+  host: localhost
+  min_messages: warning
+  username:

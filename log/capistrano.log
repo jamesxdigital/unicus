@@ -1,0 +1,919 @@
+# Logfile created on 2016-05-17 11:43:52 +0100 by logger.rb/53141
+  INFO ---------------------------------------------------------------------------
+  INFO START 2016-05-17 11:43:52 +0100 cap demo deploy:migrations
+  INFO ---------------------------------------------------------------------------
+ DEBUG [d33be250] Running /usr/bin/env which passenger as demo.team21@epi-stu-hut-demo2.shef.ac.uk
+ DEBUG [d33be250] Command: /usr/bin/env which passenger
+ DEBUG [d33be250] Finished in 0.272 seconds with exit status 1 (failed).
+ DEBUG [37be10eb] Running /usr/local/rvm/bin/rvm version as demo.team21@epi-stu-hut-demo2.shef.ac.uk
+ DEBUG [37be10eb] Command: /usr/local/rvm/bin/rvm version
+ DEBUG [37be10eb] 	rvm 1.26.11 (latest) by Wayne E. Seguin <wayneeseguin@gmail.com>, Michal Papis <mpapis@gmail.com> [https://rvm.io/]
+ DEBUG [37be10eb] 	
+ DEBUG [37be10eb] Finished in 0.201 seconds with exit status 0 (successful).
+ DEBUG [c17c538c] Running /usr/local/rvm/bin/rvm current as demo.team21@epi-stu-hut-demo2.shef.ac.uk
+ DEBUG [c17c538c] Command: /usr/local/rvm/bin/rvm current
+ DEBUG [c17c538c] 	ruby-2.1.7
+ DEBUG [c17c538c] 	
+ DEBUG [c17c538c] Finished in 0.300 seconds with exit status 0 (successful).
+ DEBUG [fb18252e] Running /usr/local/rvm/bin/rvm 2.1.7 do ruby --version as demo.team21@epi-stu-hut-demo2.shef.ac.uk
+ DEBUG [fb18252e] Command: /usr/local/rvm/bin/rvm 2.1.7 do ruby --version
+ DEBUG [fb18252e] 	ruby 2.1.7p400 (2015-08-18 revision 51632) [x86_64-linux]
+ DEBUG [fb18252e] Finished in 0.381 seconds with exit status 0 (successful).
+  INFO [07d2d623] Running /usr/bin/env mkdir -p /tmp/hut-21/ as demo.team21@epi-stu-hut-demo2.shef.ac.uk
+ DEBUG [07d2d623] Command: /usr/bin/env mkdir -p /tmp/hut-21/
+  INFO [07d2d623] Finished in 0.060 seconds with exit status 0 (successful).
+ DEBUG Uploading /tmp/hut-21/git-ssh.sh 0.0%
+  INFO Uploading /tmp/hut-21/git-ssh.sh 100.0%
+  INFO [22f9a93b] Running /usr/bin/env chmod +rx /tmp/hut-21/git-ssh.sh as demo.team21@epi-stu-hut-demo2.shef.ac.uk
+ DEBUG [22f9a93b] Command: /usr/bin/env chmod +rx /tmp/hut-21/git-ssh.sh
+  INFO [22f9a93b] Finished in 0.010 seconds with exit status 0 (successful).
+  INFO [6d272bb9] Running /usr/bin/env git ls-remote --heads git@git.genesys-solutions.org.uk:hut-team21/project.git as demo.team21@epi-stu-hut-demo2.shef.ac.uk
+ DEBUG [6d272bb9] Command: ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/hut-21/git-ssh.sh" ; /usr/bin/env git ls-remote --heads git@git.genesys-solutions.org.uk:hut-team21/project.git )
+ DEBUG [6d272bb9] 	636adb3191cac046ff6f63d70071d24a01a0b404	refs/heads/demo
+636adb3191cac046ff6f63d70071d24a01a0b404	refs/heads/master
+  INFO [6d272bb9] Finished in 0.603 seconds with exit status 0 (successful).
+  INFO [31d10aff] Running /usr/bin/env mkdir -p /srv/services/demo.team21/shared /srv/services/demo.team21/releases as demo.team21@epi-stu-hut-demo2.shef.ac.uk
+ DEBUG [31d10aff] Command: /usr/bin/env mkdir -p /srv/services/demo.team21/shared /srv/services/demo.team21/releases
+  INFO [31d10aff] Finished in 0.014 seconds with exit status 0 (successful).
+  INFO [b248bfad] Running /usr/bin/env mkdir -p /srv/services/demo.team21/shared/public/assets /srv/services/demo.team21/shared/log /srv/services/demo.team21/shared/tmp/pids /srv/services/demo.team21/shared/uploads as demo.team21@epi-stu-hut-demo2.shef.ac.uk
+ DEBUG [b248bfad] Command: /usr/bin/env mkdir -p /srv/services/demo.team21/shared/public/assets /srv/services/demo.team21/shared/log /srv/services/demo.team21/shared/tmp/pids /srv/services/demo.team21/shared/uploads
+  INFO [b248bfad] Finished in 0.025 seconds with exit status 0 (successful).
+  INFO [19ae7178] Running /usr/bin/env mkdir -p /srv/services/demo.team21/shared/config as demo.team21@epi-stu-hut-demo2.shef.ac.uk
+ DEBUG [19ae7178] Command: /usr/bin/env mkdir -p /srv/services/demo.team21/shared/config
+  INFO [19ae7178] Finished in 0.015 seconds with exit status 0 (successful).
+ DEBUG [15820402] Running [ -f /srv/services/demo.team21/shared/config/database.yml ] as demo.team21@epi-stu-hut-demo2.shef.ac.uk
+ DEBUG [15820402] Command: [ -f /srv/services/demo.team21/shared/config/database.yml ]
+ DEBUG [15820402] Finished in 0.012 seconds with exit status 0 (successful).
+ DEBUG [39dfcc91] Running [ -f /srv/services/demo.team21/shared/config/secrets.yml ] as demo.team21@epi-stu-hut-demo2.shef.ac.uk
+ DEBUG [39dfcc91] Command: [ -f /srv/services/demo.team21/shared/config/secrets.yml ]
+ DEBUG [39dfcc91] Finished in 0.021 seconds with exit status 0 (successful).
+ DEBUG [c90f94ee] Running [ -f /srv/services/demo.team21/current/REVISION ] as demo.team21@epi-stu-hut-demo2.shef.ac.uk
+ DEBUG [c90f94ee] Command: [ -f /srv/services/demo.team21/current/REVISION ]
+ DEBUG [c90f94ee] Finished in 0.013 seconds with exit status 0 (successful).
+ DEBUG [50746f88] Running /usr/bin/env cat /srv/services/demo.team21/current/REVISION 2>/dev/null as demo.team21@epi-stu-hut-demo2.shef.ac.uk
+ DEBUG [50746f88] Command: /usr/bin/env cat /srv/services/demo.team21/current/REVISION 2>/dev/null
+ DEBUG [50746f88] 	4619012b904c0cad4339e31b514ffe4da5317e2f
+ DEBUG [50746f88] Finished in 0.013 seconds with exit status 0 (successful).
+ DEBUG [5f9c4d8f] Running [ -f /srv/services/demo.team21/repo/HEAD ] as demo.team21@epi-stu-hut-demo2.shef.ac.uk
+ DEBUG [5f9c4d8f] Command: [ -f /srv/services/demo.team21/repo/HEAD ]
+ DEBUG [5f9c4d8f] Finished in 0.012 seconds with exit status 0 (successful).
+  INFO The repository mirror is at /srv/services/demo.team21/repo
+ DEBUG [c70e4f69] Running if test ! -d /srv/services/demo.team21/repo; then echo "Directory does not exist '/srv/services/demo.team21/repo'" 1>&2; false; fi as demo.team21@epi-stu-hut-demo2.shef.ac.uk
+ DEBUG [c70e4f69] Command: if test ! -d /srv/services/demo.team21/repo; then echo "Directory does not exist '/srv/services/demo.team21/repo'" 1>&2; false; fi
+ DEBUG [c70e4f69] Finished in 0.009 seconds with exit status 0 (successful).
+  INFO [f37f00d1] Running /usr/bin/env git remote update --prune as demo.team21@epi-stu-hut-demo2.shef.ac.uk
+ DEBUG [f37f00d1] Command: cd /srv/services/demo.team21/repo && ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/hut-21/git-ssh.sh" ; /usr/bin/env git remote update --prune )
+ DEBUG [f37f00d1] 	Fetching origin
+ DEBUG [f37f00d1] 	remote: Counting objects: 59, done.[K
+ DEBUG [f37f00d1] 	
+ DEBUG [f37f00d1] 	remote: Compressing objects:   1% (1/57)   [K
+ DEBUG [f37f00d1] 	remote: Compressing objects:   3% (2/57)   [K
+ DEBUG [f37f00d1] 	remote: Compressing objects:   5% (3/57)   [K
+ DEBUG [f37f00d1] 	remote: Compressing objects:   7% (4/57)   [K
+ DEBUG [f37f00d1] 	remote: Compressing objects:   8% (5/57)   [K
+ DEBUG [f37f00d1] 	remote: Compressing objects:  10% (6/57)   [K
+ DEBUG [f37f00d1] 	remote: Compressing objects:  12% (7/57)   [K
+ DEBUG [f37f00d1] 	remote: Compressing objects:  14% (8/57)   [K
+ DEBUG [f37f00d1] 	remote: Compressing objects:  15% (9/57)   [K
+ DEBUG [f37f00d1] 	remote: Compressing objects:  17% (10/57)   [K
+ DEBUG [f37f00d1] 	remote: Compressing objects:  19% (11/57)   [K
+ DEBUG [f37f00d1] 	remote: Compressing objects:  21% (12/57)   [K
+ DEBUG [f37f00d1] 	remote: Compressing objects:  22% (13/57)   [K
+ DEBUG [f37f00d1] 	remote: Compressing objects:  24% (14/57)   [K
+ DEBUG [f37f00d1] 	remote: Compressing objects:  26% (15/57)   [K
+ DEBUG [f37f00d1] 	remote: Compressing objects:  28% (16/57)   [K
+ DEBUG [f37f00d1] 	remote: Compressing objects:  29% (17/57)   [K
+ DEBUG [f37f00d1] 	remote: Compressing objects:  31% (18/57)   [K
+ DEBUG [f37f00d1] 	remote: Compressing objects:  33% (19/57)   [K
+ DEBUG [f37f00d1] 	remote: Compressing objects:  35% (20/57)   [K
+ DEBUG [f37f00d1] 	remote: Compressing objects:  36% (21/57)   [K
+ DEBUG [f37f00d1] 	remote: Compressing objects:  38% (22/57)   [K
+ DEBUG [f37f00d1] 	remote: Compressing objects:  40% (23/57)   [K
+ DEBUG [f37f00d1] 	remote: Compressing objects:  42% (24/57)   [K
+ DEBUG [f37f00d1] 	remote: Compressing objects:  43% (25/57)   [K
+ DEBUG [f37f00d1] 	remote: Compressing objects:  45% (26/57)   [K
+ DEBUG [f37f00d1] 	remote: Compressing objects:  47% (27/57)   [K
+ DEBUG [f37f00d1] 	remote: Compressing objects:  49% (28/57)   [K
+ DEBUG [f37f00d1] 	remote: Compressing objects:  50% (29/57)   [K
+ DEBUG [f37f00d1] 	remote: Compressing objects:  52% (30/57)   [K
+ DEBUG [f37f00d1] 	remote: Compressing objects:  54% (31/57)   [K
+ DEBUG [f37f00d1] 	remote: Compressing objects:  56% (32/57)   [K
+ DEBUG [f37f00d1] 	remote: Compressing objects:  57% (33/57)   [K
+ DEBUG [f37f00d1] 	remote: Compressing objects:  59% (34/57)   [K
+ DEBUG [f37f00d1] 	remote: Compressing objects:  61% (35/57)   [K
+ DEBUG [f37f00d1] 	remote: Compressing objects:  63% (36/57)   [K
+ DEBUG [f37f00d1] 	remote: Compressing objects:  64% (37/57)   [K
+ DEBUG [f37f00d1] 	remote: Compressing objects:  66% (38/57)   [K
+ DEBUG [f37f00d1] 	remote: Compressing objects:  68% (39/57)   [K
+ DEBUG [f37f00d1] 	remote: Compressing objects:  70% (40/57)   [K
+ DEBUG [f37f00d1] 	remote: Compressing objects:  71% (41/57)   [K
+ DEBUG [f37f00d1] 	remote: Compressing objects:  73% (42/57)   [K
+ DEBUG [f37f00d1] 	remote: Compressing objects:  75% (43/57)   [K
+ DEBUG [f37f00d1] 	remote: Compressing objects:  77% (44/57)   [K
+ DEBUG [f37f00d1] 	remote: Compressing objects:  78% (45/57)   [K
+ DEBUG [f37f00d1] 	remote: Compressing objects:  80% (46/57)   [K
+ DEBUG [f37f00d1] 	remote: Compressing objects:  82% (47/57)   [K
+ DEBUG [f37f00d1] 	remote: Compressing objects:  84% (48/57)   [K
+ DEBUG [f37f00d1] 	remote: Compressing objects:  85% (49/57)   [K
+ DEBUG [f37f00d1] 	remote: Compressing objects:  87% (50/57)   [K
+ DEBUG [f37f00d1] 	remote: Compressing objects:  89% (51/57)   [K
+ DEBUG [f37f00d1] 	remote: Compressing objects:  91% (52/57)   [K
+ DEBUG [f37f00d1] 	remote: Compressing objects:  92% (53/57)   [K
+ DEBUG [f37f00d1] 	remote: Compressing objects:  94% (54/57)   [K
+ DEBUG [f37f00d1] 	remote: Compressing objects:  96% (55/57)   [K
+ DEBUG [f37f00d1] 	remote: Compressing objects:  98% (56/57)   [K
+ DEBUG [f37f00d1] 	remote: Compressing objects: 100% (57/57)   [K
+ DEBUG [f37f00d1] 	remote: Compressing objects: 100% (57/57), done.[K
+ DEBUG [f37f00d1] 	
+ DEBUG [f37f00d1] 	remote: Total 59 (delta 30), reused 0 (delta 0)[K
+ DEBUG [f37f00d1] 	
+ DEBUG [f37f00d1] 	Unpacking objects:   1% (1/59)   
+ DEBUG [f37f00d1] 	Unpacking objects:   3% (2/59)   
+ DEBUG [f37f00d1] 	Unpacking objects:   5% (3/59)   
+ DEBUG [f37f00d1] 	Unpacking objects:   6% (4/59)   
+ DEBUG [f37f00d1] 	Unpacking objects:   8% (5/59)   
+ DEBUG [f37f00d1] 	Unpacking objects:  10% (6/59)   
+ DEBUG [f37f00d1] 	Unpacking objects:  11% (7/59)   
+ DEBUG [f37f00d1] 	Unpacking objects:  13% (8/59)   
+ DEBUG [f37f00d1] 	Unpacking objects:  15% (9/59)   
+ DEBUG [f37f00d1] 	Unpacking objects:  16% (10/59)   
+ DEBUG [f37f00d1] 	Unpacking objects:  18% (11/59)   
+ DEBUG [f37f00d1] 	Unpacking objects:  20% (12/59)   
+ DEBUG [f37f00d1] 	Unpacking objects:  22% (13/59)   
+ DEBUG [f37f00d1] 	Unpacking objects:  23% (14/59)   
+ DEBUG [f37f00d1] 	Unpacking objects:  25% (15/59)   
+ DEBUG [f37f00d1] 	Unpacking objects:  27% (16/59)   
+ DEBUG [f37f00d1] 	Unpacking objects:  28% (17/59)   
+ DEBUG [f37f00d1] 	Unpacking objects:  30% (18/59)   
+ DEBUG [f37f00d1] 	Unpacking objects:  32% (19/59)   
+ DEBUG [f37f00d1] 	Unpacking objects:  33% (20/59)   
+ DEBUG [f37f00d1] 	Unpacking objects:  35% (21/59)   
+ DEBUG [f37f00d1] 	Unpacking objects:  37% (22/59)   
+ DEBUG [f37f00d1] 	Unpacking objects:  38% (23/59)   
+ DEBUG [f37f00d1] 	Unpacking objects:  40% (24/59)   
+ DEBUG [f37f00d1] 	Unpacking objects:  42% (25/59)   
+ DEBUG [f37f00d1] 	Unpacking objects:  44% (26/59)   
+ DEBUG [f37f00d1] 	Unpacking objects:  45% (27/59)   
+ DEBUG [f37f00d1] 	Unpacking objects:  47% (28/59)   
+ DEBUG [f37f00d1] 	Unpacking objects:  49% (29/59)   
+ DEBUG [f37f00d1] 	Unpacking objects:  50% (30/59)   
+ DEBUG [f37f00d1] 	Unpacking objects:  52% (31/59)   
+ DEBUG [f37f00d1] 	Unpacking objects:  54% (32/59)   
+ DEBUG [f37f00d1] 	Unpacking objects:  55% (33/59)   
+ DEBUG [f37f00d1] 	Unpacking objects:  57% (34/59)   
+ DEBUG [f37f00d1] 	Unpacking objects:  59% (35/59)   
+ DEBUG [f37f00d1] 	Unpacking objects:  61% (36/59)   
+ DEBUG [f37f00d1] 	Unpacking objects:  62% (37/59)   
+ DEBUG [f37f00d1] 	Unpacking objects:  64% (38/59)   
+ DEBUG [f37f00d1] 	Unpacking objects:  66% (39/59)   
+ DEBUG [f37f00d1] 	Unpacking objects:  67% (40/59)   
+ DEBUG [f37f00d1] 	Unpacking objects:  69% (41/59)   
+ DEBUG [f37f00d1] 	Unpacking objects:  71% (42/59)   
+ DEBUG [f37f00d1] 	Unpacking objects:  72% (43/59)   
+ DEBUG [f37f00d1] 	Unpacking objects:  74% (44/59)   
+ DEBUG [f37f00d1] 	Unpacking objects:  76% (45/59)   
+ DEBUG [f37f00d1] 	Unpacking objects:  77% (46/59)   
+ DEBUG [f37f00d1] 	Unpacking objects:  79% (47/59)   
+ DEBUG [f37f00d1] 	Unpacking objects:  81% (48/59)   
+ DEBUG [f37f00d1] 	Unpacking objects:  83% (49/59)   
+ DEBUG [f37f00d1] 	Unpacking objects:  84% (50/59)   
+ DEBUG [f37f00d1] 	Unpacking objects:  86% (51/59)   
+ DEBUG [f37f00d1] 	Unpacking objects:  88% (52/59)   
+ DEBUG [f37f00d1] 	Unpacking objects:  89% (53/59)   
+ DEBUG [f37f00d1] 	Unpacking objects:  91% (54/59)   
+ DEBUG [f37f00d1] 	Unpacking objects:  93% (55/59)   
+ DEBUG [f37f00d1] 	Unpacking objects:  94% (56/59)   
+ DEBUG [f37f00d1] 	Unpacking objects:  96% (57/59)   
+ DEBUG [f37f00d1] 	Unpacking objects:  98% (58/59)   
+ DEBUG [f37f00d1] 	Unpacking objects: 100% (59/59)   
+ DEBUG [f37f00d1] 	Unpacking objects: 100% (59/59), done.
+ DEBUG [f37f00d1] 	
+ DEBUG [f37f00d1] 	From git.genesys-solutions.org.uk:hut-team21/project
+   4619012..636adb3  demo       -> demo
+ DEBUG [f37f00d1] 	   4619012..636adb3  master     -> master
+ DEBUG [f37f00d1] 	 * [new tag]         2016may17-1143-636adb3-v60 -> 2016may17-1143-636adb3-v60
+ DEBUG [f37f00d1] 	
+  INFO [f37f00d1] Finished in 8.779 seconds with exit status 0 (successful).
+ DEBUG [3c5ac1c2] Running if test ! -d /srv/services/demo.team21/repo; then echo "Directory does not exist '/srv/services/demo.team21/repo'" 1>&2; false; fi as demo.team21@epi-stu-hut-demo2.shef.ac.uk
+ DEBUG [3c5ac1c2] Command: if test ! -d /srv/services/demo.team21/repo; then echo "Directory does not exist '/srv/services/demo.team21/repo'" 1>&2; false; fi
+ DEBUG [3c5ac1c2] Finished in 0.011 seconds with exit status 0 (successful).
+  INFO [7adcb75a] Running /usr/bin/env mkdir -p /srv/services/demo.team21/releases/20160517104354 as demo.team21@epi-stu-hut-demo2.shef.ac.uk
+ DEBUG [7adcb75a] Command: cd /srv/services/demo.team21/repo && ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/hut-21/git-ssh.sh" ; /usr/bin/env mkdir -p /srv/services/demo.team21/releases/20160517104354 )
+  INFO [7adcb75a] Finished in 0.048 seconds with exit status 0 (successful).
+  INFO [6a7cef5b] Running /usr/bin/env git archive master | tar -x -f - -C /srv/services/demo.team21/releases/20160517104354 as demo.team21@epi-stu-hut-demo2.shef.ac.uk
+ DEBUG [6a7cef5b] Command: cd /srv/services/demo.team21/repo && ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/hut-21/git-ssh.sh" ; /usr/bin/env git archive master | tar -x -f - -C /srv/services/demo.team21/releases/20160517104354 )
+  INFO [6a7cef5b] Finished in 3.181 seconds with exit status 0 (successful).
+ DEBUG [f10ed321] Running if test ! -d /srv/services/demo.team21/repo; then echo "Directory does not exist '/srv/services/demo.team21/repo'" 1>&2; false; fi as demo.team21@epi-stu-hut-demo2.shef.ac.uk
+ DEBUG [f10ed321] Command: if test ! -d /srv/services/demo.team21/repo; then echo "Directory does not exist '/srv/services/demo.team21/repo'" 1>&2; false; fi
+ DEBUG [f10ed321] Finished in 0.010 seconds with exit status 0 (successful).
+ DEBUG [893e92f9] Running /usr/bin/env git rev-list --max-count=1 master as demo.team21@epi-stu-hut-demo2.shef.ac.uk
+ DEBUG [893e92f9] Command: cd /srv/services/demo.team21/repo && ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/hut-21/git-ssh.sh" ; /usr/bin/env git rev-list --max-count=1 master )
+ DEBUG [893e92f9] 	636adb3191cac046ff6f63d70071d24a01a0b404
+ DEBUG [893e92f9] Finished in 0.037 seconds with exit status 0 (successful).
+ DEBUG [5a9c6f5f] Running if test ! -d /srv/services/demo.team21/releases/20160517104354; then echo "Directory does not exist '/srv/services/demo.team21/releases/20160517104354'" 1>&2; false; fi as demo.team21@epi-stu-hut-demo2.shef.ac.uk
+ DEBUG [5a9c6f5f] Command: if test ! -d /srv/services/demo.team21/releases/20160517104354; then echo "Directory does not exist '/srv/services/demo.team21/releases/20160517104354'" 1>&2; false; fi
+ DEBUG [5a9c6f5f] Finished in 0.037 seconds with exit status 0 (successful).
+  INFO [a26dad5c] Running /usr/bin/env echo "636adb3191cac046ff6f63d70071d24a01a0b404" >> REVISION as demo.team21@epi-stu-hut-demo2.shef.ac.uk
+ DEBUG [a26dad5c] Command: cd /srv/services/demo.team21/releases/20160517104354 && /usr/bin/env echo "636adb3191cac046ff6f63d70071d24a01a0b404" >> REVISION
+  INFO [a26dad5c] Finished in 0.018 seconds with exit status 0 (successful).
+  INFO [a19befff] Running /usr/bin/env mkdir -p /srv/services/demo.team21/releases/20160517104354/config as demo.team21@epi-stu-hut-demo2.shef.ac.uk
+ DEBUG [a19befff] Command: /usr/bin/env mkdir -p /srv/services/demo.team21/releases/20160517104354/config
+  INFO [a19befff] Finished in 0.022 seconds with exit status 0 (successful).
+ DEBUG [95c86d64] Running [ -L /srv/services/demo.team21/releases/20160517104354/config/database.yml ] as demo.team21@epi-stu-hut-demo2.shef.ac.uk
+ DEBUG [95c86d64] Command: [ -L /srv/services/demo.team21/releases/20160517104354/config/database.yml ]
+ DEBUG [95c86d64] Finished in 0.013 seconds with exit status 1 (failed).
+ DEBUG [4f0ac6a1] Running [ -f /srv/services/demo.team21/releases/20160517104354/config/database.yml ] as demo.team21@epi-stu-hut-demo2.shef.ac.uk
+ DEBUG [4f0ac6a1] Command: [ -f /srv/services/demo.team21/releases/20160517104354/config/database.yml ]
+ DEBUG [4f0ac6a1] Finished in 0.013 seconds with exit status 1 (failed).
+  INFO [fd77cdb7] Running /usr/bin/env ln -s /srv/services/demo.team21/shared/config/database.yml /srv/services/demo.team21/releases/20160517104354/config/database.yml as demo.team21@epi-stu-hut-demo2.shef.ac.uk
+ DEBUG [fd77cdb7] Command: /usr/bin/env ln -s /srv/services/demo.team21/shared/config/database.yml /srv/services/demo.team21/releases/20160517104354/config/database.yml
+  INFO [fd77cdb7] Finished in 0.020 seconds with exit status 0 (successful).
+ DEBUG [8971586b] Running [ -L /srv/services/demo.team21/releases/20160517104354/config/secrets.yml ] as demo.team21@epi-stu-hut-demo2.shef.ac.uk
+ DEBUG [8971586b] Command: [ -L /srv/services/demo.team21/releases/20160517104354/config/secrets.yml ]
+ DEBUG [8971586b] Finished in 0.012 seconds with exit status 1 (failed).
+ DEBUG [ada96c34] Running [ -f /srv/services/demo.team21/releases/20160517104354/config/secrets.yml ] as demo.team21@epi-stu-hut-demo2.shef.ac.uk
+ DEBUG [ada96c34] Command: [ -f /srv/services/demo.team21/releases/20160517104354/config/secrets.yml ]
+ DEBUG [ada96c34] Finished in 0.010 seconds with exit status 0 (successful).
+  INFO [61b20c28] Running /usr/bin/env rm /srv/services/demo.team21/releases/20160517104354/config/secrets.yml as demo.team21@epi-stu-hut-demo2.shef.ac.uk
+ DEBUG [61b20c28] Command: /usr/bin/env rm /srv/services/demo.team21/releases/20160517104354/config/secrets.yml
+  INFO [61b20c28] Finished in 0.014 seconds with exit status 0 (successful).
+  INFO [1931f1de] Running /usr/bin/env ln -s /srv/services/demo.team21/shared/config/secrets.yml /srv/services/demo.team21/releases/20160517104354/config/secrets.yml as demo.team21@epi-stu-hut-demo2.shef.ac.uk
+ DEBUG [1931f1de] Command: /usr/bin/env ln -s /srv/services/demo.team21/shared/config/secrets.yml /srv/services/demo.team21/releases/20160517104354/config/secrets.yml
+  INFO [1931f1de] Finished in 0.015 seconds with exit status 0 (successful).
+  INFO [c31b36b5] Running /usr/bin/env mkdir -p /srv/services/demo.team21/releases/20160517104354/public /srv/services/demo.team21/releases/20160517104354 /srv/services/demo.team21/releases/20160517104354/tmp as demo.team21@epi-stu-hut-demo2.shef.ac.uk
+ DEBUG [c31b36b5] Command: /usr/bin/env mkdir -p /srv/services/demo.team21/releases/20160517104354/public /srv/services/demo.team21/releases/20160517104354 /srv/services/demo.team21/releases/20160517104354/tmp
+  INFO [c31b36b5] Finished in 0.023 seconds with exit status 0 (successful).
+ DEBUG [1e46fef6] Running [ -L /srv/services/demo.team21/releases/20160517104354/public/assets ] as demo.team21@epi-stu-hut-demo2.shef.ac.uk
+ DEBUG [1e46fef6] Command: [ -L /srv/services/demo.team21/releases/20160517104354/public/assets ]
+ DEBUG [1e46fef6] Finished in 0.012 seconds with exit status 1 (failed).
+ DEBUG [c8648b77] Running [ -d /srv/services/demo.team21/releases/20160517104354/public/assets ] as demo.team21@epi-stu-hut-demo2.shef.ac.uk
+ DEBUG [c8648b77] Command: [ -d /srv/services/demo.team21/releases/20160517104354/public/assets ]
+ DEBUG [c8648b77] Finished in 0.009 seconds with exit status 1 (failed).
+  INFO [c1a5db53] Running /usr/bin/env ln -s /srv/services/demo.team21/shared/public/assets /srv/services/demo.team21/releases/20160517104354/public/assets as demo.team21@epi-stu-hut-demo2.shef.ac.uk
+ DEBUG [c1a5db53] Command: /usr/bin/env ln -s /srv/services/demo.team21/shared/public/assets /srv/services/demo.team21/releases/20160517104354/public/assets
+  INFO [c1a5db53] Finished in 0.058 seconds with exit status 0 (successful).
+ DEBUG [0826705f] Running [ -L /srv/services/demo.team21/releases/20160517104354/log ] as demo.team21@epi-stu-hut-demo2.shef.ac.uk
+ DEBUG [0826705f] Command: [ -L /srv/services/demo.team21/releases/20160517104354/log ]
+ DEBUG [0826705f] Finished in 0.039 seconds with exit status 1 (failed).
+ DEBUG [d7eec680] Running [ -d /srv/services/demo.team21/releases/20160517104354/log ] as demo.team21@epi-stu-hut-demo2.shef.ac.uk
+ DEBUG [d7eec680] Command: [ -d /srv/services/demo.team21/releases/20160517104354/log ]
+ DEBUG [d7eec680] Finished in 0.011 seconds with exit status 1 (failed).
+  INFO [027ac20e] Running /usr/bin/env ln -s /srv/services/demo.team21/shared/log /srv/services/demo.team21/releases/20160517104354/log as demo.team21@epi-stu-hut-demo2.shef.ac.uk
+ DEBUG [027ac20e] Command: /usr/bin/env ln -s /srv/services/demo.team21/shared/log /srv/services/demo.team21/releases/20160517104354/log
+  INFO [027ac20e] Finished in 0.015 seconds with exit status 0 (successful).
+ DEBUG [e465f508] Running [ -L /srv/services/demo.team21/releases/20160517104354/tmp/pids ] as demo.team21@epi-stu-hut-demo2.shef.ac.uk
+ DEBUG [e465f508] Command: [ -L /srv/services/demo.team21/releases/20160517104354/tmp/pids ]
+ DEBUG [e465f508] Finished in 0.017 seconds with exit status 1 (failed).
+ DEBUG [a505e6da] Running [ -d /srv/services/demo.team21/releases/20160517104354/tmp/pids ] as demo.team21@epi-stu-hut-demo2.shef.ac.uk
+ DEBUG [a505e6da] Command: [ -d /srv/services/demo.team21/releases/20160517104354/tmp/pids ]
+ DEBUG [a505e6da] Finished in 0.011 seconds with exit status 1 (failed).
+  INFO [d1234011] Running /usr/bin/env ln -s /srv/services/demo.team21/shared/tmp/pids /srv/services/demo.team21/releases/20160517104354/tmp/pids as demo.team21@epi-stu-hut-demo2.shef.ac.uk
+ DEBUG [d1234011] Command: /usr/bin/env ln -s /srv/services/demo.team21/shared/tmp/pids /srv/services/demo.team21/releases/20160517104354/tmp/pids
+  INFO [d1234011] Finished in 0.012 seconds with exit status 0 (successful).
+ DEBUG [db59a6a3] Running [ -L /srv/services/demo.team21/releases/20160517104354/uploads ] as demo.team21@epi-stu-hut-demo2.shef.ac.uk
+ DEBUG [db59a6a3] Command: [ -L /srv/services/demo.team21/releases/20160517104354/uploads ]
+ DEBUG [db59a6a3] Finished in 0.011 seconds with exit status 1 (failed).
+ DEBUG [b8bc18a4] Running [ -d /srv/services/demo.team21/releases/20160517104354/uploads ] as demo.team21@epi-stu-hut-demo2.shef.ac.uk
+ DEBUG [b8bc18a4] Command: [ -d /srv/services/demo.team21/releases/20160517104354/uploads ]
+ DEBUG [b8bc18a4] Finished in 0.013 seconds with exit status 1 (failed).
+  INFO [d75c12db] Running /usr/bin/env ln -s /srv/services/demo.team21/shared/uploads /srv/services/demo.team21/releases/20160517104354/uploads as demo.team21@epi-stu-hut-demo2.shef.ac.uk
+ DEBUG [d75c12db] Command: /usr/bin/env ln -s /srv/services/demo.team21/shared/uploads /srv/services/demo.team21/releases/20160517104354/uploads
+  INFO [d75c12db] Finished in 0.013 seconds with exit status 0 (successful).
+ DEBUG [8da49036] Running if test ! -d /srv/services/demo.team21/releases/20160517104354; then echo "Directory does not exist '/srv/services/demo.team21/releases/20160517104354'" 1>&2; false; fi as demo.team21@epi-stu-hut-demo2.shef.ac.uk
+ DEBUG [8da49036] Command: if test ! -d /srv/services/demo.team21/releases/20160517104354; then echo "Directory does not exist '/srv/services/demo.team21/releases/20160517104354'" 1>&2; false; fi
+ DEBUG [8da49036] Finished in 0.010 seconds with exit status 0 (successful).
+  INFO [434ad81c] Running /usr/bin/env sed -ie 's/-x86-mingw32//' Gemfile.lock as demo.team21@epi-stu-hut-demo2.shef.ac.uk
+ DEBUG [434ad81c] Command: cd /srv/services/demo.team21/releases/20160517104354 && /usr/bin/env sed -ie 's/-x86-mingw32//' Gemfile.lock
+  INFO [434ad81c] Finished in 0.020 seconds with exit status 0 (successful).
+  INFO [f11dc682] Running /usr/bin/env sed -ie 's/-x64-mingw32//' Gemfile.lock as demo.team21@epi-stu-hut-demo2.shef.ac.uk
+ DEBUG [f11dc682] Command: cd /srv/services/demo.team21/releases/20160517104354 && /usr/bin/env sed -ie 's/-x64-mingw32//' Gemfile.lock
+  INFO [f11dc682] Finished in 0.021 seconds with exit status 0 (successful).
+ DEBUG [d1e3db95] Running if test ! -d /srv/services/demo.team21/releases/20160517104354; then echo "Directory does not exist '/srv/services/demo.team21/releases/20160517104354'" 1>&2; false; fi as demo.team21@epi-stu-hut-demo2.shef.ac.uk
+ DEBUG [d1e3db95] Command: if test ! -d /srv/services/demo.team21/releases/20160517104354; then echo "Directory does not exist '/srv/services/demo.team21/releases/20160517104354'" 1>&2; false; fi
+ DEBUG [d1e3db95] Finished in 0.011 seconds with exit status 0 (successful).
+  INFO [741c116d] Running /usr/bin/env chmod +x bin/* as demo.team21@epi-stu-hut-demo2.shef.ac.uk
+ DEBUG [741c116d] Command: cd /srv/services/demo.team21/releases/20160517104354 && /usr/bin/env chmod +x bin/*
+  INFO [741c116d] Finished in 0.025 seconds with exit status 0 (successful).
+ DEBUG [47e380d4] Running if test ! -d /srv/services/demo.team21/releases/20160517104354; then echo "Directory does not exist '/srv/services/demo.team21/releases/20160517104354'" 1>&2; false; fi as demo.team21@epi-stu-hut-demo2.shef.ac.uk
+ DEBUG [47e380d4] Command: if test ! -d /srv/services/demo.team21/releases/20160517104354; then echo "Directory does not exist '/srv/services/demo.team21/releases/20160517104354'" 1>&2; false; fi
+ DEBUG [47e380d4] Finished in 0.011 seconds with exit status 0 (successful).
+  INFO [5b70163c] Running /usr/local/rvm/bin/rvm 2.1.7 do bundle install --path /srv/services/demo.team21/shared/bundle --without development test --deployment --quiet as demo.team21@epi-stu-hut-demo2.shef.ac.uk
+ DEBUG [5b70163c] Command: cd /srv/services/demo.team21/releases/20160517104354 && /usr/local/rvm/bin/rvm 2.1.7 do bundle install --path /srv/services/demo.team21/shared/bundle --without development test --deployment --quiet
+  INFO [5b70163c] Finished in 1.160 seconds with exit status 0 (successful).
+ DEBUG [9d07dc62] Running if test ! -d /srv/services/demo.team21/releases/20160517104354; then echo "Directory does not exist '/srv/services/demo.team21/releases/20160517104354'" 1>&2; false; fi as demo.team21@epi-stu-hut-demo2.shef.ac.uk
+ DEBUG [9d07dc62] Command: if test ! -d /srv/services/demo.team21/releases/20160517104354; then echo "Directory does not exist '/srv/services/demo.team21/releases/20160517104354'" 1>&2; false; fi
+ DEBUG [9d07dc62] Finished in 0.011 seconds with exit status 0 (successful).
+ DEBUG [25109fc1] Running /usr/bin/env ls -xr /srv/services/demo.team21/releases as demo.team21@epi-stu-hut-demo2.shef.ac.uk
+ DEBUG [25109fc1] Command: cd /srv/services/demo.team21/releases/20160517104354 && ( export RAILS_ENV="demo" ; /usr/bin/env ls -xr /srv/services/demo.team21/releases )
+ DEBUG [25109fc1] 	20160517104354	20160517090005	20160517081303
+ DEBUG [25109fc1] Finished in 0.016 seconds with exit status 0 (successful).
+  INFO [0b665cac] Running /usr/bin/env ls /srv/services/demo.team21/releases/20160517090005/assets_manifest_backup as demo.team21@epi-stu-hut-demo2.shef.ac.uk
+ DEBUG [0b665cac] Command: cd /srv/services/demo.team21/releases/20160517104354 && ( export RAILS_ENV="demo" ; /usr/bin/env ls /srv/services/demo.team21/releases/20160517090005/assets_manifest_backup )
+  INFO [0b665cac] Finished in 0.021 seconds with exit status 0 (successful).
+  INFO [695b034e] Running /usr/bin/env diff -Naur /srv/services/demo.team21/releases/20160517104354/app/assets /srv/services/demo.team21/releases/20160517090005/app/assets as demo.team21@epi-stu-hut-demo2.shef.ac.uk
+ DEBUG [695b034e] Command: cd /srv/services/demo.team21/releases/20160517104354 && ( export RAILS_ENV="demo" ; /usr/bin/env diff -Naur /srv/services/demo.team21/releases/20160517104354/app/assets /srv/services/demo.team21/releases/20160517090005/app/assets )
+ DEBUG [695b034e] 	diff -Naur /srv/services/demo.team21/releases/20160517104354/app/assets/javascripts/posts.coffee /srv/services/demo.team21/releases/20160517090005/app/assets/javascripts/posts.coffee
+ DEBUG [695b034e] 	
+ DEBUG [695b034e] 	--- /srv/services/demo.team21/releases/20160517104354/app/assets/javascripts/posts.coffee
+ DEBUG [695b034e] 		
+ DEBUG [695b034e] 	2016-05-17 11:43:45.000000000 +0100
+ DEBUG [695b034e] 	
+ DEBUG [695b034e] 	+++ /srv/services/demo.team21/releases/20160517090005/app/assets/javascripts/posts.coffee
+ DEBUG [695b034e] 		
+ DEBUG [695b034e] 	1970-01-01 01:00:00.000000000 +0100
+ DEBUG [695b034e] 	
+ DEBUG [695b034e] 	@@ -1,3 +0,0 @@
+ DEBUG [695b034e] 	
+ DEBUG [695b034e] 	-# Place all the behaviors and hooks related to the matching controller here.
+ DEBUG [695b034e] 	
+ DEBUG [695b034e] 	-# All this logic will automatically be available in application.js.
+ DEBUG [695b034e] 	
+ DEBUG [695b034e] 	-# You can use CoffeeScript in this file: http://coffeescript.org/
+ DEBUG [695b034e] 	
+ DEBUG [695b034e] 	diff -Naur /srv/services/demo.team21/releases/20160517104354/app/assets/stylesheets/posts.scss /srv/services/demo.team21/releases/20160517090005/app/assets/stylesheets/posts.scss
+ DEBUG [695b034e] 	
+ DEBUG [695b034e] 	--- /srv/services/demo.team21/releases/20160517104354/app/assets/stylesheets/posts.scss
+ DEBUG [695b034e] 		
+ DEBUG [695b034e] 	2016-05-17 11:43:45.000000000 +0100
+ DEBUG [695b034e] 	
+ DEBUG [695b034e] 	+++ /srv/services/demo.team21/releases/20160517090005/app/assets/stylesheets/posts.scss
+ DEBUG [695b034e] 		
+ DEBUG [695b034e] 	1970-01-01 01:00:00.000000000 +0100
+ DEBUG [695b034e] 	
+ DEBUG [695b034e] 	@@ -1,3 +0,0 @@
+ DEBUG [695b034e] 	
+ DEBUG [695b034e] 	-// Place all the styles related to the posts controller here.
+ DEBUG [695b034e] 	
+ DEBUG [695b034e] 	-// They will automatically be included in application.css.
+ DEBUG [695b034e] 	
+ DEBUG [695b034e] 	-// You can use Sass (SCSS) here: http://sass-lang.com/
+ DEBUG [695b034e] 	
+ DEBUG [695b034e] 	diff -Naur /srv/services/demo.team21/releases/20160517104354/app/assets/stylesheets/scaffolds.scss /srv/services/demo.team21/releases/20160517090005/app/assets/stylesheets/scaffolds.scss
+ DEBUG [695b034e] 	
+ DEBUG [695b034e] 	--- /srv/services/demo.team21/releases/20160517104354/app/assets/stylesheets/scaffolds.scss
+ DEBUG [695b034e] 		
+ DEBUG [695b034e] 	2016-05-17 11:43:45.000000000 +0100
+ DEBUG [695b034e] 	
+ DEBUG [695b034e] 	+++ /srv/services/demo.team21/releases/20160517090005/app/assets/stylesheets/scaffolds.scss
+ DEBUG [695b034e] 		
+ DEBUG [695b034e] 	1970-01-01 01:00:00.000000000 +0100
+ DEBUG [695b034e] 	
+ DEBUG [695b034e] 	@@ -1,73 +0,0 @@
+ DEBUG [695b034e] 	
+ DEBUG [695b034e] 	-body {
+ DEBUG [695b034e] 	
+ DEBUG [695b034e] 	-  background-color: #fff;
+ DEBUG [695b034e] 	
+ DEBUG [695b034e] 	-  color: #333;
+ DEBUG [695b034e] 	
+ DEBUG [695b034e] 	-  font-family: verdana, arial, helvetica, sans-serif;
+ DEBUG [695b034e] 	
+ DEBUG [695b034e] 	-  font-size: 13px;
+ DEBUG [695b034e] 	
+ DEBUG [695b034e] 	-  line-height: 18px;
+ DEBUG [695b034e] 	
+ DEBUG [695b034e] 	-}
+ DEBUG [695b034e] 	
+ DEBUG [695b034e] 	-
+ DEBUG [695b034e] 	
+ DEBUG [695b034e] 	-p, ol, ul, td {
+ DEBUG [695b034e] 	
+ DEBUG [695b034e] 	-  font-family: verdana, arial, helvetica, sans-serif;
+ DEBUG [695b034e] 	
+ DEBUG [695b034e] 	-  font-size: 13px;
+ DEBUG [695b034e] 	
+ DEBUG [695b034e] 	-  line-height: 18px;
+ DEBUG [695b034e] 	
+ DEBUG [695b034e] 	-}
+ DEBUG [695b034e] 	
+ DEBUG [695b034e] 	-
+ DEBUG [695b034e] 	
+ DEBUG [695b034e] 	-pre {
+ DEBUG [695b034e] 	
+ DEBUG [695b034e] 	-  background-color: #eee;
+ DEBUG [695b034e] 	
+ DEBUG [695b034e] 	-  padding: 10px;
+ DEBUG [695b034e] 	
+ DEBUG [695b034e] 	-  font-size: 11px;
+ DEBUG [695b034e] 	
+ DEBUG [695b034e] 	-}
+ DEBUG [695b034e] 	
+ DEBUG [695b034e] 	-
+ DEBUG [695b034e] 	
+ DEBUG [695b034e] 	-a {
+ DEBUG [695b034e] 	
+ DEBUG [695b034e] 	-  color: #000;
+ DEBUG [695b034e] 	
+ DEBUG [695b034e] 	-
+ DEBUG [695b034e] 	
+ DEBUG [695b034e] 	-  &:visited {
+ DEBUG [695b034e] 	
+ DEBUG [695b034e] 	-    color: #666;
+ DEBUG [695b034e] 	
+ DEBUG [695b034e] 	-  }
+ DEBUG [695b034e] 	
+ DEBUG [695b034e] 	-
+ DEBUG [695b034e] 	
+ DEBUG [695b034e] 	-  &:hover {
+ DEBUG [695b034e] 	
+ DEBUG [695b034e] 	-    color: #fff;
+ DEBUG [695b034e] 	
+ DEBUG [695b034e] 	-    background-color: #000;
+ DEBUG [695b034e] 	
+ DEBUG [695b034e] 	-  }
+ DEBUG [695b034e] 	
+ DEBUG [695b034e] 	-}
+ DEBUG [695b034e] 	
+ DEBUG [695b034e] 	-
+ DEBUG [695b034e] 	
+ DEBUG [695b034e] 	-div {
+ DEBUG [695b034e] 	
+ DEBUG [695b034e] 	-  &.field, &.actions {
+ DEBUG [695b034e] 	
+ DEBUG [695b034e] 	-    margin-bottom: 10px;
+ DEBUG [695b034e] 	
+ DEBUG [695b034e] 	-  }
+ DEBUG [695b034e] 	
+ DEBUG [695b034e] 	-}
+ DEBUG [695b034e] 	
+ DEBUG [695b034e] 	-
+ DEBUG [695b034e] 	
+ DEBUG [695b034e] 	-#notice {
+ DEBUG [695b034e] 	
+ DEBUG [695b034e] 	-  color: green;
+ DEBUG [695b034e] 	
+ DEBUG [695b034e] 	-}
+ DEBUG [695b034e] 	
+ DEBUG [695b034e] 	-
+ DEBUG [695b034e] 	
+ DEBUG [695b034e] 	-.field_with_errors {
+ DEBUG [695b034e] 	
+ DEBUG [695b034e] 	-  padding: 2px;
+ DEBUG [695b034e] 	
+ DEBUG [695b034e] 	-  background-color: red;
+ DEBUG [695b034e] 	
+ DEBUG [695b034e] 	-  display: table;
+ DEBUG [695b034e] 	
+ DEBUG [695b034e] 	-}
+ DEBUG [695b034e] 	
+ DEBUG [695b034e] 	-
+ DEBUG [695b034e] 	
+ DEBUG [695b034e] 	-#error_explanation {
+ DEBUG [695b034e] 	
+ DEBUG [695b034e] 	-  width: 450px;
+ DEBUG [695b034e] 	
+ DEBUG [695b034e] 	-  border: 2px solid red;
+ DEBUG [695b034e] 	
+ DEBUG [695b034e] 	-  padding: 7px;
+ DEBUG [695b034e] 	
+ DEBUG [695b034e] 	-  padding-bottom: 0;
+ DEBUG [695b034e] 	
+ DEBUG [695b034e] 	-  margin-bottom: 20px;
+ DEBUG [695b034e] 	
+ DEBUG [695b034e] 	-  background-color: #f0f0f0;
+ DEBUG [695b034e] 	
+ DEBUG [695b034e] 	-
+ DEBUG [695b034e] 	
+ DEBUG [695b034e] 	-  h2 {
+ DEBUG [695b034e] 	
+ DEBUG [695b034e] 	-    text-align: left;
+ DEBUG [695b034e] 	
+ DEBUG [695b034e] 	-    font-weight: bold;
+ DEBUG [695b034e] 	
+ DEBUG [695b034e] 	-    padding: 5px 5px 5px 15px;
+ DEBUG [695b034e] 	
+ DEBUG [695b034e] 	-    font-size: 12px;
+ DEBUG [695b034e] 	
+ DEBUG [695b034e] 	-    margin: -7px;
+ DEBUG [695b034e] 	
+ DEBUG [695b034e] 	-    margin-bottom: 0px;
+ DEBUG [695b034e] 	
+ DEBUG [695b034e] 	-    background-color: #c00;
+ DEBUG [695b034e] 	
+ DEBUG [695b034e] 	-    color: #fff;
+ DEBUG [695b034e] 	
+ DEBUG [695b034e] 	-  }
+ DEBUG [695b034e] 	
+ DEBUG [695b034e] 	-
+ DEBUG [695b034e] 	
+ DEBUG [695b034e] 	-  ul li {
+ DEBUG [695b034e] 	
+ DEBUG [695b034e] 	-    font-size: 12px;
+ DEBUG [695b034e] 	
+ DEBUG [695b034e] 	-    list-style: square;
+ DEBUG [695b034e] 	
+ DEBUG [695b034e] 	-  }
+ DEBUG [695b034e] 	
+ DEBUG [695b034e] 	-}
+ DEBUG [695b034e] 	
+  INFO [c275c387] Running /usr/local/rvm/bin/rvm 2.1.7 do bundle exec rake assets:precompile as demo.team21@epi-stu-hut-demo2.shef.ac.uk
+ DEBUG [c275c387] Command: cd /srv/services/demo.team21/releases/20160517104354 && ( export RAILS_ENV="demo" ; /usr/local/rvm/bin/rvm 2.1.7 do bundle exec rake assets:precompile )
+  INFO [c275c387] Finished in 58.565 seconds with exit status 0 (successful).
+ DEBUG [830cbdb7] Running if test ! -d /srv/services/demo.team21/releases/20160517104354; then echo "Directory does not exist '/srv/services/demo.team21/releases/20160517104354'" 1>&2; false; fi as demo.team21@epi-stu-hut-demo2.shef.ac.uk
+ DEBUG [830cbdb7] Command: if test ! -d /srv/services/demo.team21/releases/20160517104354; then echo "Directory does not exist '/srv/services/demo.team21/releases/20160517104354'" 1>&2; false; fi
+ DEBUG [830cbdb7] Finished in 0.013 seconds with exit status 0 (successful).
+  INFO [bcf803a5] Running /usr/bin/env mkdir -p /srv/services/demo.team21/releases/20160517104354/assets_manifest_backup as demo.team21@epi-stu-hut-demo2.shef.ac.uk
+ DEBUG [bcf803a5] Command: cd /srv/services/demo.team21/releases/20160517104354 && /usr/bin/env mkdir -p /srv/services/demo.team21/releases/20160517104354/assets_manifest_backup
+  INFO [bcf803a5] Finished in 0.039 seconds with exit status 0 (successful).
+ DEBUG [bcadae25] Running /usr/bin/env ls /srv/services/demo.team21/releases/20160517104354/public/assets/.sprockets-manifest* as demo.team21@epi-stu-hut-demo2.shef.ac.uk
+ DEBUG [bcadae25] Command: cd /srv/services/demo.team21/releases/20160517104354 && /usr/bin/env ls /srv/services/demo.team21/releases/20160517104354/public/assets/.sprockets-manifest*
+ DEBUG [bcadae25] 	/srv/services/demo.team21/releases/20160517104354/public/assets/.sprockets-manifest-e90cca42af4826e91ae60f286c7cd99a.json
+ DEBUG [bcadae25] Finished in 0.018 seconds with exit status 0 (successful).
+ DEBUG [0d6bf22f] Running /usr/bin/env ls /srv/services/demo.team21/releases/20160517104354/public/assets/.sprockets-manifest* as demo.team21@epi-stu-hut-demo2.shef.ac.uk
+ DEBUG [0d6bf22f] Command: cd /srv/services/demo.team21/releases/20160517104354 && /usr/bin/env ls /srv/services/demo.team21/releases/20160517104354/public/assets/.sprockets-manifest*
+ DEBUG [0d6bf22f] 	/srv/services/demo.team21/releases/20160517104354/public/assets/.sprockets-manifest-e90cca42af4826e91ae60f286c7cd99a.json
+ DEBUG [0d6bf22f] Finished in 0.013 seconds with exit status 0 (successful).
+  INFO [63f34106] Running /usr/bin/env cp /srv/services/demo.team21/releases/20160517104354/public/assets/.sprockets-manifest-e90cca42af4826e91ae60f286c7cd99a.json /srv/services/demo.team21/releases/20160517104354/assets_manifest_backup as demo.team21@epi-stu-hut-demo2.shef.ac.uk
+ DEBUG [63f34106] Command: cd /srv/services/demo.team21/releases/20160517104354 && /usr/bin/env cp /srv/services/demo.team21/releases/20160517104354/public/assets/.sprockets-manifest-e90cca42af4826e91ae60f286c7cd99a.json /srv/services/demo.team21/releases/20160517104354/assets_manifest_backup
+  INFO [63f34106] Finished in 0.028 seconds with exit status 0 (successful).
+  INFO [deploy:migrate] Run `rake db:migrate`
+ DEBUG [6f261285] Running if test ! -d /srv/services/demo.team21/releases/20160517104354; then echo "Directory does not exist '/srv/services/demo.team21/releases/20160517104354'" 1>&2; false; fi as demo.team21@epi-stu-hut-demo2.shef.ac.uk
+ DEBUG [6f261285] Command: if test ! -d /srv/services/demo.team21/releases/20160517104354; then echo "Directory does not exist '/srv/services/demo.team21/releases/20160517104354'" 1>&2; false; fi
+ DEBUG [6f261285] Finished in 0.039 seconds with exit status 0 (successful).
+  INFO [ae9fac3b] Running /usr/local/rvm/bin/rvm 2.1.7 do bundle exec rake db:migrate as demo.team21@epi-stu-hut-demo2.shef.ac.uk
+ DEBUG [ae9fac3b] Command: cd /srv/services/demo.team21/releases/20160517104354 && ( export RAILS_ENV="demo" ; /usr/local/rvm/bin/rvm 2.1.7 do bundle exec rake db:migrate )
+ DEBUG [ae9fac3b] 	== 20160516224734 CreatePosts: migrating ======================================
+ DEBUG [ae9fac3b] 	
+ DEBUG [ae9fac3b] 	-- create_table(:posts)
+ DEBUG [ae9fac3b] 	
+ DEBUG [ae9fac3b] 	   -> 0.0419s
+ DEBUG [ae9fac3b] 	
+ DEBUG [ae9fac3b] 	== 20160516224734 CreatePosts: migrated (0.0423s) =============================
+ DEBUG [ae9fac3b] 	
+ DEBUG [ae9fac3b] 	
+  INFO [ae9fac3b] Finished in 7.043 seconds with exit status 0 (successful).
+ DEBUG [b9d95fff] Running if test ! -d /srv/services/demo.team21/releases/20160517104354; then echo "Directory does not exist '/srv/services/demo.team21/releases/20160517104354'" 1>&2; false; fi as demo.team21@epi-stu-hut-demo2.shef.ac.uk
+ DEBUG [b9d95fff] Command: if test ! -d /srv/services/demo.team21/releases/20160517104354; then echo "Directory does not exist '/srv/services/demo.team21/releases/20160517104354'" 1>&2; false; fi
+ DEBUG [b9d95fff] Finished in 0.009 seconds with exit status 0 (successful).
+  INFO [00f46412] Running /usr/local/rvm/bin/rvm 2.1.7 do bundle exec whenever --update-crontab hut-21-demo --set "environment=demo&delayed_job_args_p=hut-21-demo&delayed_job_args_n=1" --roles=web,app,db as demo.team21@epi-stu-hut-demo2.shef.ac.uk
+ DEBUG [00f46412] Command: cd /srv/services/demo.team21/releases/20160517104354 && /usr/local/rvm/bin/rvm 2.1.7 do bundle exec whenever --update-crontab hut-21-demo --set "environment=demo&delayed_job_args_p=hut-21-demo&delayed_job_args_n=1" --roles=web,app,db
+ DEBUG [00f46412] 	[write] crontab file updated
+ DEBUG [00f46412] 	
+  INFO [00f46412] Finished in 1.542 seconds with exit status 0 (successful).
+ DEBUG [e328e5fc] Running if test ! -d /srv/services/demo.team21/releases/20160517104354; then echo "Directory does not exist '/srv/services/demo.team21/releases/20160517104354'" 1>&2; false; fi as demo.team21@epi-stu-hut-demo2.shef.ac.uk
+ DEBUG [e328e5fc] Command: if test ! -d /srv/services/demo.team21/releases/20160517104354; then echo "Directory does not exist '/srv/services/demo.team21/releases/20160517104354'" 1>&2; false; fi
+ DEBUG [e328e5fc] Finished in 0.013 seconds with exit status 0 (successful).
+  INFO [650cd021] Running /usr/local/rvm/bin/rvm 2.1.7 do bundle exec bin/delayed_job stop as demo.team21@epi-stu-hut-demo2.shef.ac.uk
+ DEBUG [650cd021] Command: cd /srv/services/demo.team21/releases/20160517104354 && ( export RAILS_ENV="demo" ; /usr/local/rvm/bin/rvm 2.1.7 do bundle exec bin/delayed_job stop )
+ DEBUG [650cd021] 	delayed_job: trying to stop process with pid 21344...
+ DEBUG [650cd021] 	delayed_job: process with pid 21344 successfully stopped.
+  INFO [650cd021] Finished in 10.974 seconds with exit status 0 (successful).
+  INFO [cf9c1660] Running /usr/bin/env ln -s /srv/services/demo.team21/releases/20160517104354 /srv/services/demo.team21/releases/current as demo.team21@epi-stu-hut-demo2.shef.ac.uk
+ DEBUG [cf9c1660] Command: /usr/bin/env ln -s /srv/services/demo.team21/releases/20160517104354 /srv/services/demo.team21/releases/current
+  INFO [cf9c1660] Finished in 0.032 seconds with exit status 0 (successful).
+  INFO [c86327be] Running /usr/bin/env mv /srv/services/demo.team21/releases/current /srv/services/demo.team21 as demo.team21@epi-stu-hut-demo2.shef.ac.uk
+ DEBUG [c86327be] Command: /usr/bin/env mv /srv/services/demo.team21/releases/current /srv/services/demo.team21
+  INFO [c86327be] Finished in 0.019 seconds with exit status 0 (successful).
+ DEBUG [24e141f6] Running if test ! -d /srv/services/demo.team21/releases/20160517104354; then echo "Directory does not exist '/srv/services/demo.team21/releases/20160517104354'" 1>&2; false; fi as demo.team21@epi-stu-hut-demo2.shef.ac.uk
+ DEBUG [24e141f6] Command: if test ! -d /srv/services/demo.team21/releases/20160517104354; then echo "Directory does not exist '/srv/services/demo.team21/releases/20160517104354'" 1>&2; false; fi
+ DEBUG [24e141f6] Finished in 0.035 seconds with exit status 0 (successful).
+ DEBUG [d401ab27] Running /usr/local/rvm/bin/rvm 2.1.7 do passenger -v as demo.team21@epi-stu-hut-demo2.shef.ac.uk
+ DEBUG [d401ab27] Command: cd /srv/services/demo.team21/releases/20160517104354 && /usr/local/rvm/bin/rvm 2.1.7 do passenger -v
+ DEBUG [d401ab27] 	Phusion Passenger 5.0.28
+ DEBUG [d401ab27] Finished in 0.433 seconds with exit status 0 (successful).
+  INFO [6614ed84] Running /usr/local/rvm/bin/rvm 2.1.7 do passenger-config restart-app /srv/services/demo.team21 --ignore-app-not-running as demo.team21@epi-stu-hut-demo2.shef.ac.uk
+ DEBUG [6614ed84] Command: cd /srv/services/demo.team21/releases/20160517104354 && /usr/local/rvm/bin/rvm 2.1.7 do passenger-config restart-app /srv/services/demo.team21 --ignore-app-not-running
+ DEBUG [6614ed84] 	Restarting /srv/services/demo.team21/current (demo)
+ DEBUG [6614ed84] 	
+  INFO [6614ed84] Finished in 0.549 seconds with exit status 0 (successful).
+ DEBUG [bd4d7d40] Running /usr/bin/env ls -xtr /srv/services/demo.team21/releases as demo.team21@epi-stu-hut-demo2.shef.ac.uk
+ DEBUG [bd4d7d40] Command: /usr/bin/env ls -xtr /srv/services/demo.team21/releases
+ DEBUG [bd4d7d40] 	20160517081303	20160517090005	20160517104354
+ DEBUG [bd4d7d40] Finished in 0.012 seconds with exit status 0 (successful).
+  INFO Keeping 2 of 3 deployed releases on epi-stu-hut-demo2.shef.ac.uk
+  INFO [7e518f0d] Running /usr/bin/env rm -rf /srv/services/demo.team21/releases/20160517081303 as demo.team21@epi-stu-hut-demo2.shef.ac.uk
+ DEBUG [7e518f0d] Command: /usr/bin/env rm -rf /srv/services/demo.team21/releases/20160517081303
+  INFO [7e518f0d] Finished in 1.630 seconds with exit status 0 (successful).
+ DEBUG [fb7d60cb] Running if test ! -d /srv/services/demo.team21/releases/20160517104354; then echo "Directory does not exist '/srv/services/demo.team21/releases/20160517104354'" 1>&2; false; fi as demo.team21@epi-stu-hut-demo2.shef.ac.uk
+ DEBUG [fb7d60cb] Command: if test ! -d /srv/services/demo.team21/releases/20160517104354; then echo "Directory does not exist '/srv/services/demo.team21/releases/20160517104354'" 1>&2; false; fi
+ DEBUG [fb7d60cb] Finished in 0.010 seconds with exit status 0 (successful).
+  INFO [dd528aab] Running /usr/local/rvm/bin/rvm 2.1.7 do bundle exec bin/delayed_job -p hut-21-demo -n 1 start as demo.team21@epi-stu-hut-demo2.shef.ac.uk
+ DEBUG [dd528aab] Command: cd /srv/services/demo.team21/releases/20160517104354 && ( export RAILS_ENV="demo" ; /usr/local/rvm/bin/rvm 2.1.7 do bundle exec bin/delayed_job -p hut-21-demo -n 1 start )
+ DEBUG [dd528aab] 	delayed_job: process with pid 14103 started.
+  INFO [dd528aab] Finished in 7.872 seconds with exit status 0 (successful).
+ DEBUG [9edd0a45] Running if test ! -d /srv/services/demo.team21/releases; then echo "Directory does not exist '/srv/services/demo.team21/releases'" 1>&2; false; fi as demo.team21@epi-stu-hut-demo2.shef.ac.uk
+ DEBUG [9edd0a45] Command: if test ! -d /srv/services/demo.team21/releases; then echo "Directory does not exist '/srv/services/demo.team21/releases'" 1>&2; false; fi
+ DEBUG [9edd0a45] Finished in 0.281 seconds with exit status 0 (successful).
+  INFO [e144a188] Running /usr/bin/env echo "Branch master (at 636adb3191cac046ff6f63d70071d24a01a0b404) deployed as release 20160517104354 by Nixon" >> /srv/services/demo.team21/revisions.log as demo.team21@epi-stu-hut-demo2.shef.ac.uk
+ DEBUG [e144a188] Command: cd /srv/services/demo.team21/releases && /usr/bin/env echo "Branch master (at 636adb3191cac046ff6f63d70071d24a01a0b404) deployed as release 20160517104354 by Nixon" >> /srv/services/demo.team21/revisions.log
+  INFO [e144a188] Finished in 0.014 seconds with exit status 0 (successful).
+  INFO ---------------------------------------------------------------------------
+  INFO START 2016-05-17 12:49:48 +0100 cap demo deploy:migrations
+  INFO ---------------------------------------------------------------------------
+ DEBUG [139fe0f8] Running /usr/bin/env which passenger as demo.team21@epi-stu-hut-demo2.shef.ac.uk
+ DEBUG [139fe0f8] Command: /usr/bin/env which passenger
+ DEBUG [139fe0f8] Finished in 0.178 seconds with exit status 1 (failed).
+ DEBUG [3a20b591] Running /usr/local/rvm/bin/rvm version as demo.team21@epi-stu-hut-demo2.shef.ac.uk
+ DEBUG [3a20b591] Command: /usr/local/rvm/bin/rvm version
+ DEBUG [3a20b591] 	rvm 1.26.11 (latest) by Wayne E. Seguin <wayneeseguin@gmail.com>, Michal Papis <mpapis@gmail.com> [https://rvm.io/]
+ DEBUG [3a20b591] Finished in 0.197 seconds with exit status 0 (successful).
+ DEBUG [d3c287b5] Running /usr/local/rvm/bin/rvm current as demo.team21@epi-stu-hut-demo2.shef.ac.uk
+ DEBUG [d3c287b5] Command: /usr/local/rvm/bin/rvm current
+ DEBUG [d3c287b5] 	ruby-2.1.7
+ DEBUG [d3c287b5] 	
+ DEBUG [d3c287b5] Finished in 0.194 seconds with exit status 0 (successful).
+ DEBUG [5dde302b] Running /usr/local/rvm/bin/rvm 2.1.7 do ruby --version as demo.team21@epi-stu-hut-demo2.shef.ac.uk
+ DEBUG [5dde302b] Command: /usr/local/rvm/bin/rvm 2.1.7 do ruby --version
+ DEBUG [5dde302b] 	ruby 2.1.7p400 (2015-08-18 revision 51632) [x86_64-linux]
+ DEBUG [5dde302b] Finished in 0.405 seconds with exit status 0 (successful).
+  INFO [cdae49fe] Running /usr/bin/env mkdir -p /tmp/hut-21/ as demo.team21@epi-stu-hut-demo2.shef.ac.uk
+ DEBUG [cdae49fe] Command: /usr/bin/env mkdir -p /tmp/hut-21/
+  INFO [cdae49fe] Finished in 0.012 seconds with exit status 0 (successful).
+ DEBUG Uploading /tmp/hut-21/git-ssh.sh 0.0%
+  INFO Uploading /tmp/hut-21/git-ssh.sh 100.0%
+  INFO [988d6cff] Running /usr/bin/env chmod +rx /tmp/hut-21/git-ssh.sh as demo.team21@epi-stu-hut-demo2.shef.ac.uk
+ DEBUG [988d6cff] Command: /usr/bin/env chmod +rx /tmp/hut-21/git-ssh.sh
+  INFO [988d6cff] Finished in 0.012 seconds with exit status 0 (successful).
+  INFO [77ba6d23] Running /usr/bin/env git ls-remote --heads git@git.genesys-solutions.org.uk:hut-team21/project.git as demo.team21@epi-stu-hut-demo2.shef.ac.uk
+ DEBUG [77ba6d23] Command: ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/hut-21/git-ssh.sh" ; /usr/bin/env git ls-remote --heads git@git.genesys-solutions.org.uk:hut-team21/project.git )
+ DEBUG [77ba6d23] 	a149450d6b4f226898520b1716082d19811a8733	refs/heads/demo
+a149450d6b4f226898520b1716082d19811a8733	refs/heads/master
+  INFO [77ba6d23] Finished in 0.547 seconds with exit status 0 (successful).
+  INFO [b5ec7329] Running /usr/bin/env mkdir -p /srv/services/demo.team21/shared /srv/services/demo.team21/releases as demo.team21@epi-stu-hut-demo2.shef.ac.uk
+ DEBUG [b5ec7329] Command: /usr/bin/env mkdir -p /srv/services/demo.team21/shared /srv/services/demo.team21/releases
+  INFO [b5ec7329] Finished in 0.013 seconds with exit status 0 (successful).
+  INFO [6168adfc] Running /usr/bin/env mkdir -p /srv/services/demo.team21/shared/public/assets /srv/services/demo.team21/shared/log /srv/services/demo.team21/shared/tmp/pids /srv/services/demo.team21/shared/uploads as demo.team21@epi-stu-hut-demo2.shef.ac.uk
+ DEBUG [6168adfc] Command: /usr/bin/env mkdir -p /srv/services/demo.team21/shared/public/assets /srv/services/demo.team21/shared/log /srv/services/demo.team21/shared/tmp/pids /srv/services/demo.team21/shared/uploads
+  INFO [6168adfc] Finished in 0.035 seconds with exit status 0 (successful).
+  INFO [3e517afc] Running /usr/bin/env mkdir -p /srv/services/demo.team21/shared/config as demo.team21@epi-stu-hut-demo2.shef.ac.uk
+ DEBUG [3e517afc] Command: /usr/bin/env mkdir -p /srv/services/demo.team21/shared/config
+  INFO [3e517afc] Finished in 0.015 seconds with exit status 0 (successful).
+ DEBUG [08a4ab36] Running [ -f /srv/services/demo.team21/shared/config/database.yml ] as demo.team21@epi-stu-hut-demo2.shef.ac.uk
+ DEBUG [08a4ab36] Command: [ -f /srv/services/demo.team21/shared/config/database.yml ]
+ DEBUG [08a4ab36] Finished in 0.010 seconds with exit status 0 (successful).
+ DEBUG [78abfbbd] Running [ -f /srv/services/demo.team21/shared/config/secrets.yml ] as demo.team21@epi-stu-hut-demo2.shef.ac.uk
+ DEBUG [78abfbbd] Command: [ -f /srv/services/demo.team21/shared/config/secrets.yml ]
+ DEBUG [78abfbbd] Finished in 0.019 seconds with exit status 0 (successful).
+ DEBUG [a91552c9] Running [ -f /srv/services/demo.team21/current/REVISION ] as demo.team21@epi-stu-hut-demo2.shef.ac.uk
+ DEBUG [a91552c9] Command: [ -f /srv/services/demo.team21/current/REVISION ]
+ DEBUG [a91552c9] Finished in 0.015 seconds with exit status 0 (successful).
+ DEBUG [b5a0eb7e] Running /usr/bin/env cat /srv/services/demo.team21/current/REVISION 2>/dev/null as demo.team21@epi-stu-hut-demo2.shef.ac.uk
+ DEBUG [b5a0eb7e] Command: /usr/bin/env cat /srv/services/demo.team21/current/REVISION 2>/dev/null
+ DEBUG [b5a0eb7e] 	636adb3191cac046ff6f63d70071d24a01a0b404
+ DEBUG [b5a0eb7e] Finished in 0.014 seconds with exit status 0 (successful).
+ DEBUG [d5aaf6e0] Running [ -f /srv/services/demo.team21/repo/HEAD ] as demo.team21@epi-stu-hut-demo2.shef.ac.uk
+ DEBUG [d5aaf6e0] Command: [ -f /srv/services/demo.team21/repo/HEAD ]
+ DEBUG [d5aaf6e0] Finished in 0.013 seconds with exit status 0 (successful).
+  INFO The repository mirror is at /srv/services/demo.team21/repo
+ DEBUG [6a118049] Running if test ! -d /srv/services/demo.team21/repo; then echo "Directory does not exist '/srv/services/demo.team21/repo'" 1>&2; false; fi as demo.team21@epi-stu-hut-demo2.shef.ac.uk
+ DEBUG [6a118049] Command: if test ! -d /srv/services/demo.team21/repo; then echo "Directory does not exist '/srv/services/demo.team21/repo'" 1>&2; false; fi
+ DEBUG [6a118049] Finished in 0.009 seconds with exit status 0 (successful).
+  INFO [415ee7dd] Running /usr/bin/env git remote update --prune as demo.team21@epi-stu-hut-demo2.shef.ac.uk
+ DEBUG [415ee7dd] Command: cd /srv/services/demo.team21/repo && ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/hut-21/git-ssh.sh" ; /usr/bin/env git remote update --prune )
+ DEBUG [415ee7dd] 	Fetching origin
+ DEBUG [415ee7dd] 	remote: Counting objects: 18, done.[K
+ DEBUG [415ee7dd] 	
+ DEBUG [415ee7dd] 	remote: Compressing objects:   7% (1/14)   [K
+ DEBUG [415ee7dd] 	remote: Compressing objects:  14% (2/14)   [K
+ DEBUG [415ee7dd] 	remote: Compressing objects:  21% (3/14)   [K
+ DEBUG [415ee7dd] 	remote: Compressing objects:
+ DEBUG [415ee7dd] 	  28% (4/14)   [K
+ DEBUG [415ee7dd] 	remote: Compressing objects:  35% (5/14)   [K
+ DEBUG [415ee7dd] 	remote: Compressing objects:  42% (6/14)   [K
+ DEBUG [415ee7dd] 	remote: Compressing objects:  50% (7/14)   [K
+ DEBUG [415ee7dd] 	remote: Comp
+ DEBUG [415ee7dd] 	ressing objects:  57% (8/14)   [K
+ DEBUG [415ee7dd] 	remote: Compressing objects:  64% (9/14)   [K
+ DEBUG [415ee7dd] 	remote: Compressing objects:  71% (10/14)   [K
+ DEBUG [415ee7dd] 	remote: Compressing objects:  7
+ DEBUG [415ee7dd] 	8% (11/14)   [K
+ DEBUG [415ee7dd] 	remote: Compressing objects:  85% (12/14)   [K
+ DEBUG [415ee7dd] 	remote: Compressing objects:  92% (13/14)   [K
+ DEBUG [415ee7dd] 	remote: Compressing objects: 100% (14/14)   [K
+ DEBUG [415ee7dd] 	remote: Compressing objects: 100% (14/14), done.[K
+ DEBUG [415ee7dd] 	
+ DEBUG [415ee7dd] 	Unpacking objects:   5% (1/18)   
+ DEBUG [415ee7dd] 	Unpacking objects:  11% (2/18)   
+ DEBUG [415ee7dd] 	Unpacking objects:  16% (3/18)   
+ DEBUG [415ee7dd] 	Unpacking objects:  22% (4/18)   
+ DEBUG [415ee7dd] 	Unpacking objects:  27% (5/18)   
+ DEBUG [415ee7dd] 	Unpacking objects:  33% (6/18)   
+ DEBUG [415ee7dd] 	Unpacking objects:  38% (7/18)   
+ DEBUG [415ee7dd] 	Unpacking objects:  44% (8/18)   
+ DEBUG [415ee7dd] 	Unpacking objects:  50% (9/18)   
+ DEBUG [415ee7dd] 	Unpacking objects:  55% (10/18)   
+ DEBUG [415ee7dd] 	Unpacking objects:  61% (11/18)   
+ DEBUG [415ee7dd] 	Unpacking objects:  66% (12/18)   
+ DEBUG [415ee7dd] 	Unpacking objects:  72% (13/18)   
+ DEBUG [415ee7dd] 	Unpacking objects:  77% (14/18)   
+ DEBUG [415ee7dd] 	Unpacking objects:  83% (15/18)   
+ DEBUG [415ee7dd] 	remote: Total 18 (delta 8), reused 11 (delta 1)[K
+ DEBUG [415ee7dd] 	
+ DEBUG [415ee7dd] 	Unpacking objects:  88% (16/18)   
+ DEBUG [415ee7dd] 	Unpacking objects:  94% (17/18)   
+ DEBUG [415ee7dd] 	Unpacking objects: 100% (18/18)   
+ DEBUG [415ee7dd] 	Unpacking objects: 100% (18/18), done.
+ DEBUG [415ee7dd] 	
+ DEBUG [415ee7dd] 	From git.genesys-solutions.org.uk:hut-team21/project
+ DEBUG [415ee7dd] 	
+ DEBUG [415ee7dd] 	   636adb3..a149450  demo       -> demo
+ DEBUG [415ee7dd] 	
+ DEBUG [415ee7dd] 	   636adb3..a149450  master     -> master
+ DEBUG [415ee7dd] 	
+ DEBUG [415ee7dd] 	 * [new tag]         2016may17-1249-a149450-v61 -> 2016may17-1249-a149450-v61
+  INFO [415ee7dd] Finished in 2.796 seconds with exit status 0 (successful).
+ DEBUG [90a92ac9] Running if test ! -d /srv/services/demo.team21/repo; then echo "Directory does not exist '/srv/services/demo.team21/repo'" 1>&2; false; fi as demo.team21@epi-stu-hut-demo2.shef.ac.uk
+ DEBUG [90a92ac9] Command: if test ! -d /srv/services/demo.team21/repo; then echo "Directory does not exist '/srv/services/demo.team21/repo'" 1>&2; false; fi
+ DEBUG [90a92ac9] Finished in 0.009 seconds with exit status 0 (successful).
+  INFO [94597e72] Running /usr/bin/env mkdir -p /srv/services/demo.team21/releases/20160517114950 as demo.team21@epi-stu-hut-demo2.shef.ac.uk
+ DEBUG [94597e72] Command: cd /srv/services/demo.team21/repo && ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/hut-21/git-ssh.sh" ; /usr/bin/env mkdir -p /srv/services/demo.team21/releases/20160517114950 )
+  INFO [94597e72] Finished in 0.014 seconds with exit status 0 (successful).
+  INFO [5245ddf2] Running /usr/bin/env git archive master | tar -x -f - -C /srv/services/demo.team21/releases/20160517114950 as demo.team21@epi-stu-hut-demo2.shef.ac.uk
+ DEBUG [5245ddf2] Command: cd /srv/services/demo.team21/repo && ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/hut-21/git-ssh.sh" ; /usr/bin/env git archive master | tar -x -f - -C /srv/services/demo.team21/releases/20160517114950 )
+  INFO [5245ddf2] Finished in 2.143 seconds with exit status 0 (successful).
+ DEBUG [1e9ab912] Running if test ! -d /srv/services/demo.team21/repo; then echo "Directory does not exist '/srv/services/demo.team21/repo'" 1>&2; false; fi as demo.team21@epi-stu-hut-demo2.shef.ac.uk
+ DEBUG [1e9ab912] Command: if test ! -d /srv/services/demo.team21/repo; then echo "Directory does not exist '/srv/services/demo.team21/repo'" 1>&2; false; fi
+ DEBUG [1e9ab912] Finished in 0.010 seconds with exit status 0 (successful).
+ DEBUG [7c5cb24d] Running /usr/bin/env git rev-list --max-count=1 master as demo.team21@epi-stu-hut-demo2.shef.ac.uk
+ DEBUG [7c5cb24d] Command: cd /srv/services/demo.team21/repo && ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/hut-21/git-ssh.sh" ; /usr/bin/env git rev-list --max-count=1 master )
+ DEBUG [7c5cb24d] 	a149450d6b4f226898520b1716082d19811a8733
+ DEBUG [7c5cb24d] Finished in 0.019 seconds with exit status 0 (successful).
+ DEBUG [f709f67a] Running if test ! -d /srv/services/demo.team21/releases/20160517114950; then echo "Directory does not exist '/srv/services/demo.team21/releases/20160517114950'" 1>&2; false; fi as demo.team21@epi-stu-hut-demo2.shef.ac.uk
+ DEBUG [f709f67a] Command: if test ! -d /srv/services/demo.team21/releases/20160517114950; then echo "Directory does not exist '/srv/services/demo.team21/releases/20160517114950'" 1>&2; false; fi
+ DEBUG [f709f67a] Finished in 0.010 seconds with exit status 0 (successful).
+  INFO [6897a84d] Running /usr/bin/env echo "a149450d6b4f226898520b1716082d19811a8733" >> REVISION as demo.team21@epi-stu-hut-demo2.shef.ac.uk
+ DEBUG [6897a84d] Command: cd /srv/services/demo.team21/releases/20160517114950 && /usr/bin/env echo "a149450d6b4f226898520b1716082d19811a8733" >> REVISION
+  INFO [6897a84d] Finished in 0.083 seconds with exit status 0 (successful).
+  INFO [c3e7f9f9] Running /usr/bin/env mkdir -p /srv/services/demo.team21/releases/20160517114950/config as demo.team21@epi-stu-hut-demo2.shef.ac.uk
+ DEBUG [c3e7f9f9] Command: /usr/bin/env mkdir -p /srv/services/demo.team21/releases/20160517114950/config
+  INFO [c3e7f9f9] Finished in 0.032 seconds with exit status 0 (successful).
+ DEBUG [cefc7fef] Running [ -L /srv/services/demo.team21/releases/20160517114950/config/database.yml ] as demo.team21@epi-stu-hut-demo2.shef.ac.uk
+ DEBUG [cefc7fef] Command: [ -L /srv/services/demo.team21/releases/20160517114950/config/database.yml ]
+ DEBUG [cefc7fef] Finished in 0.019 seconds with exit status 1 (failed).
+ DEBUG [2af5c88c] Running [ -f /srv/services/demo.team21/releases/20160517114950/config/database.yml ] as demo.team21@epi-stu-hut-demo2.shef.ac.uk
+ DEBUG [2af5c88c] Command: [ -f /srv/services/demo.team21/releases/20160517114950/config/database.yml ]
+ DEBUG [2af5c88c] Finished in 0.009 seconds with exit status 1 (failed).
+  INFO [512da532] Running /usr/bin/env ln -s /srv/services/demo.team21/shared/config/database.yml /srv/services/demo.team21/releases/20160517114950/config/database.yml as demo.team21@epi-stu-hut-demo2.shef.ac.uk
+ DEBUG [512da532] Command: /usr/bin/env ln -s /srv/services/demo.team21/shared/config/database.yml /srv/services/demo.team21/releases/20160517114950/config/database.yml
+  INFO [512da532] Finished in 0.011 seconds with exit status 0 (successful).
+ DEBUG [19b88a95] Running [ -L /srv/services/demo.team21/releases/20160517114950/config/secrets.yml ] as demo.team21@epi-stu-hut-demo2.shef.ac.uk
+ DEBUG [19b88a95] Command: [ -L /srv/services/demo.team21/releases/20160517114950/config/secrets.yml ]
+ DEBUG [19b88a95] Finished in 0.009 seconds with exit status 1 (failed).
+ DEBUG [4b2b7369] Running [ -f /srv/services/demo.team21/releases/20160517114950/config/secrets.yml ] as demo.team21@epi-stu-hut-demo2.shef.ac.uk
+ DEBUG [4b2b7369] Command: [ -f /srv/services/demo.team21/releases/20160517114950/config/secrets.yml ]
+ DEBUG [4b2b7369] Finished in 0.008 seconds with exit status 0 (successful).
+  INFO [2f1e2a3d] Running /usr/bin/env rm /srv/services/demo.team21/releases/20160517114950/config/secrets.yml as demo.team21@epi-stu-hut-demo2.shef.ac.uk
+ DEBUG [2f1e2a3d] Command: /usr/bin/env rm /srv/services/demo.team21/releases/20160517114950/config/secrets.yml
+  INFO [2f1e2a3d] Finished in 0.011 seconds with exit status 0 (successful).
+  INFO [5abefb05] Running /usr/bin/env ln -s /srv/services/demo.team21/shared/config/secrets.yml /srv/services/demo.team21/releases/20160517114950/config/secrets.yml as demo.team21@epi-stu-hut-demo2.shef.ac.uk
+ DEBUG [5abefb05] Command: /usr/bin/env ln -s /srv/services/demo.team21/shared/config/secrets.yml /srv/services/demo.team21/releases/20160517114950/config/secrets.yml
+  INFO [5abefb05] Finished in 0.012 seconds with exit status 0 (successful).
+  INFO [a6d8e76f] Running /usr/bin/env mkdir -p /srv/services/demo.team21/releases/20160517114950/public /srv/services/demo.team21/releases/20160517114950 /srv/services/demo.team21/releases/20160517114950/tmp as demo.team21@epi-stu-hut-demo2.shef.ac.uk
+ DEBUG [a6d8e76f] Command: /usr/bin/env mkdir -p /srv/services/demo.team21/releases/20160517114950/public /srv/services/demo.team21/releases/20160517114950 /srv/services/demo.team21/releases/20160517114950/tmp
+  INFO [a6d8e76f] Finished in 0.016 seconds with exit status 0 (successful).
+ DEBUG [0587facf] Running [ -L /srv/services/demo.team21/releases/20160517114950/public/assets ] as demo.team21@epi-stu-hut-demo2.shef.ac.uk
+ DEBUG [0587facf] Command: [ -L /srv/services/demo.team21/releases/20160517114950/public/assets ]
+ DEBUG [0587facf] Finished in 0.016 seconds with exit status 1 (failed).
+ DEBUG [bea26b51] Running [ -d /srv/services/demo.team21/releases/20160517114950/public/assets ] as demo.team21@epi-stu-hut-demo2.shef.ac.uk
+ DEBUG [bea26b51] Command: [ -d /srv/services/demo.team21/releases/20160517114950/public/assets ]
+ DEBUG [bea26b51] Finished in 0.010 seconds with exit status 1 (failed).
+  INFO [7f86e04d] Running /usr/bin/env ln -s /srv/services/demo.team21/shared/public/assets /srv/services/demo.team21/releases/20160517114950/public/assets as demo.team21@epi-stu-hut-demo2.shef.ac.uk
+ DEBUG [7f86e04d] Command: /usr/bin/env ln -s /srv/services/demo.team21/shared/public/assets /srv/services/demo.team21/releases/20160517114950/public/assets
+  INFO [7f86e04d] Finished in 0.068 seconds with exit status 0 (successful).
+ DEBUG [45d00e6d] Running [ -L /srv/services/demo.team21/releases/20160517114950/log ] as demo.team21@epi-stu-hut-demo2.shef.ac.uk
+ DEBUG [45d00e6d] Command: [ -L /srv/services/demo.team21/releases/20160517114950/log ]
+ DEBUG [45d00e6d] Finished in 0.010 seconds with exit status 1 (failed).
+ DEBUG [64960dfb] Running [ -d /srv/services/demo.team21/releases/20160517114950/log ] as demo.team21@epi-stu-hut-demo2.shef.ac.uk
+ DEBUG [64960dfb] Command: [ -d /srv/services/demo.team21/releases/20160517114950/log ]
+ DEBUG [64960dfb] Finished in 0.009 seconds with exit status 1 (failed).
+  INFO [bfab1eb9] Running /usr/bin/env ln -s /srv/services/demo.team21/shared/log /srv/services/demo.team21/releases/20160517114950/log as demo.team21@epi-stu-hut-demo2.shef.ac.uk
+ DEBUG [bfab1eb9] Command: /usr/bin/env ln -s /srv/services/demo.team21/shared/log /srv/services/demo.team21/releases/20160517114950/log
+  INFO [bfab1eb9] Finished in 0.010 seconds with exit status 0 (successful).
+ DEBUG [32940ca5] Running [ -L /srv/services/demo.team21/releases/20160517114950/tmp/pids ] as demo.team21@epi-stu-hut-demo2.shef.ac.uk
+ DEBUG [32940ca5] Command: [ -L /srv/services/demo.team21/releases/20160517114950/tmp/pids ]
+ DEBUG [32940ca5] Finished in 0.010 seconds with exit status 1 (failed).
+ DEBUG [6e6b175f] Running [ -d /srv/services/demo.team21/releases/20160517114950/tmp/pids ] as demo.team21@epi-stu-hut-demo2.shef.ac.uk
+ DEBUG [6e6b175f] Command: [ -d /srv/services/demo.team21/releases/20160517114950/tmp/pids ]
+ DEBUG [6e6b175f] Finished in 0.010 seconds with exit status 1 (failed).
+  INFO [596aeb21] Running /usr/bin/env ln -s /srv/services/demo.team21/shared/tmp/pids /srv/services/demo.team21/releases/20160517114950/tmp/pids as demo.team21@epi-stu-hut-demo2.shef.ac.uk
+ DEBUG [596aeb21] Command: /usr/bin/env ln -s /srv/services/demo.team21/shared/tmp/pids /srv/services/demo.team21/releases/20160517114950/tmp/pids
+  INFO [596aeb21] Finished in 0.012 seconds with exit status 0 (successful).
+ DEBUG [95e9ddbb] Running [ -L /srv/services/demo.team21/releases/20160517114950/uploads ] as demo.team21@epi-stu-hut-demo2.shef.ac.uk
+ DEBUG [95e9ddbb] Command: [ -L /srv/services/demo.team21/releases/20160517114950/uploads ]
+ DEBUG [95e9ddbb] Finished in 0.011 seconds with exit status 1 (failed).
+ DEBUG [06e4a3f0] Running [ -d /srv/services/demo.team21/releases/20160517114950/uploads ] as demo.team21@epi-stu-hut-demo2.shef.ac.uk
+ DEBUG [06e4a3f0] Command: [ -d /srv/services/demo.team21/releases/20160517114950/uploads ]
+ DEBUG [06e4a3f0] Finished in 0.012 seconds with exit status 1 (failed).
+  INFO [b536bb05] Running /usr/bin/env ln -s /srv/services/demo.team21/shared/uploads /srv/services/demo.team21/releases/20160517114950/uploads as demo.team21@epi-stu-hut-demo2.shef.ac.uk
+ DEBUG [b536bb05] Command: /usr/bin/env ln -s /srv/services/demo.team21/shared/uploads /srv/services/demo.team21/releases/20160517114950/uploads
+  INFO [b536bb05] Finished in 0.012 seconds with exit status 0 (successful).
+ DEBUG [ee0adac5] Running if test ! -d /srv/services/demo.team21/releases/20160517114950; then echo "Directory does not exist '/srv/services/demo.team21/releases/20160517114950'" 1>&2; false; fi as demo.team21@epi-stu-hut-demo2.shef.ac.uk
+ DEBUG [ee0adac5] Command: if test ! -d /srv/services/demo.team21/releases/20160517114950; then echo "Directory does not exist '/srv/services/demo.team21/releases/20160517114950'" 1>&2; false; fi
+ DEBUG [ee0adac5] Finished in 0.010 seconds with exit status 0 (successful).
+  INFO [d566216a] Running /usr/bin/env sed -ie 's/-x86-mingw32//' Gemfile.lock as demo.team21@epi-stu-hut-demo2.shef.ac.uk
+ DEBUG [d566216a] Command: cd /srv/services/demo.team21/releases/20160517114950 && /usr/bin/env sed -ie 's/-x86-mingw32//' Gemfile.lock
+  INFO [d566216a] Finished in 0.019 seconds with exit status 0 (successful).
+  INFO [752fb198] Running /usr/bin/env sed -ie 's/-x64-mingw32//' Gemfile.lock as demo.team21@epi-stu-hut-demo2.shef.ac.uk
+ DEBUG [752fb198] Command: cd /srv/services/demo.team21/releases/20160517114950 && /usr/bin/env sed -ie 's/-x64-mingw32//' Gemfile.lock
+  INFO [752fb198] Finished in 0.020 seconds with exit status 0 (successful).
+ DEBUG [731b71a1] Running if test ! -d /srv/services/demo.team21/releases/20160517114950; then echo "Directory does not exist '/srv/services/demo.team21/releases/20160517114950'" 1>&2; false; fi as demo.team21@epi-stu-hut-demo2.shef.ac.uk
+ DEBUG [731b71a1] Command: if test ! -d /srv/services/demo.team21/releases/20160517114950; then echo "Directory does not exist '/srv/services/demo.team21/releases/20160517114950'" 1>&2; false; fi
+ DEBUG [731b71a1] Finished in 0.011 seconds with exit status 0 (successful).
+  INFO [01d54513] Running /usr/bin/env chmod +x bin/* as demo.team21@epi-stu-hut-demo2.shef.ac.uk
+ DEBUG [01d54513] Command: cd /srv/services/demo.team21/releases/20160517114950 && /usr/bin/env chmod +x bin/*
+  INFO [01d54513] Finished in 0.014 seconds with exit status 0 (successful).
+ DEBUG [50025af1] Running if test ! -d /srv/services/demo.team21/releases/20160517114950; then echo "Directory does not exist '/srv/services/demo.team21/releases/20160517114950'" 1>&2; false; fi as demo.team21@epi-stu-hut-demo2.shef.ac.uk
+ DEBUG [50025af1] Command: if test ! -d /srv/services/demo.team21/releases/20160517114950; then echo "Directory does not exist '/srv/services/demo.team21/releases/20160517114950'" 1>&2; false; fi
+ DEBUG [50025af1] Finished in 0.010 seconds with exit status 0 (successful).
+  INFO [2c500a4e] Running /usr/local/rvm/bin/rvm 2.1.7 do bundle install --path /srv/services/demo.team21/shared/bundle --without development test --deployment --quiet as demo.team21@epi-stu-hut-demo2.shef.ac.uk
+ DEBUG [2c500a4e] Command: cd /srv/services/demo.team21/releases/20160517114950 && /usr/local/rvm/bin/rvm 2.1.7 do bundle install --path /srv/services/demo.team21/shared/bundle --without development test --deployment --quiet
+  INFO [2c500a4e] Finished in 1.067 seconds with exit status 0 (successful).
+ DEBUG [34806dfe] Running if test ! -d /srv/services/demo.team21/releases/20160517114950; then echo "Directory does not exist '/srv/services/demo.team21/releases/20160517114950'" 1>&2; false; fi as demo.team21@epi-stu-hut-demo2.shef.ac.uk
+ DEBUG [34806dfe] Command: if test ! -d /srv/services/demo.team21/releases/20160517114950; then echo "Directory does not exist '/srv/services/demo.team21/releases/20160517114950'" 1>&2; false; fi
+ DEBUG [34806dfe] Finished in 0.010 seconds with exit status 0 (successful).
+ DEBUG [88486483] Running /usr/bin/env ls -xr /srv/services/demo.team21/releases as demo.team21@epi-stu-hut-demo2.shef.ac.uk
+ DEBUG [88486483] Command: cd /srv/services/demo.team21/releases/20160517114950 && ( export RAILS_ENV="demo" ; /usr/bin/env ls -xr /srv/services/demo.team21/releases )
+ DEBUG [88486483] 	20160517114950	20160517104354	20160517090005
+ DEBUG [88486483] Finished in 0.012 seconds with exit status 0 (successful).
+  INFO [924fb33e] Running /usr/bin/env ls /srv/services/demo.team21/releases/20160517104354/assets_manifest_backup as demo.team21@epi-stu-hut-demo2.shef.ac.uk
+ DEBUG [924fb33e] Command: cd /srv/services/demo.team21/releases/20160517114950 && ( export RAILS_ENV="demo" ; /usr/bin/env ls /srv/services/demo.team21/releases/20160517104354/assets_manifest_backup )
+  INFO [924fb33e] Finished in 0.014 seconds with exit status 0 (successful).
+  INFO [d5d7f800] Running /usr/bin/env diff -Naur /srv/services/demo.team21/releases/20160517114950/app/assets /srv/services/demo.team21/releases/20160517104354/app/assets as demo.team21@epi-stu-hut-demo2.shef.ac.uk
+ DEBUG [d5d7f800] Command: cd /srv/services/demo.team21/releases/20160517114950 && ( export RAILS_ENV="demo" ; /usr/bin/env diff -Naur /srv/services/demo.team21/releases/20160517114950/app/assets /srv/services/demo.team21/releases/20160517104354/app/assets )
+  INFO [d5d7f800] Finished in 0.209 seconds with exit status 0 (successful).
+  INFO [247789f4] Running /usr/bin/env diff -Naur /srv/services/demo.team21/releases/20160517114950/lib/assets /srv/services/demo.team21/releases/20160517104354/lib/assets as demo.team21@epi-stu-hut-demo2.shef.ac.uk
+ DEBUG [247789f4] Command: cd /srv/services/demo.team21/releases/20160517114950 && ( export RAILS_ENV="demo" ; /usr/bin/env diff -Naur /srv/services/demo.team21/releases/20160517114950/lib/assets /srv/services/demo.team21/releases/20160517104354/lib/assets )
+ DEBUG [247789f4] 	diff: /srv/services/demo.team21/releases/20160517114950/lib/assets
+ DEBUG [247789f4] 	: No such file or directory
+diff: /srv/services/demo.team21/releases/20160517104354/lib/assets: No such file or directory
+  INFO [2d8c94ef] Running /usr/local/rvm/bin/rvm 2.1.7 do bundle exec rake assets:precompile as demo.team21@epi-stu-hut-demo2.shef.ac.uk
+ DEBUG [2d8c94ef] Command: cd /srv/services/demo.team21/releases/20160517114950 && ( export RAILS_ENV="demo" ; /usr/local/rvm/bin/rvm 2.1.7 do bundle exec rake assets:precompile )
+  INFO [2d8c94ef] Finished in 59.017 seconds with exit status 0 (successful).
+ DEBUG [73bc628d] Running if test ! -d /srv/services/demo.team21/releases/20160517114950; then echo "Directory does not exist '/srv/services/demo.team21/releases/20160517114950'" 1>&2; false; fi as demo.team21@epi-stu-hut-demo2.shef.ac.uk
+ DEBUG [73bc628d] Command: if test ! -d /srv/services/demo.team21/releases/20160517114950; then echo "Directory does not exist '/srv/services/demo.team21/releases/20160517114950'" 1>&2; false; fi
+ DEBUG [73bc628d] Finished in 0.017 seconds with exit status 0 (successful).
+  INFO [57191588] Running /usr/bin/env mkdir -p /srv/services/demo.team21/releases/20160517114950/assets_manifest_backup as demo.team21@epi-stu-hut-demo2.shef.ac.uk
+ DEBUG [57191588] Command: cd /srv/services/demo.team21/releases/20160517114950 && /usr/bin/env mkdir -p /srv/services/demo.team21/releases/20160517114950/assets_manifest_backup
+  INFO [57191588] Finished in 0.044 seconds with exit status 0 (successful).
+ DEBUG [cd6d529e] Running /usr/bin/env ls /srv/services/demo.team21/releases/20160517114950/public/assets/.sprockets-manifest* as demo.team21@epi-stu-hut-demo2.shef.ac.uk
+ DEBUG [cd6d529e] Command: cd /srv/services/demo.team21/releases/20160517114950 && /usr/bin/env ls /srv/services/demo.team21/releases/20160517114950/public/assets/.sprockets-manifest*
+ DEBUG [cd6d529e] 	/srv/services/demo.team21/releases/20160517114950/public/assets/.sprockets-manifest-e90cca42af4826e91ae60f286c7cd99a.json
+ DEBUG [cd6d529e] Finished in 0.025 seconds with exit status 0 (successful).
+ DEBUG [66f766d1] Running /usr/bin/env ls /srv/services/demo.team21/releases/20160517114950/public/assets/.sprockets-manifest* as demo.team21@epi-stu-hut-demo2.shef.ac.uk
+ DEBUG [66f766d1] Command: cd /srv/services/demo.team21/releases/20160517114950 && /usr/bin/env ls /srv/services/demo.team21/releases/20160517114950/public/assets/.sprockets-manifest*
+ DEBUG [66f766d1] 	/srv/services/demo.team21/releases/20160517114950/public/assets/.sprockets-manifest-e90cca42af4826e91ae60f286c7cd99a.json
+ DEBUG [66f766d1] Finished in 0.021 seconds with exit status 0 (successful).
+  INFO [d7322019] Running /usr/bin/env cp /srv/services/demo.team21/releases/20160517114950/public/assets/.sprockets-manifest-e90cca42af4826e91ae60f286c7cd99a.json /srv/services/demo.team21/releases/20160517114950/assets_manifest_backup as demo.team21@epi-stu-hut-demo2.shef.ac.uk
+ DEBUG [d7322019] Command: cd /srv/services/demo.team21/releases/20160517114950 && /usr/bin/env cp /srv/services/demo.team21/releases/20160517114950/public/assets/.sprockets-manifest-e90cca42af4826e91ae60f286c7cd99a.json /srv/services/demo.team21/releases/20160517114950/assets_manifest_backup
+  INFO [d7322019] Finished in 0.042 seconds with exit status 0 (successful).
+  INFO [deploy:migrate] Run `rake db:migrate`
+ DEBUG [52fe94cf] Running if test ! -d /srv/services/demo.team21/releases/20160517114950; then echo "Directory does not exist '/srv/services/demo.team21/releases/20160517114950'" 1>&2; false; fi as demo.team21@epi-stu-hut-demo2.shef.ac.uk
+ DEBUG [52fe94cf] Command: if test ! -d /srv/services/demo.team21/releases/20160517114950; then echo "Directory does not exist '/srv/services/demo.team21/releases/20160517114950'" 1>&2; false; fi
+ DEBUG [52fe94cf] Finished in 0.018 seconds with exit status 0 (successful).
+  INFO [76c07614] Running /usr/local/rvm/bin/rvm 2.1.7 do bundle exec rake db:migrate as demo.team21@epi-stu-hut-demo2.shef.ac.uk
+ DEBUG [76c07614] Command: cd /srv/services/demo.team21/releases/20160517114950 && ( export RAILS_ENV="demo" ; /usr/local/rvm/bin/rvm 2.1.7 do bundle exec rake db:migrate )
+  INFO [76c07614] Finished in 11.183 seconds with exit status 0 (successful).
+ DEBUG [b90d6818] Running if test ! -d /srv/services/demo.team21/releases/20160517114950; then echo "Directory does not exist '/srv/services/demo.team21/releases/20160517114950'" 1>&2; false; fi as demo.team21@epi-stu-hut-demo2.shef.ac.uk
+ DEBUG [b90d6818] Command: if test ! -d /srv/services/demo.team21/releases/20160517114950; then echo "Directory does not exist '/srv/services/demo.team21/releases/20160517114950'" 1>&2; false; fi
+ DEBUG [b90d6818] Finished in 0.010 seconds with exit status 0 (successful).
+  INFO [694e30d2] Running /usr/local/rvm/bin/rvm 2.1.7 do bundle exec whenever --update-crontab hut-21-demo --set "environment=demo&delayed_job_args_p=hut-21-demo&delayed_job_args_n=1" --roles=web,app,db as demo.team21@epi-stu-hut-demo2.shef.ac.uk
+ DEBUG [694e30d2] Command: cd /srv/services/demo.team21/releases/20160517114950 && /usr/local/rvm/bin/rvm 2.1.7 do bundle exec whenever --update-crontab hut-21-demo --set "environment=demo&delayed_job_args_p=hut-21-demo&delayed_job_args_n=1" --roles=web,app,db
+ DEBUG [694e30d2] 	[write] crontab file updated
+  INFO [694e30d2] Finished in 2.107 seconds with exit status 0 (successful).
+ DEBUG [097f3571] Running if test ! -d /srv/services/demo.team21/releases/20160517114950; then echo "Directory does not exist '/srv/services/demo.team21/releases/20160517114950'" 1>&2; false; fi as demo.team21@epi-stu-hut-demo2.shef.ac.uk
+ DEBUG [097f3571] Command: if test ! -d /srv/services/demo.team21/releases/20160517114950; then echo "Directory does not exist '/srv/services/demo.team21/releases/20160517114950'" 1>&2; false; fi
+ DEBUG [097f3571] Finished in 0.016 seconds with exit status 0 (successful).
+  INFO [802c8807] Running /usr/local/rvm/bin/rvm 2.1.7 do bundle exec bin/delayed_job stop as demo.team21@epi-stu-hut-demo2.shef.ac.uk
+ DEBUG [802c8807] Command: cd /srv/services/demo.team21/releases/20160517114950 && ( export RAILS_ENV="demo" ; /usr/local/rvm/bin/rvm 2.1.7 do bundle exec bin/delayed_job stop )
+ DEBUG [802c8807] 	delayed_job: trying to stop process with pid 14103...
+ DEBUG [802c8807] 	delayed_job: process with pid 14103 successfully stopped.
+  INFO [802c8807] Finished in 11.222 seconds with exit status 0 (successful).
+  INFO [f5b9ec95] Running /usr/bin/env ln -s /srv/services/demo.team21/releases/20160517114950 /srv/services/demo.team21/releases/current as demo.team21@epi-stu-hut-demo2.shef.ac.uk
+ DEBUG [f5b9ec95] Command: /usr/bin/env ln -s /srv/services/demo.team21/releases/20160517114950 /srv/services/demo.team21/releases/current
+  INFO [f5b9ec95] Finished in 0.014 seconds with exit status 0 (successful).
+  INFO [5fc87f25] Running /usr/bin/env mv /srv/services/demo.team21/releases/current /srv/services/demo.team21 as demo.team21@epi-stu-hut-demo2.shef.ac.uk
+ DEBUG [5fc87f25] Command: /usr/bin/env mv /srv/services/demo.team21/releases/current /srv/services/demo.team21
+  INFO [5fc87f25] Finished in 0.016 seconds with exit status 0 (successful).
+ DEBUG [88f3a990] Running if test ! -d /srv/services/demo.team21/releases/20160517114950; then echo "Directory does not exist '/srv/services/demo.team21/releases/20160517114950'" 1>&2; false; fi as demo.team21@epi-stu-hut-demo2.shef.ac.uk
+ DEBUG [88f3a990] Command: if test ! -d /srv/services/demo.team21/releases/20160517114950; then echo "Directory does not exist '/srv/services/demo.team21/releases/20160517114950'" 1>&2; false; fi
+ DEBUG [88f3a990] Finished in 0.013 seconds with exit status 0 (successful).
+ DEBUG [4ca7bd52] Running /usr/local/rvm/bin/rvm 2.1.7 do passenger -v as demo.team21@epi-stu-hut-demo2.shef.ac.uk
+ DEBUG [4ca7bd52] Command: cd /srv/services/demo.team21/releases/20160517114950 && /usr/local/rvm/bin/rvm 2.1.7 do passenger -v
+ DEBUG [4ca7bd52] 	Phusion Passenger 5.0.28
+ DEBUG [4ca7bd52] Finished in 0.409 seconds with exit status 0 (successful).
+  INFO [76ac5c68] Running /usr/local/rvm/bin/rvm 2.1.7 do passenger-config restart-app /srv/services/demo.team21 --ignore-app-not-running as demo.team21@epi-stu-hut-demo2.shef.ac.uk
+ DEBUG [76ac5c68] Command: cd /srv/services/demo.team21/releases/20160517114950 && /usr/local/rvm/bin/rvm 2.1.7 do passenger-config restart-app /srv/services/demo.team21 --ignore-app-not-running
+ DEBUG [76ac5c68] 	Restarting /srv/services/demo.team21/current (demo)
+ DEBUG [76ac5c68] 	
+  INFO [76ac5c68] Finished in 0.544 seconds with exit status 0 (successful).
+ DEBUG [06b24dcb] Running /usr/bin/env ls -xtr /srv/services/demo.team21/releases as demo.team21@epi-stu-hut-demo2.shef.ac.uk
+ DEBUG [06b24dcb] Command: /usr/bin/env ls -xtr /srv/services/demo.team21/releases
+ DEBUG [06b24dcb] 	20160517090005	20160517104354	20160517114950
+ DEBUG [06b24dcb] Finished in 0.013 seconds with exit status 0 (successful).
+  INFO Keeping 2 of 3 deployed releases on epi-stu-hut-demo2.shef.ac.uk
+  INFO [ad512cab] Running /usr/bin/env rm -rf /srv/services/demo.team21/releases/20160517090005 as demo.team21@epi-stu-hut-demo2.shef.ac.uk
+ DEBUG [ad512cab] Command: /usr/bin/env rm -rf /srv/services/demo.team21/releases/20160517090005
+  INFO [ad512cab] Finished in 1.544 seconds with exit status 0 (successful).
+ DEBUG [cbcc337d] Running if test ! -d /srv/services/demo.team21/releases/20160517114950; then echo "Directory does not exist '/srv/services/demo.team21/releases/20160517114950'" 1>&2; false; fi as demo.team21@epi-stu-hut-demo2.shef.ac.uk
+ DEBUG [cbcc337d] Command: if test ! -d /srv/services/demo.team21/releases/20160517114950; then echo "Directory does not exist '/srv/services/demo.team21/releases/20160517114950'" 1>&2; false; fi
+ DEBUG [cbcc337d] Finished in 0.010 seconds with exit status 0 (successful).
+  INFO [33fee0d1] Running /usr/local/rvm/bin/rvm 2.1.7 do bundle exec bin/delayed_job -p hut-21-demo -n 1 start as demo.team21@epi-stu-hut-demo2.shef.ac.uk
+ DEBUG [33fee0d1] Command: cd /srv/services/demo.team21/releases/20160517114950 && ( export RAILS_ENV="demo" ; /usr/local/rvm/bin/rvm 2.1.7 do bundle exec bin/delayed_job -p hut-21-demo -n 1 start )
+ DEBUG [33fee0d1] 	delayed_job: process with pid 11659 started.
+  INFO [33fee0d1] Finished in 11.342 seconds with exit status 0 (successful).
+ DEBUG [1f58ee9d] Running if test ! -d /srv/services/demo.team21/releases; then echo "Directory does not exist '/srv/services/demo.team21/releases'" 1>&2; false; fi as demo.team21@epi-stu-hut-demo2.shef.ac.uk
+ DEBUG [1f58ee9d] Command: if test ! -d /srv/services/demo.team21/releases; then echo "Directory does not exist '/srv/services/demo.team21/releases'" 1>&2; false; fi
+ DEBUG [1f58ee9d] Finished in 0.018 seconds with exit status 0 (successful).
+  INFO [c610fe5a] Running /usr/bin/env echo "Branch master (at a149450d6b4f226898520b1716082d19811a8733) deployed as release 20160517114950 by Nixon" >> /srv/services/demo.team21/revisions.log as demo.team21@epi-stu-hut-demo2.shef.ac.uk
+ DEBUG [c610fe5a] Command: cd /srv/services/demo.team21/releases && /usr/bin/env echo "Branch master (at a149450d6b4f226898520b1716082d19811a8733) deployed as release 20160517114950 by Nixon" >> /srv/services/demo.team21/revisions.log
+  INFO [c610fe5a] Finished in 0.023 seconds with exit status 0 (successful).

@@ -1,0 +1,77 @@
+<% randn = rand(1..3) %>
+<% if randn == 1%>
+  <div class="container-fluid head pink">
+<% elsif randn == 2%>
+  <div class="container-fluid head blue">
+<% elsif randn == 3%>
+  <div class="container-fluid head green">
+<% end %>
+  <h1>Calendar</h1>
+  <h2 class="sub">Your personal schedule</h1>
+</div>
+<% if @scalendars.empty? %>
+<div class="container marketing">
+  <h2 class= "sub"> Your schedule is empty </h2>
+</div>
+<% else %>
+<% i = 0 %>
+<% border = true %>
+<% @scalendars.each do |calendar| %>
+<!-- A DAY STARTS -->
+<% lect = @lectures.where(id: calendar.lectures_id).first%>
+<% day = @days.where(id: lect.day_id).first %>
+<%if (i == 0) && (i+1 != @scalendars.length) && (@scalendars[i].ddate != @scalendars[i+1].ddate ||
+      @scalendars[i].ddatem != @scalendars[i+1].ddatem || @scalendars[i].ddated != @scalendars[i+1].ddated)%>
+      <% border = false %>
+<%end%>
+
+<%if (i == 0) || (i+1 != @scalendars.length && @scalendars[i].ddate == @scalendars[i+1].ddate &&
+      @scalendars[i].ddatem == @scalendars[i+1].ddatem && @scalendars[i].ddated == @scalendars[i+1].ddated)%>
+  <div class="container-fluid calendar-date">
+    <div class="container">
+      <h1><%= day.name %> <%= day.date %></h1>
+    </div>
+  </div>
+  <%else %>
+  <% border = false %>
+<% end %>
+<%if (i+1 == @scalendars.length) && ( @scalendars[i].ddate != @scalendars[i-1].ddate ||
+      @scalendars[i].ddatem != @scalendars[i-1].ddatem || @scalendars[i].ddated != @scalendars[i-1].ddated)%>
+      <div class="container-fluid calendar-date">
+        <div class="container">
+          <h1><%= day.name %> <%= day.date %></h1>
+        </div>
+      </div>
+<% end %>
+  <div class="container calendar">
+
+<% if border %>
+      <div class="row">
+<% else %>
+   <div class="row no-border">
+     <%end%>
+        <div class="col-xs-12 col-sm-6 col-md-8 col-lg-8 calendar-lecture">
+          <h2>
+            <span class="glyphicon glyphicon-dashboard lecture-icon" aria-hidden="true"></span><%= lect.start_time %> - <%= lect.end_time %>
+            <span class="glyphicon glyphicon-map-marker  lecture-icon" aria-hidden="true"></span><%= lect.location %>
+          </h2>
+          <h1><%= lect.lecture_title %></h1>
+          <p><%= lect.description %></p>
+        </div>
+        <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+            <div class="center-text button">
+              <div class="relative">
+                <a href="../lecture?id=<%=lect.id%>"><p class="btn btn-default calendar-btn">View description</p></a>
+              <%= link_to 'Delete', calendar_path(calendar),
+                      method: :delete, data: { confirm: 'Are you sure?' } %>
+              </div>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <% i = i+1 %>
+  <% border = true %>
+<!-- A DAY ENDS -->
+<% end %>
+<% end %>
