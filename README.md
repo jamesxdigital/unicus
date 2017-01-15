@@ -1,8 +1,8 @@
-# Hut-21
+# Team18
 ---
 
 ### Description
-CONFERENCE WEBSITE /EDIT/
+Describe your app here...
 
 ### Significant Features/Technology
 The system has the following:

@@ -1,0 +1,27 @@
+- content_for :title, "Show Objective"
+-if (current_user.id == @objective.user_id) or (current_user.id == (User.find(@objective.user_id)).manager_id)
+  .row{style:"border-bottom: 1px solid #EEEEEE;"}
+    - if not (defined?(@path_to)).nil? # if path_to. variable is defined.
+      -if @path_to == "unapproved"
+        = link_to(unapproved_objectives_path, :class => 'btn btn-primary',style:"margin:10px;") do
+          %span{class:"glyphicon glyphicon-menu-left"}
+          =" Back to Unapproved objectives List"
+      -if @path_to == "requested"
+        = link_to(requested_objectives_path, :class => 'btn btn-primary',style:"margin:10px;") do
+          %span{class:"glyphicon glyphicon-menu-left"}
+          =" Back to requested objectives List"
+      -if @path_to == "new_objective_message"
+        = link_to(message_path(Message.where(content_id: @objective.id).where(message_type:"new_objective_notification").first), :class => 'btn btn-primary',style:"margin:10px;") do
+          %span{class:"glyphicon glyphicon-menu-left"}
+          %span{class:"glyphicon glyphicon-envelope"}
+          =" Back to message"
+    -else
+      = link_to(objectives_path, :class => 'btn btn-primary',style:"margin:10px;") do
+        %span{class:"glyphicon glyphicon-menu-left"}
+
+        %span{class:"glyphicon glyphicon-th-list"}
+        =" Back to List"
+  .row
+    =render(partial:"objective_details",locals:{:@objective => @objective})
+-else
+  %h3 You are not authorised to edit this user's Objective

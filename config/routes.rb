@@ -1,13 +1,13 @@
 Rails.application.routes.draw do
 
-  resources :posts
+  resources :training_categories
+  mount EpiCas::Engine, at: "/"
   devise_for :users
-    as :user do
-      get 'users/edit' => 'devise/registrations#edit', :as => 'edit_user_registration'
-      put 'users' => 'devise/registrations#update', :as => 'user_registration'
+  resources :reviews
+  scope "/admin" do
+   resources :users
   end
-
-
+    #match 'users/index', to: 'users#index', via: 'get'
   match "/403", to: "errors#error_403", via: :all
   match "/404", to: "errors#error_404", via: :all
   match "/422", to: "errors#error_422", via: :all
@@ -16,60 +16,43 @@ Rails.application.routes.draw do
   get :ie_warning, to: 'errors#ie_warning'
   get :javascript_warning, to: 'errors#javascript_warning'
 
-  root to: "pages#index"
+  root to: "pages#home"
 
-  resources :days, :controller => 'days'
-  resources :lectures, :controller => 'lectures'
-  resources :speakers, :controller => 'speakers'
+  get '/calendar' => 'pages#calendar'
 
-  resources :users, :controller => 'users'
+  #get '/peer_reviews' => 'peer_reviews#index'
 
-  resources :calendars, :controller => 'calendars'
-  resources :notifications, :controller => 'notifications'
+  get '/settings' => 'settings#index'
 
-  get "change_password", to: 'users#chg'
-  patch "change_password", to: 'users#chgpsw'
+  get '/performance_review' => 'performance_review#index'
 
-  get "cp/indexcontent", to: 'frontpvs#edit_form'
-  patch "cp/indexcontent", to: 'frontpvs#update_form'
+  #get '/company_values' => 'company_values#index'
 
-  get "biography", to: 'pages#biography'
-  patch "biography", to: 'pages#biography_update'
+  resources :mailer_settings
+  resources :messages
 
-  get "unotifications", to: 'notifications#usernotifications'
+  resources :objectives do
+    get :unapproved, on: :collection
+    get :approve_confirm, on: :member
+    patch :approve, on: :member
+    get :reject_confirm, on: :member
+    patch :reject, on: :member
+    get :show_unapproved, on: :member
+    get :requested, on: :collection
+    get :show_rejected, on: :member
+  end
 
-  get "lecture", to: 'pages#lecture'
-  get "schedule", to: 'pages#schedule'
-  get "account", to: 'pages#account'
-  get "calendar", to: 'pages#calendar'
-  get "speaker", to: 'pages#speaker'
-  get "speakers_list", to: 'pages#speakers'
-  get "days_schedule", to: 'pages#days'
 
-  get "admin", to: 'pages#admin'
+  resources :peer_reviews do
+    get :show_photo, on: :member
+  end
 
-  get "cp/cpHome", to: 'cp#cpHome'
-  get "cp/days", to: 'days#days'
-  get "cp/add_day", to: 'days#add_day'
-  get "cp/edit_day", to: 'days#edit_day'
-  get "cp/delete_day", to: 'days#delete_day'
+  resources :requests do
+    get :destroy_all, on: :collection
+  end
 
-  get "cp/add_lecture", to: 'lectures#add_lecture'
-  get "cp/edit_lecture", to: 'lectures#edit_lecture'
-  get "cp/lectures", to: 'lectures#lectures'
+  resources :company_values
 
-  get "cp/add_speaker", to: 'speakers#add_speaker'
-  get "cp/edit_speaker", to: 'speakers#edit_speaker'
-  get "cp/speakers", to: 'speakers#speakers'
-
-  get "cp/notifications", to: 'notifications#index'
-  get "cp/add_notification", to: 'notifications#new'
-
-  get "cp/users", to: 'users#index'
-
-  get "cp/register", to: 'users#new'
-
-  # get "cp/users", to: 'cpusers#index'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
@@ -82,5 +65,46 @@ Rails.application.routes.draw do
   # Example of named route that can be invoked with purchase_url(id: product.id)
   #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase
 
+  # Example resource route (maps HTTP verbs to controller actions automatically):
+  #   resources :products
 
+  # Example resource route with options:
+  #   resources :products do
+  #     member do
+  #       get 'short'
+  #       post 'toggle'
+  #     end
+  #
+  #     collection do
+  #       get 'sold'
+  #     end
+  #   end
+
+  # Example resource route with sub-resources:
+  #   resources :products do
+  #     resources :comments, :sales
+  #     resource :seller
+  #   end
+
+  # Example resource route with more complex sub-resources:
+  #   resources :products do
+  #     resources :comments
+  #     resources :sales do
+  #       get 'recent', on: :collection
+  #     end
+  #   end
+
+  # Example resource route with concerns:
+  #   concern :toggleable do
+  #     post 'toggle'
+  #   end
+  #   resources :posts, concerns: :toggleable
+  #   resources :photos, concerns: :toggleable
+
+  # Example resource route within a namespace:
+  #   namespace :admin do
+  #     # Directs /admin/products/* to Admin::ProductsController
+  #     # (app/controllers/admin/products_controller.rb)
+  #     resources :products
+  #   end
 end

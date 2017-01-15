@@ -1,0 +1,21 @@
+%h1 Listing training_categories
+
+%table
+  %thead
+    %tr
+      %th Category
+      %th
+      %th
+      %th
+
+  %tbody
+    - @training_categories.each do |training_category|
+      %tr
+        %td= training_category.category
+        %td= link_to 'Show', training_category
+        %td= link_to 'Edit', edit_training_category_path(training_category)
+        %td= link_to 'Destroy', training_category, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Training category', new_training_category_path

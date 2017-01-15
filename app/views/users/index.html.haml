@@ -1,0 +1,77 @@
+- content_for :title, "Employee Administration"
+.row
+  %h1
+    %span{class:"glyphicon glyphicon-user"}
+    Listing users:
+  .table-responsive
+    %table#example.table.table-striped.table-bordered.table-condensed
+      %thead
+        %tr
+          %th ID:
+          %th Email:
+          %th First Name:
+          %th Second Name:
+          %th Manager?
+          %th Admin?
+          %th Manager ID:
+          %th
+          %th
+          %th
+
+      %tbody
+        - @users.each do |user|
+          %tr
+            %td= user.id
+            %td
+              %a{ href: "mailto:#{user.email}", title: "#{user.email}" }
+                #{user.email}
+            %td= user.givenname
+            %td= user.sn
+            %td
+              -if user.manager.nil?
+                %p{:style => 'color:red;'} Employee needs activiting - Please EDIT
+              -else
+                =user.manager
+            %td
+              -if user.admin.nil?
+                %p{:style => 'color:red;'} Employee needs activiting - Please EDIT
+              -else
+                =user.admin
+            %td= user.manager_id
+            %td
+              -#%a.button.btn.btn-primary{:type => "button",class:"glyphicon glyphicon-eye-open",:href => user_path(user.id)} Show
+              =link_to(user_path(user.id), :class => 'btn btn-default') do
+                %span{class:"glyphicon glyphicon-eye-open"}
+                =" Show"
+              -#= link_to("Show", user_path(user.id), :class => 'action show')
+            %td
+              -#%a.button.btn.btn-primary{:type => "button",class:"glyphicon glyphicon-wrench",:href => edit_user_path(user)} Edit
+              =link_to(edit_user_path(user), :class => 'btn btn-default') do
+                %span{class:"glyphicon glyphicon-wrench"}
+                =" Edit"
+            %td
+              =button_to( 'javascript:void(0)', class:"btn btn-danger",method: :get,"data-target" => "#deleteModal#{user.id}", "data-toggle" => "modal", :type => "button") do
+                ="<span class=\"glyphicon glyphicon-trash\"></span>".html_safe
+              =render(partial:'delete_user_modal',locals:{:user => user,rto:'index'})
+
+
+-#%p Export User Data: #{link_to "Download", users_path(format: "csv")}
+
+/ Button trigger modal
+%button.btn.btn-primary{"data-target" => "#myModal", "data-toggle" => "modal", :type => "button"}
+  %span{class:"glyphicon glyphicon-save"}
+  Export User Data
+
+/ Modal
+#myModal.modal.fade{"aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+  .modal-dialog{:role => "document"}
+    .modal-content
+      .modal-header
+        %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+          %span{"aria-hidden" => "true"} &times;
+        %h4#myModalLabel.modal-title Export User Data
+      .modal-body
+        \Download CSV file?
+      .modal-footer
+        -#%button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} Close
+        %p #{link_to "Download", users_path(format: "csv")}

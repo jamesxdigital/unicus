@@ -1,0 +1,131 @@
+- content_for :title, "Peer Reviews"
+-if current_user.manager.present? or current_user.admin.present? or current_user.manager_id.present?
+  %h1
+    %span{class:"glyphicon glyphicon-edit"}
+    Listing Peer Reviews
+
+  %h3 Your Peer Reviews
+  .table-responsive
+    %table#example.table.table-striped.table-bordered.table-condensed
+      %thead
+        %tr
+          %th Release Date
+          %th Deadline
+          %th
+          %th
+
+      %tbody
+        - @peer_reviews.each do |peer_review|
+          -if peer_review.user_id == current_user.id
+            %tr
+              %td= peer_review.created_at
+              %td
+                #{peer_review.deadline}
+                %br/
+                %span{:id => "clock#{peer_review.id}", :style => "font-weight: bold;"}
+
+                  :javascript
+                    $('#clock#{peer_review.id}').countdown('#{peer_review.deadline}')
+                    .on('update.countdown', function(event) {
+                      var format = '%H:%M:%S';
+                      if(event.offset.days > 0) {
+                        format = '%-d day%!d ' + format;
+                      }
+                      if(event.offset.weeks > 0) {
+                        format = '%-w week%!w ' + format;
+                      }
+                      $(this).html(event.strftime(format));
+                    })
+                    .on('finish.countdown', function(event) {
+                      $(this).html("<span style='color:Green'><b>Review Expired</b></span>")
+                        .parent().addClass('disabled');
+                    });
+              %td
+                -#%a.button.btn.btn-default{:type => "button",:href => peer_review_path(peer_review)} Show
+                =link_to(peer_review_path(peer_review), :class => 'btn btn-default') do
+                  %span{class:"glyphicon glyphicon-eye-open"}
+                  =" Show"
+              -if Date.today < peer_review.deadline
+                %td
+                  -#%a.button.btn.btn-default{:type => "button",:href => edit_peer_review_path(peer_review)} Edit
+                  =link_to(edit_peer_review_path(peer_review), :class => 'btn btn-default') do
+                    %span{class:"glyphicon glyphicon-wrench"}
+                    =" Edit"
+              -else
+                %td
+                  %a.button.btn.btn-default{:disabled => "disabled",class:"glyphicon glyphicon-wrench",:type => "button"} Edit
+
+    %br
+
+  -if current_user.manager?
+    %h3 Peer Reviews of people you manage
+    .table-responsive
+      %table#example.table.table-striped.table-bordered.table-condensed
+        %thead
+          %tr
+            %th User
+            %th Release Date
+            %th Deadline
+            %th
+            %th
+            %th
+
+        %tbody
+          - @manager_peer_reviews.each do |peer_review|
+            %tr
+              -email = @minion_ids.detect{|email,id,givenname,sn| id == peer_review.user_id}
+              -if email.blank?
+                %td= "NO EMAIL! ID: #{peer_review.user_id}"
+              -else
+                %td= "#{email[2]} #{email[3]}"
+              %td= peer_review.created_at
+              %td
+                #{peer_review.deadline}
+                %br/
+                %span{:id => "clock#{peer_review.id}", :style => "font-weight: bold;"}
+
+                  :javascript
+                    $('#clock#{peer_review.id}').countdown('#{peer_review.deadline}')
+                    .on('update.countdown', function(event) {
+                      var format = '%H:%M:%S';
+                      if(event.offset.days > 0) {
+                        format = '%-d day%!d ' + format;
+                      }
+                      if(event.offset.weeks > 0) {
+                        format = '%-w week%!w ' + format;
+                      }
+                      $(this).html(event.strftime(format));
+                    })
+                    .on('finish.countdown', function(event) {
+                      $(this).html("<span style='color:Green'><b>Review Expired</b></span>")
+                        .parent().addClass('disabled');
+                    });
+              %td
+                -#%a.button.btn.btn-primary{:type => "button",:href => peer_review_path(peer_review)} Show
+                =link_to(peer_review_path(peer_review), :class => 'btn btn-default') do
+                  %span{class:"glyphicon glyphicon-eye-open"}
+                  =" Show"
+              -if Date.today < peer_review.deadline
+                %td
+                  -#%a.button.btn.btn-primary{:type => "button",:href => edit_peer_review_path(peer_review)} Edit
+                  =link_to(edit_peer_review_path(peer_review), :class => 'btn btn-default') do
+                    %span{class:"glyphicon glyphicon-wrench"}
+                    =" Edit"
+              -else
+                %td
+                  %a.button.btn.btn-default{:disabled => "disabled",class:"glyphicon glyphicon-wrench", :type => "button"} Edit
+
+
+              -if current_user.manager?
+                %td
+                  = button_to "Destroy", peer_review, class:"btn btn-danger", :method => :delete, :data => { :confirm => 'Are you sure?' }
+    -#= link_to 'New Peer Review', new_peer_review_path
+    %a.button.btn.btn-primary{:type => "button",:href => new_peer_review_path} Create Peer Review
+- else
+  .col-md-12
+    .alert.alert-warning{ :style =>"text-align: center; " }
+      %a.close{"aria-label" => "close", "data-dismiss" => "alert", :href => "#"} ×
+      %strong{:style => "font-size: 20px;"} Welcome, #{current_user.givenname} #{current_user.sn}
+      %p{:style => "font-size: 30px;"} Thank you for registering your account
+      %p{:style => "font-size: 20px;"} Please wait whilst an admin user activates your account
+      %p #{current_user.manager} #{current_user.admin} #{current_user.manager_id}

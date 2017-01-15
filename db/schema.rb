@@ -11,28 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160516224734) do
+ActiveRecord::Schema.define(version: 20160510172810) do
 
-  create_table "calendars", force: :cascade do |t|
-    t.integer  "user_id"
-    t.integer  "lectures_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-    t.string   "ddate"
-    t.string   "ltime"
-    t.string   "ddatem"
-    t.string   "ddated"
-  end
-
-  create_table "days", force: :cascade do |t|
-    t.string   "name"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
-    t.integer  "display_size"
-    t.string   "date"
-    t.string   "ddatey"
-    t.string   "ddatem"
-    t.string   "ddated"
+  create_table "company_values", force: :cascade do |t|
+    t.string   "company_value"
+    t.string   "icon"
+    t.string   "colour"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
   end
 
   create_table "delayed_jobs", force: :cascade do |t|
@@ -51,38 +37,90 @@ ActiveRecord::Schema.define(version: 20160516224734) do
 
   add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority"
 
-  create_table "frontpvs", force: :cascade do |t|
-    t.string "title"
-    t.string "message"
-    t.string "location"
-    t.string "date"
+  create_table "mailer_settings", force: :cascade do |t|
+    t.integer "user_id"
+    t.boolean "when_objective_added",     default: true
+    t.boolean "when_objective_proposed",  default: true
+    t.boolean "when_objective_approved",  default: true
+    t.boolean "when_objective_rejected",  default: true
+    t.boolean "when_peer_review_added",   default: true
+    t.boolean "when_peer_review_updated", default: true
+    t.boolean "when_user_added",          default: true
+    t.boolean "when_account_activated",   default: true
   end
 
-  create_table "lectures", force: :cascade do |t|
-    t.string   "lecture_title", null: false
-    t.string   "column_name",   null: false
-    t.string   "start_time",    null: false
-    t.string   "end_time",      null: false
-    t.string   "description",   null: false
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
-    t.string   "location",      null: false
-    t.integer  "day_id"
-    t.string   "upavatar"
-    t.string   "key_speaker"
-    t.boolean  "is_break"
+  add_index "mailer_settings", ["user_id"], name: "index_mailer_settings_on_user_id"
+
+  create_table "messages", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "content_id"
+    t.integer  "sender_id"
+    t.boolean  "seen"
+    t.string   "message_type"
+    t.string   "title"
+    t.text     "message"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
   end
 
-  add_index "lectures", ["day_id"], name: "index_lectures_on_day_id"
+  add_index "messages", ["content_id"], name: "index_messages_on_content_id"
+  add_index "messages", ["sender_id"], name: "index_messages_on_sender_id"
+  add_index "messages", ["user_id"], name: "index_messages_on_user_id"
 
-  create_table "notifications", force: :cascade do |t|
-    t.string "message"
-    t.string "ntype"
+  create_table "objectives", force: :cascade do |t|
+    t.integer  "user_id"
+    t.string   "title"
+    t.text     "description"
+    t.boolean  "completed",   default: false
+    t.datetime "deadline"
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+    t.integer  "status",      default: 0
   end
 
-  create_table "posts", force: :cascade do |t|
+  create_table "peer_reviews", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "manager_id"
+    t.text     "e_objective_response"
+    t.text     "e_overall_comments"
+    t.text     "e_personal_development"
+    t.text     "m_objective_response"
+    t.text     "m_overall_comments"
+    t.text     "m_personal_development"
+    t.datetime "deadline"
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+    t.string   "photo"
+  end
+
+  create_table "photos", force: :cascade do |t|
+    t.string   "title"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
+  end
+
+  create_table "requests", force: :cascade do |t|
+    t.integer  "user_id"
+    t.string   "title"
+    t.string   "category"
+    t.text     "comments"
+    t.boolean  "approved"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "reviews", force: :cascade do |t|
+    t.integer  "objective_id"
+    t.text     "comments"
+    t.text     "managers_comments"
+    t.string   "title"
+    t.boolean  "completed"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
   end
 
   create_table "sessions", force: :cascade do |t|
@@ -95,42 +133,35 @@ ActiveRecord::Schema.define(version: 20160516224734) do
   add_index "sessions", ["session_id"], name: "index_sessions_on_session_id", unique: true
   add_index "sessions", ["updated_at"], name: "index_sessions_on_updated_at"
 
-  create_table "speakers", force: :cascade do |t|
-    t.string   "speaker_title"
-    t.string   "forename"
-    t.string   "surname"
-    t.string   "organisation"
-    t.string   "biography"
-    t.string   "academic_background"
-    t.string   "email"
-    t.string   "website"
-    t.string   "facebook"
-    t.string   "twitter"
-    t.datetime "created_at",          null: false
-    t.datetime "updated_at",          null: false
-    t.string   "avatar"
-    t.string   "linkedIn"
-    t.string   "display_email"
-    t.string   "to_display"
+  create_table "training_categories", force: :cascade do |t|
+    t.text     "category"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|
-    t.string   "email",                  default: "", null: false
-    t.string   "encrypted_password",     default: "", null: false
-    t.string   "reset_password_token"
-    t.datetime "reset_password_sent_at"
-    t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0,  null: false
+    t.string   "email",              default: "", null: false
+    t.integer  "sign_in_count",      default: 0,  null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
-    t.datetime "created_at",                          null: false
-    t.datetime "updated_at",                          null: false
-    t.string   "role"
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
+    t.boolean  "manager"
+    t.boolean  "admin"
+    t.integer  "manager_id"
+    t.string   "username"
+    t.string   "uid"
+    t.string   "mail"
+    t.string   "ou"
+    t.string   "dn"
+    t.string   "sn"
+    t.string   "givenname"
   end
 
-  add_index "users", ["email"], name: "index_users_on_email", unique: true
-  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  add_index "users", ["email"], name: "index_users_on_email"
+  add_index "users", ["manager_id"], name: "index_users_on_manager_id"
+  add_index "users", ["username"], name: "index_users_on_username"
 
 end

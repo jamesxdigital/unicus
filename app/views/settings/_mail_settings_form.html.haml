@@ -1,0 +1,32 @@
+
+=simple_form_for(@mail_settings) do |f|
+  = f.error_notification
+  .form-inputs
+    %table.table{summary:"Settings options", :style=>"width: 100%"}
+      %thead
+        %tr
+          %th Email me when:
+      %tbody
+        %tr
+          %th=f.label('a new objective is added for me: ')
+          %td= f.check_box :when_objective_added,{"data-toggle" => "toggle", :type => "checkbox"}
+        - if current_user.manager?
+          %tr
+            %th=f.label('a new objective is proposed by my employee: ')
+            %td=f.check_box :when_objective_proposed ,{"data-toggle" => "toggle", :type => "checkbox"}
+        %tr
+          %th=f.label('an objective is approved by my manager: ')
+          %td=f.check_box :when_objective_approved ,{"data-toggle" => "toggle", :type => "checkbox"}
+        %tr
+          %th=f.label('an objective is rejected by my manager: ')
+          %td=f.check_box :when_objective_rejected ,{"data-toggle" => "toggle", :type => "checkbox"}
+        %tr
+          %th=f.label('a peer review is added by my manager: ')
+          %td=f.check_box :when_peer_review_added ,{"data-toggle" => "toggle", :type => "checkbox"}
+        %tr
+          %th=f.label('a peer review is updated: ')
+          %td=f.check_box :when_peer_review_updated ,{"data-toggle" => "toggle", :type => "checkbox"}
+
+
+  .form-actions
+    = f.button(:submit,value:"Update",class:"btn btn-primary")

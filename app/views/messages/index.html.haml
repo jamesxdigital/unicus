@@ -1,0 +1,52 @@
+- content_for :title, "Messages"
+-if current_user.manager.present? or current_user.admin.present? or current_user.manager_id.present?
+  .row{style:"max-width: 1200px;margin: auto;"}
+    %h1
+      %span{class:"glyphicon glyphicon-envelope"}
+      Your messages:
+    .col-md-12
+      .table-responsive
+        %table#example.table.table-striped.table-bordered.table-condensed
+          %thead
+            %tr
+              %th Sender
+              %th Title:
+              %th Message:
+              %th Time:
+              %th
+              -if current_user.admin?
+                %th
+
+          %tbody
+            - @your_messages.each do |message|
+              -sender_name = ""
+              -@senders.each do |snd|
+                -if snd[0] == message.id
+                  -sender_name = snd[1]
+                  -puts sender_name
+
+              %tr{style:"#{getColor(message.message_type)}"}
+                -if sender_name == ""
+                  %td{style:"color: red;"}
+                    ="NULL - ERROR"
+                -else
+                  %td="#{sender_name}"
+                %td= truncate(message.title, :length => 80, :omission => "...")
+                %td= truncate(message.message, :length => 100, :omission => "...")
+                %td= message.created_at.strftime("%d/%m/%Y - %I:%M%p")
+                %td
+                  = button_to(message_path(message.id), :class => 'btn btn-default', method: :get) do
+                    ="<span class=\"glyphicon glyphicon-eye-open\"></span>".html_safe+" Show"
+                -if current_user.admin?
+                  %td
+                    =button_to( 'javascript:void(0)',class:"btn btn-danger",method: :get,data:{target:"#deleteModal#{message.id}",toggle:"modal",:message_id => message.id}, :type => "button") do
+                      ="<span class=\"glyphicon glyphicon-trash\"></span>".html_safe
+                    =render(partial:'delete_message_modal',locals:{:message => message})
+- else
+  .col-md-12
+    .alert.alert-warning{ :style =>"text-align: center; " }
+      %a.close{"aria-label" => "close", "data-dismiss" => "alert", :href => "#"} ×
+      %strong{:style => "font-size: 20px;"} Welcome, #{current_user.givenname} #{current_user.sn}
+      %p{:style => "font-size: 30px;"} Thank you for registering your account
+      %p{:style => "font-size: 20px;"} Please wait whilst an admin user activates your account
+      %p #{current_user.manager} #{current_user.admin} #{current_user.manager_id}

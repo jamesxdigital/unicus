@@ -1,0 +1,59 @@
+
+-if (defined?(@can_full_edit)).nil?
+  -@can_full_edit = false
+
+=simple_form_for(@objective) do |f|
+  = f.error_notification
+  -puts "User_id in edit for partial:     |#{@objective.user_id}|"
+  .form-inputs
+    %table.table{summary:"Objective form fields", :style=>"width: 100%"}
+      %tr
+        -if @request_type == "self"
+          =hidden_field_tag(:request_type,'self')
+        -else
+          %th=f.label('Employee:')
+
+
+          -if params[:action] == 'edit'
+            -if @can_full_edit == true
+              %td=f.select :user_id,@minions.map {|s|["#{s.givenname} #{s.sn} (#{s.email})",s.id]}, {selected:@objective.user_id}, {:multiple => false, :class => "js-example-responsive", :style => "width: 100%;"}
+            -else
+              %td="#{@objective_user.givenname} #{@objective_user.sn}"
+          -else
+            %td=f.select :user_id, @minions.map {|s|["#{s.givenname} #{s.sn} (#{s.email})",s.id]}, {}, {:multiple => true, :class => "js-example-responsive", :style => "width: 100%;"}
+
+      %tr
+        %th=f.label('Title: ')
+        -if @can_full_edit == true
+          %td=f.text_field(:title, :class => "form-control", :placeholder => "Title", :style => "width: 100%;")
+        -else
+          %td= "#{@objective.title}"
+      -if params[:action] == 'edit'
+        %tr
+          %th=f.label('Completed: ')
+          %td=f.check_box(:completed)
+      %tr
+        %th=f.label('Description: ')
+        -if @can_full_edit
+          %td=f.text_area(:description, :class => "form-control", :placeholder => "Description", :style => "width: 100%;")
+        -else
+          %td
+            .well
+              ="#{@objective.description}"
+
+      %tr
+        %th=f.label('Deadline: ')
+        -if @can_full_edit
+          %td=f.datetime_select(:deadline,:class => "js-example-basic-single",:default => Time.now+1.week)
+        -else
+          %td= @objective.deadline.strftime("%d/%m/%Y - %I:%M%p")
+      - if @request_type == "self"
+        =f.hidden_field(:status, {value:0})
+      - else
+        =f.hidden_field(:status, {value:1})
+
+  .form-actions
+    -if params[:action] == 'edit'
+      = f.button(:submit,value:"Update",class:"btn btn-primary")
+    -else
+      = f.button(:submit,value:"Create")

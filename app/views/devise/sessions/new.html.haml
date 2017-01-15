@@ -3,12 +3,14 @@
 .row
   .col-sm-6.col-sm-offset-3.col-lg-4.col-lg-offset-4
     .panel.panel-default.margin-top-20
-      .panel-heading
-        %h2.panel-title Log In
       = simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
         .panel-body
-          = f.input :email, autofocus: true
-          = f.input :password
+          %br/
+          %h3.panel-title{:style => "text-align:center; font-size:25px;"} Welcome, Please Log In
+          %hr.colorgraph
+          %br/
+          = f.input :username, autofocus: true, :input_html => {:style=> 'width: 100%'}
+          = f.input :password, :input_html => {:style=> 'width: 100%'}
         .panel-footer
-          = submit_button 'Log in'
+          %button.btn.btn-lg.btn-primary.btn-block{:name => "Submit", :type => "Submit", :value => "Log in"} Login
           .margin-top-10= render "devise/shared/links"

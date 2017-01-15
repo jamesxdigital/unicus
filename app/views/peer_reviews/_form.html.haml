@@ -1,0 +1,221 @@
+-if params[:action] == 'new'
+  -#- content_for :title, "New Peer Review"
+  %h1
+    %span{class:"glyphicon glyphicon-edit"}
+    New Peer Review
+
+-else
+  - content_for :title, "Edit Peer Review"
+
+= simple_form_for(@peer_review) do |f|
+  = f.error_notification
+  .col-md-12
+    .col-md-4
+      .form-inputs
+        -if params[:action] == 'new'
+          -if @request_type == "self"
+            =hidden_field_tag(:request_type,'self')
+          -else
+            =f.label('Employee:')
+            =f.select :user_id,@minions.map {|s|["#{s.givenname}  #{s.sn} #{s.email}",s.id]}, {}, {:multiple => true, :class => "js-example-responsive", :style => "width: 100%;"}
+
+            = f.label('Deadline')
+            = f.input :deadline, label: false
+
+
+
+    -if params[:action] == 'edit'
+      -if (current_user.manager_id == @peer_review.manager_id) and (current_user.manager_id != current_user.id)
+        .column
+          .col-md-12
+            .panel.panel-success
+              .panel-heading Peer Review Information
+              .panel-body
+                %p
+                  %b Employee:
+                  #{User.find(@peer_review.user_id).givenname} #{User.find(@peer_review.user_id).sn}
+                %p
+                  %b Manager:
+                  #{User.find(@peer_review.manager_id).givenname} #{User.find(@peer_review.manager_id).sn}
+                %p
+                  %b Deadline:
+                  = @peer_review.deadline
+          .col-md-12
+            .panel.panel-success
+              .panel-heading Your objectives for this Peer Review
+              .panel-body
+                .table-responsive
+                  %table.table.table-hover
+                    %thead
+                      %tr
+                        %th Employee Objective
+                        %th Description
+                    %tbody
+                      - @objectives.each do |objective|
+                        -if objective.deadline < @peer_review.deadline
+                          -if @peer_review.user_id == objective.user_id
+                            -if objective.completed?
+                              %tr.success
+                                %td= objective.title
+                                %td= objective.description
+                            -else
+                              %tr.danger
+                                %td= objective.title
+                                %td= objective.description
+
+          .col-md-6
+            .panel.panel-success
+              .panel-heading Peer Review (#{User.find(@peer_review.user_id).givenname} #{User.find(@peer_review.user_id).sn} to fill in)
+              .panel-body
+                .form-inputs
+                  %table.table{summary:"Objective form fields", :style=>"width: 100%"}
+                    %tr
+                      %th= f.label('Employee\'s Objective Response:')
+                      %td=f.text_area(:e_objective_response, :class => "form-control", :placeholder => "Description", :style => "width: 100%;")
+                    %tr
+                      %th= f.label('Employee\'s Overall Comments:')
+                      %td=f.text_area(:e_overall_comments, :class => "form-control", :placeholder => "Description", :style => "width: 100%;")
+                    %tr
+                      %th= f.label('Employee\'s Personal Development:')
+                      %td=f.text_area(:e_personal_development, :class => "form-control", :placeholder => "Description", :style => "width: 100%;")
+                    %tr
+                      %th= f.label('File Upload')
+                      - if @peer_review.photo?
+                        %td
+                          %p Current uploaded evidence:
+                          %p
+                            %em (click image to enlarge)
+                          = link_to image_tag(url_for(action: :show_photo),:width => "100"), "#photo", class: "fancybox"
+                          %div{:style => "display:none;"}
+                            #photo
+                              = image_tag url_for(action: :show_photo)
+                          %p Upload different photo?
+                          %p= f.input :photo, as: :file,label: false
+                          %p= f.input :photo_cache, as: :hidden,label: false
+                      - else
+                        %td= f.input :photo, as: :file,label: false
+                        %td= f.input :photo_cache, as: :hidden,label: false
+
+          .col-md-6
+            .panel.panel-success
+              .panel-heading Peer Review (#{User.find(@peer_review.manager_id).givenname} #{User.find(@peer_review.manager_id).sn} to fill in)
+              .panel-body
+                %table.table{summary:"Objective form fields", :style=>"width: 100%"}
+                  %tr
+                    %th= f.label('Manager\'s Objective Response:')
+                    %td= @peer_review.m_objective_response
+                  %tr
+                    %th= f.label('Manager\'s Overall Comments:')
+                    %td= @peer_review.m_overall_comments
+                  %tr
+                    %th= f.label('Manager\'s Personal Development:')
+                    %td= @peer_review.m_personal_development
+                  %tr
+      -else
+        .column
+          .col-md-12
+            .panel.panel-success
+              .panel-heading Peer Review Information
+              .panel-body
+                %p
+                  %b Employee:
+                  #{User.find(@peer_review.user_id).givenname} #{User.find(@peer_review.user_id).sn}
+                %p
+                  %b Manager:
+                  #{User.find(@peer_review.manager_id).givenname} #{User.find(@peer_review.manager_id).sn}
+                %p
+                  %b Deadline:
+                  = @peer_review.deadline
+          .col-md-12
+            .panel.panel-success
+              .panel-heading Employee's objectives for this Peer Review
+              .panel-body
+                .table-responsive
+                  %table.table.table-hover
+                    %thead
+                      %tr
+                        %th Employee Objective
+                        %th Description
+                        %th Employee
+
+                    %tbody
+                      - @manager_objectives.each do |objective|
+                        -if objective.deadline < @peer_review.deadline
+                          -name = @minion_ids.detect{|email,id,givenname,sn| id == objective.user_id}
+                          -if @peer_review.user_id == objective.user_id
+                            -if objective.completed?
+                              %tr.success
+                                %td= objective.title
+                                %td= objective.description
+                                -if name.blank?
+                                  %td= "NO NAME! ID: #{objective.user_id}"
+                                -else
+                                  %td
+                                    = "#{name[2]} #{name[3]}"
+                                    = "-"
+                                    %a{ href: "mailto:#{name[0]}", title: "#{name[1]}" }
+                                      #{name[0]}
+                            -else
+                              %tr.danger
+                                %td= objective.title
+                                %td= objective.description
+                                -if name.blank?
+                                  %td= "NO NAME! ID: #{objective.user_id}"
+                                -else
+                                  %td
+                                    = "#{name[2]} #{name[3]}"
+                                    = "-"
+                                    %a{ href: "mailto:#{name[0]}", title: "#{name[1]}" }
+                                      #{name[0]}
+          .col-md-6
+            .panel.panel-success
+              .panel-heading Peer Review (#{User.find(@peer_review.user_id).givenname} #{User.find(@peer_review.user_id).sn} to fill in)
+              .panel-body
+                %table.table{summary:"Objective form fields", :style=>"width: 100%"}
+                  %tr
+                    %th= f.label('Employee\'s Objective Response:')
+                    %td= @peer_review.e_objective_response
+                  %tr
+                    %th= f.label('Employee\'s Overall Comments:')
+                    %td= @peer_review.e_overall_comments
+                  %tr
+                    %th= f.label('Employee\'s Personal Development:')
+                    %td= @peer_review.e_personal_development
+                  - if @peer_review.photo?
+                    %tr
+                      %td
+                        %b= f.label('Employee\'s Photo Evidence:')
+                        %p (click photo to enlarge)
+                      %td
+                        = link_to image_tag(url_for(action: :show_photo),:width => "100"), "#photo", class: "fancybox"
+                        %div{:style => "display:none;"}
+                          #photo
+                            = image_tag url_for(action: :show_photo)
+                  - else
+                    %tr
+                      %th File upload
+                      %td No photo evidence to show
+          .col-md-6
+            .panel.panel-success
+              .panel-heading Peer Review (#{User.find(@peer_review.manager_id).givenname} #{User.find(@peer_review.manager_id).sn} to fill in)
+              .panel-body
+                .form-inputs
+                  %table.table{summary:"Objective form fields", :style=>"width: 100%"}
+                    %tr
+                      %th= f.label('Manager\'s Objective Response:')
+                      %td=f.text_area(:m_objective_response, :class => "form-control", :placeholder => "Description", :style => "width: 100%;")
+                    %tr
+                      %th= f.label('Manager\'s Overall Comments Response:')
+                      %td=f.text_area(:m_overall_comments, :class => "form-control", :placeholder => "Description", :style => "width: 100%;")
+                    %tr
+                      %th= f.label('Manager\'s Personal Development Response:')
+                      %td=f.text_area(:m_personal_development, :class => "form-control", :placeholder => "Description", :style => "width: 100%;")
+                    %tr
+                      %th= f.label('Change Deadline')
+                      %td= f.input :deadline,label: false
+
+    .column
+      .col-md-12
+        %h1
+          %button.btn.btn-success{:type => "submit"} Update Peer Review
+          %a.button.btn.btn-info{:type => "button",:href => peer_reviews_path} Back

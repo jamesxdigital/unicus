@@ -1,0 +1,15 @@
+=form_for(@request) do |f|
+  =# f.error_notification
+
+  .form-inputs
+    %table{summary:"Request form fields", :style=>"width: 100%"}
+      %tr
+        %th=f.label('Category:')
+        %td=f.select :category, options_for_select(@request_options_minus), {}, {:multiple => false, :class => "js-example-basic-single-category", :id => "select2_category", :style=>"width: 100%"}
+      %tr
+        %th= f.label(' ')
+        %td= f.text_area :comments, label: false, :class => "form-control", :style => "width:100%", :placeholder => "Comments (optional)"
+    %br
+
+  .form-actions
+    = f.button(:submit,class:'btn btn-default btn btn-primary')

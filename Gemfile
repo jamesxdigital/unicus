@@ -1,10 +1,8 @@
 source "https://rubygems.org"
-# ruby '2.1.7'
+ruby '2.1.7'
 gem 'rails', '4.2.5.1'
 gem 'responders', '~> 2.1'
 gem 'activerecord-session_store'
-gem 'carrierwave'
-gem 'mini_magick'
 
 gem 'sqlite3', group: [:development, :test]
 gem 'puma'
@@ -12,16 +10,31 @@ gem 'pg'
 
 gem 'airbrake'
 
+gem 'bootstrap-toggle-rails'
+
+gem 'momentjs-rails', '>= 2.9.0'
+gem 'bootstrap3-datetimepicker-rails', '~> 4.17.37'
+
+gem 'chart-js-rails'
+
+gem 'jquery-final_countdown-rails'
+
+gem 'flexslider'
+
+gem 'fancybox2-rails'
+
 gem 'haml-rails'
+gem 'sass-rails'
 gem 'uglifier'
 gem 'coffee-rails'
 
 gem 'jquery-rails'
-gem 'bootstrap-sass', '~> 3.3.6'
-gem 'sass-rails', '>= 3.2'
+gem 'bootstrap-sass'
 gem 'font-awesome-rails'
 gem 'select2-rails'
 gem 'epi_js'
+gem 'carrierwave'
+gem 'mini_magick'
 
 gem 'simple_form'
 gem 'draper'
@@ -33,12 +46,17 @@ gem 'devise', '>= 3.5.2'
 gem 'devise_ldap_authenticatable', '>= 0.8.5'
 gem 'devise_cas_authenticatable', '>= 1.5.0'
 gem 'cancancan'
+gem 'epi_cas', git: 'git@git.software-hut.org.uk:gems/epi_cas.git'
+
+gem 'rails_email_validator'
 
 gem 'whenever'
 gem 'delayed_job'
 gem 'delayed_job_active_record'
 gem 'delayed-plugins-airbrake'
 gem 'daemons'
+gem "paperclip", "~> 4.2"
+
 
 # Win32 specific gems
 platforms :mswin, :mingw, :x64_mingw do
@@ -55,6 +73,7 @@ group :development, :test do
 end
 
 group :development do
+  gem 'rails_real_favicon'
   gem 'web-console', '~> 2.2.1'
   gem 'spring'
   gem 'quiet_assets'
@@ -76,6 +95,7 @@ group :test do
   gem 'factory_girl_rails'
   gem 'shoulda-matchers'
   gem 'capybara'
+  gem 'capybara-select2'
   gem 'poltergeist'
   gem 'rspec-instafail', require: false
   platforms :mswin, :mingw, :x64_mingw do

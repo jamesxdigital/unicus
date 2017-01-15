@@ -1,0 +1,9 @@
+%p#notice= notice
+
+%p
+  %b Category:
+  = @training_category.category
+
+= link_to 'Edit', edit_training_category_path(@training_category)
+\|
+= link_to 'Back', training_categories_path

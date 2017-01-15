@@ -1,0 +1,6 @@
+-if ((current_user.id == @peer_review.user_id) or (current_user.id == @peer_review.manager_id))and Date.today < @peer_review.deadline
+  %h1 Edit Peer Review
+  = render 'form'
+
+-else
+  %h3 You are not authorised to edit this user's Peer Review

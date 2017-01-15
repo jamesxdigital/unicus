@@ -1,0 +1,23 @@
+.row
+  .col-md-12
+    -if params[:from] == "rejection_notification"
+      = link_to(message_path(Message.where(content_id: @objective.id).where(message_type:"rejection_notification").first), :class => 'btn btn-primary', style:"margin: 10px;") do
+        =" << back to message"
+    -else
+    = link_to(requested_objectives_path, :class => 'btn btn-primary', style:"margin: 10px;") do
+      =" << back to list"
+  .col-md-6
+    =render(partial:"objective_details",locals:{:@objective => @objective})
+  .col-md-6
+    .panel.panel-default
+      .panel-heading
+        %h3.panel-title Rejection Details:
+      .panel-body
+        .well{style:"background-color: #ffe6e6;"}
+          =@message.message
+        %b Rejected by:
+        ="#{@rejector.givenname} #{@rejector.sn}"
+        
+
+        -#=button_to( approve_objective_path(@objective.id),class:"btn btn-success",method: :patch) do
+          -#="<span class=\"glyphicon glyphicon-ok-sign\"></span>".html_safe+" Approve"

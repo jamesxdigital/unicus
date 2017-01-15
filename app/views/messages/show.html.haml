@@ -1,0 +1,42 @@
+- content_for :title, "Show Message"
+.row{style:"border-bottom: 1px solid #EEEEEE;"}
+  = button_to(messages_path, :class => 'btn btn-primary', method: :get,style:"margin:10px;") do
+    ="<span class=\"glyphicon glyphicon-chevron-left\"></span>".html_safe+" Messages List"
+
+.row{style:"max-width:1000px"}
+  .table-responsive
+    %table{class:'table table-striped table-bordered table-condensed',:summary => "Objective detail view"}
+      %tr
+        %th Title
+        %td{style: "font-weight: bold;"}= "#{@message.title}"
+      %tr
+        %th Message text:
+        %td
+          .well
+            = "#{@message.message}"
+      -if @message.message_type == "new_objective_notification"
+        %tr
+          %th Objective:
+          %td
+            = link_to(show_unapproved_objective_path(@message.content_id,from:'new_objective_message'), :class => 'btn btn-primary', method: :get) do
+              ="<span class=\"glyphicon glyphicon-eye-open\"></span>".html_safe+" Show Objective."
+      -if @message.message_type == "rejection_notification"
+        %tr
+          %th Objective:
+          %td
+            = link_to(show_rejected_objective_path(@message.content_id,from:'rejection_notification'), :class => 'btn btn-warning', method: :get) do
+              ="<span class=\"glyphicon glyphicon-eye-open\"></span>".html_safe+" Show Objective."
+      %tr
+        %th Date
+        %td
+          = @message.created_at.strftime("%d/%m/%Y - %I:%M%p")
+          %br
+          ="#{distance_of_time_in_words_to_now(@message.created_at)} ago."
+
+      %tr
+        %th Sender
+        -if not @sender.nil?
+          %td= "#{@sender.givenname}  #{@sender.sn}"
+        -else
+          %td{style:"color:red;"}
+            ="Null, Sender not found! This might be because user was deleted!"

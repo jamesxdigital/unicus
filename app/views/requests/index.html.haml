@@ -1,0 +1,61 @@
+- content_for :title, "Training Requests"
+- minion_count = @minions.count
+.row
+  .col-md-12
+    %h1
+      %a.button.btn.btn-primary{:type => "button",:href => root_path} Back to Dashboard
+  .page-header
+    %h2 Employee Training Requests
+
+  .column
+    .col-md-12
+      .table-responsive
+        %table#example.table.table-striped.table-bordered.table-condensed
+          %thead
+            %tr
+              %th Category Requested
+              %th Date Request
+              %th Requested by
+              %th Employee Comment
+
+          %tbody
+            - @requests.each do |request|
+              %tr
+                %td= request.category
+                %td= truncate("#{request.updated_at}", :length => 17, :separator => ' ')
+                -name = @minions_details.detect{|id,email,givenname,sn| id == request.user_id}
+                -if name.blank?
+                  %td= "NO NAME! ID: #{request.user_id}"
+                -else
+                  %td
+                    = "#{name[2]} #{name[3]}"
+                    = "-"
+                    %a{ href: "mailto:#{name[1]}", title: "#{name[1]}" }
+                      #{name[1]}
+                %td= request.comments
+
+      / Button trigger modal
+
+      %button.btn.btn-primary{"data-target" => "#myModal", "data-toggle" => "modal", :type => "button", style: "display: inline;float: left;"}
+        %span{class:"glyphicon glyphicon-save"}
+        Export Training Request
+
+      = link_to(destroy_all_requests_path, :class => 'btn btn-danger', style:"display: inline;float: right; width: 200px") do
+        = "<span class=\"glyphicon glyphicon-trash\"></span>".html_safe+" Reset Training Requests"
+
+
+
+
+/ Modal
+#myModal.modal.fade{"aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+  .modal-dialog{:role => "document"}
+    .modal-content
+      .modal-header
+        %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+          %span{"aria-hidden" => "true"} &times;
+        %h4#myModalLabel.modal-title Export Training Request
+      .modal-body
+        \Download CSV file?
+      .modal-footer
+        -#%button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} Close
+        %p #{link_to "Download", requests_path(format: "csv")}

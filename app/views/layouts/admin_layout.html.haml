@@ -1,0 +1,163 @@
+!!!
+%html{:lang => "en"}
+  %head
+    %title Team18 - #{content_for(:title)}
+    %meta{ name: "viewport", content: "width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=0" }
+    %meta{ :'http-equiv' => 'X-UA-Compatible', content: 'IE=edge' }
+    = stylesheet_link_tag    "application", media: :all
+    = javascript_include_tag "application"
+    = csrf_meta_tags
+    = render 'favicon'
+  %body{ class: environment_notice_body_class }
+    = render 'layouts/environment_notice'
+    .flash-messages
+      - flash.each do |name, msg|
+        - next unless name == 'alert' || name == 'notice'
+        .alert.fade.in
+          .container
+            - if name == 'notice'
+              = fa_icon('check', class: 'flash-success')
+            - else
+              = fa_icon('warning', class: 'flash-error')
+            = msg
+            %a{ href: '#', title: 'Hide this message', data: { dismiss: :alert } } Dismiss
+
+
+    %noscript
+      .warning-page-cover
+        .alert.alert-info
+          %h2 Sorry, it appears that you are using a web browser without JavaScript which prevents us offering you a rich online experience.
+          %p Please enable JavaScript or use a different web browser, or alternatively contact the CiCS Helpdesk for assistance.
+    #wrapper
+      / Navigation
+      %nav.navbar.navbar-default.navbar-static-top{:role => "navigation", :style => "margin-bottom: 0"}
+        .navbar-header
+          %button.navbar-toggle{"data-target" => ".navbar-collapse", "data-toggle" => "collapse", :type => "button"}
+            %span.sr-only Toggle navigation
+            %span.icon-bar
+            %span.icon-bar
+            %span.icon-bar
+          = link_to :root, class: 'navbar-brand' do
+            =image_tag asset_path('unicus.png'), :height => "50px"
+        / /.navbar-header
+        - if user_signed_in?
+          %ul.nav.navbar-nav.navbar-right{style:"margin-right: 0px"}
+            %li.dropdown
+              = link_to '#', data: { toggle: :dropdown }, class: 'dropdown-toggle' do
+                = fa_icon 'user', text: current_user.email
+                %b.caret
+              %ul.dropdown-menu
+                %li
+                  = link_to destroy_user_session_path, method: :delete, title: "Log out of the system" do
+                    %i.fa.fa-sign-out
+                    Log out
+
+          / /.dropdown
+          / /.dropdown
+          / /.dropdown
+        / /.navbar-top-links
+        - if user_signed_in? and (current_user.manager.present? or current_user.admin.present? or current_user.manager_id.present?)
+          .navbar-default.sidebar{:role => "navigation"}
+            .sidebar-nav.navbar-collapse
+              %ul#side-menu.nav
+                - if user_signed_in?
+                  %li
+                    = link_to :root, title: "Go to the Dashboard", identifier: :home do
+                      = fa_icon 'home'
+                      Dashboard
+
+                  -if can?(:create, Request)
+                    %li
+                      =link_to objectives_path, title: "Go to the Calendar page", identifier: :home do
+                        = fa_icon 'calendar'
+                        Calendar
+
+                  - if can?(:edit, Objective) or can?(:edit,TrainingCategory)
+                    %li
+                      = link_to :settings, title: "Go to the settings page", identifier: :home do
+                        = fa_icon 'gears'
+                        Settings
+
+                  %li
+                    -not_seen_count = Message.where(seen: false).where(user_id: current_user.id).count
+                    = link_to(:messages, title: "Go to the inbox", identifier: :messages,style:getNotificationColor(not_seen_count)) do
+                      ="<span class=\"glyphicon glyphicon-envelope\"></span>".html_safe
+                      Messages
+                      -if not_seen_count > 0
+                        %span{class:"badge",style:"background-color: red;"}
+                          =not_seen_count
+                  -if current_user.manager?
+                    %li
+                      = link_to("/performance_review", title: "See employees performance.", identifier: :performance_review) do
+                        %span{class:"glyphicon glyphicon-dashboard"}
+                        Performance Review
+                  -if can?(:manage, Objective)
+                    %li
+                      = link_to(:unapproved_objectives, title: "Manage proposed objectives.", identifier: :unapproved) do
+                        %span{class:"glyphicon glyphicon-pushpin"}
+                        Manage Objectives
+
+
+                  -if can?(:edit, User)
+                    %li
+                      = link_to :users, title: "Go to the employee administration page", identifier: :home do
+                        = fa_icon 'book'
+                        Employees
+                  -if can?(:edit, PeerReview)
+                    %li
+                      = link_to :peer_reviews, title: "Go to the Peer Review page", identifier: :home do
+                        = fa_icon 'edit'
+                        Peer Review
+
+              /
+                <li>
+                <a href="#"> UI Elements <span class="caret"></span></a>
+                <ul class="nav nav-second-level">
+                <li>
+                <a href="panels-wells.html">Panels and Wells</a>
+                </li>
+                <li>
+                <a href="buttons.html">Buttons</a>
+                </li>
+                <li>
+                <a href="notifications.html">Notifications</a>
+                </li>
+                <li>
+                <a href="typography.html">Typography</a>
+                </li>
+                <li>
+                <a href="icons.html"> Icons</a>
+                </li>
+                <li>
+                <a href="grid.html">Grid</a>
+                </li>
+                </ul>
+
+                </li>
+        - else
+          .navbar-default.sidebar{:role => "navigation"}
+            .sidebar-nav.navbar-collapse
+              %ul#side-menu.nav
+
+                - if user_signed_in?
+                  %li
+                    = link_to :root, title: "Go to the Dashboard", identifier: :home do
+                      = fa_icon 'home'
+                      Dashboard
+
+      - if user_signed_in?
+        .container-fluid#page-wrapper
+          = yield
+
+      - else
+        #page-wrapper.container-fluid{style: "margin-left:0;"}
+          = yield
+        / /.row
+        / /.row
+        / /.row
+      / /#page-wrapper
+    %footer#footer
+      .container
+        %p
+          &copy;#{Date.today.year}
+          = link_to 'epiGenesys', 'https://www.epigenesys.org.uk', target: '_blank', title: 'Goto the epiGenesys website'

@@ -1,0 +1,16 @@
+- content_for :title, "Edit Employee Information"
+-#= link_to('<Back to users list', users_path)
+%h1
+  %a.button.btn.btn-info{:type => "button",:href => users_path} Back to users list
+.panel.panel-default{style:'max-width:500px'}
+  .panel-heading
+    %h3.panel-title Edit #{@user.givenname} #{@user.sn}'s details
+  = simple_form_for(@user, html: { id: 'user-form' } ) do |f|
+    .panel-body
+      = f.input :manager
+      = f.input :admin
+      = f.label('Assign employee manager')
+      = f.select :manager_id,[["No manager", nil]] + @manager_users.map {|s|["#{s.givenname} #{s.sn} (#{s.email})",s.id]}, {}, {:multiple => false, :class => "form-control", :style => "width: 80%;" }
+
+    .panel-footer
+      = f.button :submit, class: 'btn btn-primary'

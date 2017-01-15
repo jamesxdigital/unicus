@@ -1,0 +1,124 @@
+- content_for :title, "Settings"
+-if current_user.manager.present? or current_user.admin.present? or current_user.manager_id.present?
+  - minion_count = @minions.count
+  .row
+    %h1
+      %span{class:"glyphicon glyphicon-cog"}
+      Settings
+    .column
+      -if current_user.manager?
+        .col-md-12
+          .panel.panel-success
+            .panel-heading Team Members
+            .panel-body
+              -if minion_count > 0
+                %p Employees you are accountable for:
+                .table-responsive
+                  %table.table
+                    %tr
+                      %th ID:
+                      %th First Name:
+                      %th Last Name:
+                      %th Email:
+                      %th Manager?
+                      %th Admin?
+                    -@minions.each do |minion|
+                      %tr
+                        %td=minion.id
+                        %td=minion.givenname
+                        %td=minion.sn
+                        %td
+                          %a{:href => "mailto:#{minion.email}", :title => "#{minion.email}"}
+                            =minion.email
+                        %td=minion.manager
+                        %td=minion.admin
+              -else
+                ="No employees to show"
+
+      -if current_user.manager?
+        .col-md-6
+          .panel.panel-info
+            .panel-heading Add New Objective
+            .panel-body
+              -if minion_count > 0
+                =render(partial:'add_objective_form',locals: {:@can_full_edit => true})
+              -else
+                ="Unable to add objectives, with no employees"
+
+      -if current_user.admin?
+        .col-md-6
+          .panel.panel-info
+            .panel-heading Training Categories
+            .panel-body
+              .form-inputs
+                %table.table{summary:"Objective form fields", :style=>"width: 100%"}
+                  %thead
+                    %tr
+                      %th Existing Training Categories
+                      %th
+                  %tbody
+                    - if @training_categories.length >= 1
+                      - @training_categories.each do |training_category|
+                        %tr
+                          %td= training_category.category
+                          %td= button_to "Destroy", training_category, class:"btn btn-danger", :method => :delete, :data => { :confirm => 'Are you sure?' }
+                    -else
+                      %tr
+                        %td No training categories submitted. Create one below.
+              = render 'form'
+      .col-md-6
+        .panel.panel-info
+          .panel-heading E-mail Notifications Settings
+          .panel-body
+            =render(partial:"mail_settings_form")
+
+      -if current_user.admin?
+        .col-md-6
+          .panel.panel-info
+            .panel-heading Export All Employee's Training Requests
+            .panel-body
+              .table-responsive
+                #dvData2
+                  %table{:style => 'display:none'}
+                    %tr
+                      %td{:style => 'font-weight: bold'}  Category Requested
+                      %td{:style => 'font-weight: bold'}  Date Request
+                      %td{:style => 'font-weight: bold'}  Requested by
+                      %td{:style => 'font-weight: bold'}  Employee Comment
+                    - @requests.each do |request|
+                      %tr
+                        %td= request.category
+                        %td= truncate("#{request.updated_at}", :length => 17, :separator => ' ')
+                        -name = @employee_details.detect{|id,email,givenname,sn| id == request.user_id}
+                        -if name.blank?
+                          %td= "NO NAME"
+                        -else
+                          %td= "#{name[2]} #{name[3]}"
+                        %td= request.comments
+
+                  %button.btn.btn-primary{"data-target" => "#myModal", "data-toggle" => "modal", :type => "button"}
+                    %span{class:"glyphicon glyphicon-save"}
+                    Export .csv File
+
+                  / Modal
+                  #myModal.modal.fade{"aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+                    .modal-dialog{:role => "document"}
+                      .modal-content
+                        .modal-header
+                          %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+                            %span{"aria-hidden" => "true"} &times;
+                          %h4#myModalLabel.modal-title Employee's Training Requests
+                        .modal-body
+                          Download CSV file
+                        .modal-footer
+                          -#%button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} Close
+                          %a.export2{:href => "#"} Download
+
+- else
+  .col-md-12
+    .alert.alert-warning{ :style =>"text-align: center; " }
+      %a.close{"aria-label" => "close", "data-dismiss" => "alert", :href => "#"} ×
+      %strong{:style => "font-size: 20px;"} Welcome, #{current_user.givenname} #{current_user.sn}
+      %p{:style => "font-size: 30px;"} Thank you for registering your account
+      %p{:style => "font-size: 20px;"} Please wait whilst an admin user activates your account
+      %p #{current_user.manager} #{current_user.admin} #{current_user.manager_id}

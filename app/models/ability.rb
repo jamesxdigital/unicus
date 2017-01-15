@@ -2,45 +2,29 @@ class Ability
   include CanCan::Ability
 
   def initialize(user)
-    user ||= User.new
+    user ||= User.new # guest user (not logged in)
 
-  if user.role == 'Administrator'
-    can :manage, :all
-  elsif user.role == 'Moderator'
-    can [:edit, :update,:index, :new, :create, :chg, :chgpsw], User
-    can :manage, Notification
-    can :manage, Frontpv
-    can :manage, Calendar
-    can :manage, Lecture
-    can :manage, Day
-    can :manage, Speaker
-    can :cpHome, :home
-    can :schedule, :home
-    can :lecture, :home
-    can :speaker, :home
-    can :days, :home
-    can :speakers, :home
-    can :account, :home
-    can :notifications, :home
-    can :biography, :home
-    can :biography_update, :home
-  elsif user.role == 'Default'
-    can [:chg, :chgpsw], User do |usr|
-      usr.try(:id) == user.id
+
+    if user.admin?
+      can :manage, User
+      can :manage, CompanyValue
+      can :manage, TrainingCategory
+      can [:new,:create, :requested,:edit,:update,:read,:show_unapproved,:show_rejected], Objective
+      can [:new,:create], Request
+      can [:edit, :update, :read, :show_photo], PeerReview
     end
-    can :usernotifications, Notification
-    can :manage, Calendar
-    can :schedule, :home
-    can :lecture, :home
-    can :speaker, :home
-    can :days, :home
-    can :speakers, :home
-    can :account, :home
-    can :notifications, :home
-    can :biography, :home
-    can :biography_update, :home
-  else
-  end
+
+    if user.manager?
+      can :manage, Objective
+      can :manage, Request
+      can :manage, PeerReview
+    end
+    if not(user.manager? or user.admin?)
+      can [:new,:create, :requested,:edit,:update,:read,:show_unapproved,:show_rejected], Objective
+      can [:new,:create], Request
+      can [:edit, :update, :read, :show_photo], PeerReview
+    end
+
 
   end
 end

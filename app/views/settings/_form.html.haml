@@ -1,0 +1,16 @@
+= simple_form_for(@training_category) do |f|
+  = f.error_notification
+
+  .form-inputs
+    %table.table{summary:"Objective form fields", :style=>"width: 100%"}
+      %thead
+        %tr
+          %th Create New Category
+          %th
+          %th
+      %tbody
+        %tr
+          %th= f.text_field :category, label: false, :class => "form-control"
+          %th
+            .form-actions
+              = f.button :submit, class:"btn btn-success"

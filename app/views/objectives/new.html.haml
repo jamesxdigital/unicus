@@ -1,0 +1,11 @@
+- content_for :title, "Propose New Objectives"
+.row
+  %h1 New objective
+  .alert.alert-warning
+    %a.close{"aria-label" => "close", "data-dismiss" => "alert", :href => "#"} ×
+    %p Notice! Objectives you add must be approved by your manager.
+  = render 'add_objective_form'
+
+  -#= link_to 'Back', objectives_path
+  %h2
+    %a.button.btn.btn-primary{:type => "button",:href => objectives_path} Back

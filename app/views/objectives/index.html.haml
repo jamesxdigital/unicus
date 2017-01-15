@@ -1,0 +1,146 @@
+- content_for :title, "Calender"
+-if current_user.manager.present? or current_user.admin.present? or current_user.manager_id.present?
+  .row{style:"max-width:1500px;"}
+    .col-sm-6
+      %h1
+        %span{class:"glyphicon glyphicon-calendar"}
+        Calendar
+    .col-sm-6
+      .row
+        = link_to(new_objective_path(request_type: 'self'), :class => 'btn btn-primary',style:"float: right; margin-top: 20px; margin-bottom: 10px; width: 250px") do
+          = "<span class=\"glyphicon glyphicon-plus\"></span>".html_safe+" Create your own objective"
+      .row
+        .rejected{style:"float: right;"}
+          =link_to(requested_objectives_path,:class => 'btn btn-primary',:style => "width: 250px") do
+            = "<span class=\"glyphicon glyphicon-book\"></span>".html_safe+" Requested Objectives"
+
+    .col-md-12
+      %h2 Your objectives:
+    .col-md-12
+      .table-responsive
+        %table#example.table.table-striped.table-bordered.table-condensed
+          %thead
+            %tr
+              %th Objective
+              %th Status
+              %th Deadline
+              %th
+              %th
+
+          %tbody
+            - @objectives.each do |objective|
+              %tr
+                %td
+                  %table.table.table-condensed{:style => "background-color:#F9F9F9;max-width:500px;"}
+                    %thead
+                      %tr
+                        %th= objective.title
+                    %tbody
+                      %tr
+                        %td= objective.description
+                %td= status_tag(objective.completed)
+                %td
+                  #{objective.deadline}
+                  %br/
+                  %span{:id => "clock#{objective.id}", :style => "font-weight: bold;"}
+                    :javascript
+                      $('#clock#{objective.id}').countdown('#{objective.deadline}')
+                      .on('update.countdown', function(event) {
+                        var format = '%H:%M:%S';
+                        if(event.offset.days > 0) {
+                          format = '%-d day%!d ' + format;
+                        }
+                        if(event.offset.weeks > 0) {
+                          format = '%-w week%!w ' + format;
+                        }
+                        $(this).html(event.strftime(format));
+                      })
+                      .on('finish.countdown', function(event) {
+                        $(this).html("<span style='color:red'><b>DEADLINE EXCEEDED</b></span>")
+                          .parent().addClass('disabled');
+                      });
+                %td
+                  =link_to(objective_path(objective.id), :class => 'btn btn-default') do
+                    %span{class:"glyphicon glyphicon-eye-open"}
+                    =" Show"
+                %td
+                  =link_to(edit_objective_path(objective),class:'btn btn-default') do
+                    %span{class:"glyphicon glyphicon-wrench"}
+                    =" Edit"
+      -if current_user.manager?
+        %br
+        %h2 Objectives of people you manage:
+        .table-responsive
+          %table#example.table.table-striped.table-bordered.table-condensed
+            %thead
+              %tr
+                %th User
+                %th Objective
+                %th Status
+                %th Deadline
+                %th
+                %th
+                %th
+
+
+            %tbody
+              - @manager_objectives.each do |objective|
+                %tr
+                  -email = @minion_ids.detect{|email,id,givenname,sn| id == objective.user_id}
+                  -if email.blank?
+                    %td= "NO EMAIL! ID: #{objective.user_id}"
+                  -else
+                    %td= "#{email[2]} #{email[3]}"
+                  %td
+                    %table.table.table-condensed{:style => "background-color:#F9F9F9;max-width:500px;"}
+                      %thead
+                        %tr
+                          %th= objective.title
+                      %tbody
+                        %tr
+                          %td= objective.description
+                  %td= status_tag(objective.completed)
+                  %td
+                    #{objective.deadline}
+                    %br/
+                    %span{:id => "clock#{objective.id}", :style => "font-weight: bold;"}
+
+                      :javascript
+                        $('#clock#{objective.id}').countdown('#{objective.deadline}')
+                        .on('update.countdown', function(event) {
+                          var format = '%H:%M:%S';
+                          if(event.offset.days > 0) {
+                            format = '%-d day%!d ' + format;
+                          }
+                          if(event.offset.weeks > 0) {
+                            format = '%-w week%!w ' + format;
+                          }
+                          $(this).html(event.strftime(format));
+                        })
+                        .on('finish.countdown', function(event) {
+                          $(this).html("<span style='color:red'><b>DEADLINE EXCEEDED</b></span>")
+                            .parent().addClass('disabled');
+                        });
+
+
+                  %td
+                    =link_to(objective_path(objective.id), :class => 'btn btn-default') do
+                      %span{class:"glyphicon glyphicon-eye-open"}
+                      =" Show"
+                  %td
+                    =link_to(edit_objective_path(objective),class:'btn btn-default') do
+                      %span{class:"glyphicon glyphicon-wrench"}
+                      =" Edit"
+                  /%td= link_to('Destroy', objective_path(objective.id), :method => :delete, :data => { :confirm => 'Are you sure?' })
+                  %td
+                    =button_to( 'javascript:void(0)',class:"btn btn-danger",method: :get,data:{target:"#deleteModal#{objective.id}",toggle:"modal",:objective_id => objective.id}, :type => "button") do
+                      ="<span class=\"glyphicon glyphicon-trash\"></span>".html_safe
+                    =render(partial:'delete_objective_modal',locals:{:objective => objective})
+- else
+  .col-md-12
+    .alert.alert-warning{ :style =>"text-align: center; " }
+      %a.close{"aria-label" => "close", "data-dismiss" => "alert", :href => "#"} ×
+      %strong{:style => "font-size: 20px;"} Welcome, #{current_user.givenname} #{current_user.sn}
+      %p{:style => "font-size: 30px;"} Thank you for registering your account
+      %p{:style => "font-size: 20px;"} Please wait whilst an admin user activates your account
+      %p #{current_user.manager} #{current_user.admin} #{current_user.manager_id}

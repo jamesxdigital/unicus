@@ -1,0 +1,91 @@
+- content_for :title, "Requested Objectives"
+.row{style:"max-width:1500px;"}
+  =button_to(objectives_path,class:"btn btn-primary",method: :get,style:"float:left;margin-top:10px;") do
+    %span{class:"glyphicon glyphicon-menu-left"}
+    %span{class:"glyphicon glyphicon-th-list"}
+    =" Back to List"
+  .col-md-12
+    %h2{style:"color: #ffbb33;"}
+      %span{class:"glyphicons glyphicon-hourglass"}
+      Pending Objectives:
+  .col-md-12
+    .table-responsive
+      %table#example.table.table-striped.table-bordered.table-condensed
+        %thead
+          %tr
+            %th Objective
+            %th Deadline
+            %th
+            %th
+
+        %tbody
+          - @pending_objectives.each do |objective|
+            %tr
+              %td
+                %table.table.table-condensed
+                  %thead
+                    %tr
+                      %th= objective.title
+                  %tbody
+                    %tr
+                      %td= objective.description
+              %td
+                #{objective.deadline}
+                %br/
+                %span{:id => "clock#{objective.id}", :style => "font-weight: bold;"}
+                  :javascript
+                    $('#clock#{objective.id}').countdown('#{objective.deadline}')
+                    .on('update.countdown', function(event) {
+                      var format = '%H:%M:%S';
+                      if(event.offset.days > 0) {
+                        format = '%-d day%!d ' + format;
+                      }
+                      if(event.offset.weeks > 0) {
+                        format = '%-w week%!w ' + format;
+                      }
+                      $(this).html(event.strftime(format));
+                    })
+                    .on('finish.countdown', function(event) {
+                      $(this).html("<span style='color:red'><b>DEADLINE EXCEEDED</b></span>")
+                        .parent().addClass('disabled');
+                    });
+              %td
+                = button_to(show_unapproved_objective_path(objective.id,from:'requested'), :class => 'btn btn-default', method: :get) do
+                  ="<span class=\"glyphicon glyphicon-eye-open\"></span>".html_safe+" Show"
+              %td
+                =button_to( 'javascript:void(0)',class:"btn btn-danger",method: :get,data:{target:"#deleteModal#{objective.id}",toggle:"modal",:objective_id => objective.id}, :type => "button") do
+                  ="<span class=\"glyphicon glyphicon-trash\"></span>".html_safe
+                =render(partial:'delete_objective_modal',locals:{:objective => objective,:rto=>"requested"})
+
+  .col-md-12
+    %h2{style:"color:#cc0000"}
+      %span{class:"glyphicon glyphicon-ban-circle"}
+      Rejected Objectives:
+  .col-md-12
+    .table-responsive
+      %table#example.table.table-striped.table-bordered.table-condensed
+        %thead
+          %tr
+            %th Objective
+            %th
+            %th
+
+        %tbody
+          - @rejected_objectives.each do |objective|
+            %tr
+              %td
+                %table.table.table-condensed
+                  %thead
+                    %tr
+                      %th= objective.title
+                  %tbody
+                    %tr
+                      %td= objective.description
+
+              %td
+                = button_to(show_rejected_objective_path(objective.id), :class => 'btn btn-default', method: :get) do
+                  ="<span class=\"glyphicon glyphicon-eye-open\"></span>".html_safe+" Show"
+              %td
+                =button_to( 'javascript:void(0)',class:"btn btn-danger",method: :get,data:{target:"#deleteModal#{objective.id}",toggle:"modal",:objective_id => objective.id}, :type => "button") do
+                  ="<span class=\"glyphicon glyphicon-trash\"></span>".html_safe
+                =render(partial:'delete_objective_modal',locals:{:objective => objective,:rto=>"requested"})

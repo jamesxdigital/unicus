@@ -1,0 +1,21 @@
+.modal{:id => "deleteModal#{user.id}",:role => "dialog"}
+  .modal-dialog
+    / Modal content
+    .modal-content
+      .modal-header
+        %button.close{"data-dismiss" => "modal", :type => "button"} ×
+        %h4.modal-title Are you sure?
+      .modal-body
+        %p Are you sure you want to delete...
+        .well.well-sm
+          ="#{user.givenname} #{user.sn}"
+        - if not (defined?(name)).nil? # if name variable is defined. put it in dialog.
+          %p
+            Author:
+            %b="#{name}"
+        - if (defined?(rto)).nil? #if redirection after delete location unspecified. set to default.
+          -rto = "index"
+      .modal-footer
+        =link_to( user_path(user.id,rto:rto),class:"btn btn-danger",method: :delete,style:"float:left;") do
+          ="<span class=\"glyphicon glyphicon-trash\"></span>".html_safe+" Yes, delete this user"
+        %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} Close

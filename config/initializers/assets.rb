@@ -9,9 +9,3 @@ Rails.application.config.assets.version = '1.0'
 # Precompile additional assets.
 # application.js, application.css, and all non-JS/CSS in app/assets folder are already added.
 # Rails.application.config.assets.precompile += %w( search.js )
-
-  #Code to precompile second stylesheet
-  Rails.application.config.assets.precompile += %w( adminpanel.css )
-  Rails.application.config.assets.precompile += %w( cp.css )
-  Rails.application.config.assets.precompile += %w( bootstrap.min.css )
-  Rails.application.config.assets.precompile += %w( bootstrap.min.js )

@@ -1,0 +1,32 @@
+-#= link_to("< Back to List",users_path, :class => 'back-link')
+- content_for :title, "Show Employee Information"
+%h1
+  %a.button.btn.btn-info{:type => "button",:href => users_path} Back to users list
+.panel.panel-default{style:'width:400px'}
+  .panel-heading
+    %h3.panel-title User details:
+  %table{class:'table',:summary => "User detail view"}
+    %tr
+      %th User ID:
+      %td= @user.id
+    %tr
+      %th User Email:
+      %td= @user.email
+    %tr
+      %th First Name:
+      %td= @user.givenname
+    %tr
+      %th Last Name:
+      %td= @user.sn
+    %tr
+      %th Admin?
+      %td= @user.admin
+    %tr
+      %th Manager?
+      %td= @user.manager
+    %tr
+      %th Manager_ID:
+      %td= @user.manager_id
+    %tr
+      %th created_at:
+      %td= @user.created_at

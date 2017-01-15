@@ -1,0 +1,135 @@
+- content_for :title, "Show Peer Review"
+-if (current_user.id == @peer_review.user_id) or (current_user.id == @peer_review.manager_id)
+  %h1 Show Peer Review
+  .column
+    .col-md-12
+      .panel.panel-success
+        .panel-heading Peer Review Information
+        .panel-body
+          %p
+            %b Employee:
+            #{User.find(@peer_review.user_id).givenname} #{User.find(@peer_review.user_id).sn}
+          %p
+            %b Manager:
+            #{User.find(@peer_review.manager_id).givenname} #{User.find(@peer_review.manager_id).sn}
+          %p
+            %b Deadline:
+            = @peer_review.deadline
+      .panel.panel-success
+        .panel-heading Peer Review Objectives
+        .panel-bod
+          -if (current_user.manager_id == @peer_review.manager_id) and (current_user.manager_id != current_user.id)
+            .table-responsive
+              %table.table.table-hover
+                %thead
+                  %tr
+                  %th Employee Objective
+                  %th Description
+                %tbody
+                  - @objectives.each do |objective|
+                    -if objective.deadline < @peer_review.deadline
+                      -if @peer_review.user_id == objective.user_id
+                        -if objective.completed?
+                          %tr.success
+                            %td= objective.title
+                            %td= objective.description
+                        -else
+                          %tr.danger
+                            %td= objective.title
+                            %td= objective.description
+          -else
+            .table-responsive
+              %table.table.table-hover
+                %thead
+                  %tr
+                    %th Employee Objective
+                    %th Description
+                    %th Employee
+                %tbody
+                  - @manager_objectives.each do |objective|
+                    -if objective.deadline < @peer_review.deadline
+                      -name = @minion_ids.detect{|email,id,givenname,sn| id == objective.user_id}
+                      -if @peer_review.user_id == objective.user_id
+                        -if objective.completed?
+                          %tr.success
+                            %td= objective.title
+                            %td= objective.description
+                            -if name.blank?
+                              %td= "NO NAME! ID: #{objective.user_id}"
+                            -else
+                              %td
+                                = "#{name[2]} #{name[3]}"
+                                = "-"
+                                %a{ href: "mailto:#{name[0]}", title: "#{name[1]}" }
+                                  #{name[0]}
+                        -else
+                          %tr.danger
+                            %td= objective.title
+                            %td= objective.description
+                            -if name.blank?
+                              %td= "NO NAME! ID: #{objective.user_id}"
+                            -else
+                              %td
+                                = "#{name[2]} #{name[3]}"
+                                = "-"
+                                %a{ href: "mailto:#{name[0]}", title: "#{name[1]}" }
+                                  #{name[0]}
+    .col-md-6
+      .panel.panel-success
+        .panel-heading Peer Review Employee (#{User.find(@peer_review.user_id).givenname} #{User.find(@peer_review.user_id).sn})
+        .panel-body
+          .table-responsive
+            %table.table.table-hover
+              %tbody
+                %tr
+                  %th Employee objective response:
+                  %td{:colspan => "2"}= @peer_review.e_objective_response
+                %tr
+                  %th Employee overall comments:
+                  %td{:colspan => "2"}= @peer_review.e_overall_comments
+                %tr
+                  %th Employee personal development:
+                  %td{:colspan => "2"}= @peer_review.e_personal_development
+                %tr
+                  %td
+                    %b Photo Evidence:
+                    (click photo to enlarge)
+                  %td{:colspan => "2"}
+                    - if @peer_review.photo?
+                      = link_to image_tag(url_for(action: :show_photo),:width => "100"), "#photo", class: "fancybox"
+                      %div{:style => "display:none;"}
+                        #photo
+                          = image_tag url_for(action: :show_photo)
+                    - else
+                      No photo evidence to show
+
+
+
+    .col-md-6
+      .panel.panel-success
+        .panel-heading Peer Review Manager (#{User.find(@peer_review.manager_id).givenname} #{User.find(@peer_review.manager_id).sn})
+        .panel-body
+          .table-responsive
+            %table.table.table-hover
+              %tbody
+                %tr
+                  %th Manager objective response:
+                  %td{:colspan => "2"}= @peer_review.m_objective_response
+                %tr
+                  %th Manager overall comments:
+                  %td{:colspan => "2"}= @peer_review.m_overall_comments
+                %tr
+                  %th Manager personal development:
+                  %td{:colspan => "2"}= @peer_review.m_personal_development
+
+
+    .col-md-12
+      -#= link_to 'Edit', edit_peer_review_path(@peer_review)
+      %a.button.btn.btn-primary{:type => "button",:href => edit_peer_review_path(@peer_review)} Edit
+      -#\|
+      -#= link_to 'Back', peer_reviews_path
+      %a.button.btn.btn-info{:type => "button",:href => peer_reviews_path} Back
+
+
+-else
+  %h3 You are not authorised to view this user's Peer Review

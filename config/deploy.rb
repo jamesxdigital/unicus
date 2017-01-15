@@ -1,7 +1,7 @@
 ## Application configuration
-set :application,             'hut-21'
+set :application,             'team18'
 set :scm,                     :git
-set :repo_url,                'git@git.genesys-solutions.org.uk:hut-team21/project.git'
+set :repo_url,                'git@git.software-hut.org.uk:hut-team18/project.git'
 set :linked_files,            fetch(:linked_files,  fetch(:env_links, [])).push('config/database.yml', 'config/secrets.yml')
 set :linked_dirs,             fetch(:linked_dirs, []).push('log', 'tmp/pids', 'uploads')
 # set the locations to look for changed assets to determine whether to precompile
@@ -30,6 +30,7 @@ set :delayed_job_environment, -> { (fetch(:rails_env) || fetch(:stage)) }
 set :delayed_job_identifier,  -> { "#{fetch(:application)}-#{fetch(:delayed_job_environment)}" }
 set :delayed_job_workers,     -> { (fetch(:dj_workers) || '1') }
 set :delayed_job_args,        -> { "-p #{fetch(:delayed_job_identifier)} -n #{fetch(:delayed_job_workers)}" }
+
 
 namespace :delayed_job do
 

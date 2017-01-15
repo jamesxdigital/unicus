@@ -1,0 +1,35 @@
+-content_for :title, "Company Values"
+
+.col-md-12
+  %h2
+    %span{class:"glyphicon glyphicon-flag"}
+    Company Values:
+.col-md-12
+  .table-responsive
+    %table#example.table.table-striped.table-bordered.table-condensed
+      %thead
+        %tr
+          %th Icon
+          %th Value
+          %th Colour
+          %th
+          %th
+
+      %tbody
+        - @values.each do |value|
+
+          -button_class = getFaColour(value.colour)
+
+          %tr
+            %td
+              %span{:class => "fa fa-" + value.icon}
+            %td= value.company_value
+            %td
+              %a.btn.btn-default.btn-vals{:class => button_class}
+            %td
+              =link_to 'Edit', edit_company_value_path(value), {:class => "btn btn-default"}
+
+            %td
+              =link_to '<i class="fa fa-trash-o"></i>'.html_safe, value, {:class => "btn btn-danger", :method => :delete}
+
+=link_to 'New', new_company_value_path, {:class => "btn btn-primary", style:"margin-left: 15px;"}

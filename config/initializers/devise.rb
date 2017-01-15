@@ -1,18 +1,30 @@
 # Use this hook to configure devise mailer, warden hooks and so forth.
 # Many of these configuration options can be set straight in your model.
 Devise.setup do |config|
+  # ==> CAS configuration
+  # Use CAS to log in, location configured in epi_cas_settings.yml
+  config.cas_base_url = EpiCas::Settings.cas_base_url
+  # Redirect log out to app logout page, which then uses CAS to log out
+  config.cas_logout_url = EpiCas::Settings.app_logout_url
+  config.cas_logout_url_param = 'destination'
+  config.cas_enable_single_sign_out = true
+  # By default, devise_cas_authenticatable will create users.  If you would rather
+  # require user records to already exist locally before they can authenticate via
+  # CAS, uncomment the following line:
+  # config.cas_create_user = false
+
   # The secret key used by Devise. Devise uses this key to generate
   # random tokens. Changing this key will render invalid all existing
   # confirmation, reset password and unlock tokens in the database.
   # Devise will use the `secret_key_base` on Rails 4+ applications as its `secret_key`
   # by default. You can change it below and use your own secret key.
-  config.secret_key = '279272ab1a8d509b3a2a4f6bf9b41df8d76cb6535c43da9bdf89d86b1d04fb6f39e81151fdfc9fbdbd1997e8eafe99e0e95b320b478c0298121bf1af59937602'
+  # config.secret_key = '03a217025e15dbb766dd1d99c8dbdd35400a327baf4631691aa4e44f8460df56d53bf90c07bb99e3458211e422c5c3fadb73deb967ef3d05010444b183cfbe02'
 
   # ==> Mailer Configuration
   # Configure the e-mail address which will be shown in Devise::Mailer,
   # note that it will be overwritten if you use your own mailer class
   # with default "from" parameter.
-  config.mailer_sender = 'no-reply@shef.ac.uk'
+  config.mailer_sender = 'My App <no-reply@sheffield.ac.uk>'
 
   # Configure the class responsible to send e-mails.
   # config.mailer = 'Devise::Mailer'
@@ -31,7 +43,7 @@ Devise.setup do |config|
   # session. If you need permissions, you should implement that in a before filter.
   # You can also supply a hash where the value is a boolean determining whether
   # or not authentication should be aborted when the value is not present.
-  config.authentication_keys = [:email]
+  config.authentication_keys = [:username]
 
   # Configure parameters from the request object used for authentication. Each entry
   # given should be a request method and it will automatically be passed to the
@@ -99,7 +111,7 @@ Devise.setup do |config|
   config.stretches = Rails.env.test? ? 1 : 10
 
   # Setup a pepper to generate the encrypted password.
-  config.pepper = '83eb783ee07b0788430d6ea97e58c59aeadcf30282f9520e364ff52249cf7c22efeb0265f80eedbf8551891761001baa7e31bebefe10f4c373b1320fb66c973e'
+  # config.pepper = 'ba680c487c0345c5dab7285339231bd2e425c3ba4205da4a275a216cacd1ff0e348dc82801dc7925c6c1623e5f988967945dfc02ea10da4591cd578f5ed6a58d'
 
   # ==> Configuration for :confirmable
   # A period that the user is allowed to access the website even without

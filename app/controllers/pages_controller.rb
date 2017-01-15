@@ -1,88 +1,104 @@
 class PagesController < ApplicationController
-  # authorize_resource :class => false
-  # skip_authorize_resource :only => :index
-  #authorize_resource
-  def index
-    #@spksize = Speaker.where("to_display = 1").count
-    @spksize = User.where("role = 'Default'").count
-    #@att = User.count
-    @speakerF = Speaker.take(4)
-    @frontpv = Frontpv.first
-    #  authorize! :show, current_user
-  end
 
-  def lecture
-    authorize! :lecture, :home
-    @lecturesX = Lecture.find(params[:id])
+  layout "layouts/admin_layout"
 
-    @speakerS = Speaker.where("email = '#{@lecturesX.key_speaker}'").first
-    @calendar = Calendar.new()
-    @days = Day.all
-  end
+  def home
 
-  def schedule
-    authorize! :schedule, :home
-    @days = Day.all
-    @lectures1=Lecture.order(start_time: :asc).where("day_id = ? AND column_name = ?", params[:time], 'Splitting')
-    @lectures2=Lecture.order(start_time: :asc).where("day_id = ? AND column_name = ?", params[:time], 'Insertion')
-    @lectures3=Lecture.order(start_time: :asc).where("day_id = ? AND column_name = ?", params[:time], 'Enabling')
-    @lectures4=Lecture.order(start_time: :asc).where("day_id = ? AND column_name = ?", params[:time], 'Extra')
-    @lecturesPS=Lecture.order(start_time: :asc).where("day_id = ? AND column_name = ?", params[:time], 'Plenary Session')
-    @lecturesCB=Lecture.order(start_time: :asc).where("day_id = ? AND column_name = ?", params[:time], 'Coffee Break')
-  end
+    @request = Request.new
 
-  def speaker
-    authorize! :speaker, :home
+    @values = CompanyValue.all
 
-    if params[:id].present?
-      @speakerX = Speaker.find(params[:id])
-    else
-      @speakerX = Speaker.find_by_email(params[:email])
+    @current_nav_identifier = :home
+    @minions = User.where(["manager_id=?",current_user.id])
+
+    @minions_details = Array.new
+    @minions.each do |minion|
+      @minions_details << [minion.email,minion.id,0,0,minion.givenname,minion.sn]
+      puts "** #{[minion.email,minion.id,0,0]}"
     end
-  end
 
-  def days
-    authorize! :days, :home
-    @days = Day.all
-    @dayX = @days.sort_by {|x| [x.ddatey,x.ddatem,x.ddated] }
-
-  end
-
-  def speakers
-    authorize! :speakers, :home
-    @speakerA = Speaker.all
-
-  end
-
-  def account
-    authorize! :account, :home
-  end
-
-  def notifications
-    authorize! :notifications, :home
-  end
-
-  def biography
-    authorize! :biography, :home
-    @speaker = Speaker.find_by_email(current_user.email)
-  end
-
-  def biography_update
-    authorize! :biography_update, :home
-    @speaker = Speaker.find_by_email(current_user.email)
-    if @speaker.update(biography_params)
-      flash[:notice] = "Biography successfully updated"
-      redirect_to "/speaker?id=#{@speaker.id}"
-    else
-      flash[:alert] = "A problem occured while updating"
-      render 'biography'
+    #extracting ids to an array
+    minion_ids = []
+    @minions_details.each do |detail|
+     minion_ids << detail[1]
     end
-  end
+    #
+    # Regulating request options
+    #
 
-  private
-  def biography_params
-    params.require(:speaker).permit(:to_display, :speaker_title, :forename, :surname, :organisation, :display_email, :biography, :academic_background, :website, :facebook, :twitter, :linkedIn, :avatar, :avatar_cache, :remove_avatar)
-  end
+    @training_categories = TrainingCategory.all
 
+
+    @categories = Array.new
+    @training_categories.each do |category|
+      @categories << category.category
+    end
+
+
+
+    @request_options = @categories
+    @request_categories = Request.where(user_id:current_user.id)
+    requested_array = []
+    @request_categories.each do |cat|
+      requested_array << cat.category
+    end
+    puts "************* requested_array:"
+    puts requested_array
+    puts "*************"
+    @request_options_minus = @request_options - requested_array
+    #
+    # Loop to count how many times each request appears in the database
+    #
+
+    @minions_requests = Request.where(user_id:minion_ids)
+    @category_counts = []
+    @minions_requests.each do |request|
+
+     # puts " start of request:  #{request.category}  loop"
+
+      found = false
+      @category_counts.each do |cat_count|
+        if cat_count[0] == request.category
+          cat_count[1] += 1
+          found = true;
+          break;
+        end
+      end
+
+      if found == false
+       #"FAILED TO FIND CATEGORY IN ARRAY, ADDING NEW "
+        @category_counts << [request.category,1]
+      end
+    end# end of request loop
+
+    #@hash1 = Hash.new("value" => @category_counts[0][1], "label" => @category_counts[0][0],"color" => "#7955A3","highlight"=>"#FF5A5E")
+
+
+    # puts @minions_details
+    @minions_objectives = Objective.where(user_id:minion_ids)
+
+    @minions_objectives.each do |objective|
+      @minions_details.each do |user|
+        if objective.user_id == user[1]
+          if objective.status == 1
+            if objective.completed?
+              user[2]+=1
+            else
+              user[3]+=1
+            end
+          end
+        end
+      end
+    end
+    #loop ends
+
+    #finding top manager, with no managers above them
+    if current_user.manager?
+      if not(current_user.manager_id)
+        @top_boss = true
+      end
+    end
+
+  end #end of Home function
 
 end

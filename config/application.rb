@@ -1,15 +1,23 @@
 require File.expand_path('../boot', __FILE__)
 
 require 'rails/all'
-
+require 'csv'
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
-module HUt21
+# Require gems used by epi_cas
+require 'devise'
+require 'devise_cas_authenticatable'
+require "devise_ldap_authenticatable"
+require 'sheffield_ldap_lookup'
+module Team18
   class Application < Rails::Application
     # Send queued jobs to delayed_job
     config.active_job.queue_adapter = :delayed_job
+
+    #this line added for autoload of lib
+    config.autoload_paths += %W(#{config.root}/lib)
 
     # This points to our own routes middleware to handle exceptions
     config.exceptions_app = self.routes

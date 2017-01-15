@@ -1,0 +1,79 @@
+- content_for :title, "Performance Review"
+-if current_user.manager?
+  .row{style:"max-width: 1200px;margin: auto;"}
+    %h1
+      %span{class:"glyphicon glyphicon-dashboard"}
+      Performance Review
+  -if @minions.count > 0 and @manager_objectives.count > 0
+    .row{style:"max-width: 1200px;margin: auto;"}
+      .col-md-6
+        .panel.panel-primary
+          .panel-heading Objectives Statistics:
+          .panel-body
+            .table-responsive
+              #dvData1
+                %table{class:'table table-striped table-bordered table-condensed',:summary => "Objective detail view"}
+                  %tr
+                    %td{:style => 'font-weight: bold'}  Total Employees:
+                    %td= @minion_ids.count
+                  %tr
+                    %td{:style => 'font-weight: bold'}  Total Objectives:
+                    %td= @manager_objectives.count
+                  %tr
+                    %td{:style => 'font-weight: bold'} Completed Objectives:
+                    %td= "#{@manager_objectives.where(completed:true).count} | #{(@manager_objectives.where(completed:true).count*100)/@manager_objectives.count}%"
+                  %tr
+                    %td{:style => 'font-weight: bold'} Uncompleted Objectives:
+                    %td= "#{@manager_objectives.where(completed:false).count} | #{(@manager_objectives.where(completed:false).count*100)/@manager_objectives.count}%"
+
+                / Button trigger modal
+                %button.btn.btn-primary{"data-target" => "#myModal", "data-toggle" => "modal", :type => "button"}
+                  %span{class:"glyphicon glyphicon-save"}
+                  Export Performance Data
+
+                / Modal
+                #myModal.modal.fade{"aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+                  .modal-dialog{:role => "document"}
+                    .modal-content
+                      .modal-header
+                        %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+                          %span{"aria-hidden" => "true"} &times;
+                        %h4#myModalLabel.modal-title Export Performance Data
+                      .modal-body
+                        Download CSV file
+                      .modal-footer
+                        -#%button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} Close
+                        %a.export1{:href => "#"} Download
+
+      .col-md-6
+        .panel.panel-default
+          .panel-heading Pie-chart:
+          .panel-body
+            .embed-responsive.embed-responsive-4by3
+              %canvas#canvas{:class => "embed-responsive-item"}
+            #js-legend.chart-legend{:style => "list-style: none;"}
+
+      -string1 = ""
+      -item = 0
+      -colors = ["'#7955A3'","'#99CCCF'","'#DC143C'","'#FF6347'","'#7CFC00'"]
+      -highlight_color = "'#DCF3D8'"
+      -string1 = "{value: #{@manager_objectives.where(completed:true).count},color:'#7955A3',highlight:"+highlight_color+",label: 'Completed Objectives'},"
+      -string1 = string1+"{value: #{@manager_objectives.where(completed:false).count},color:'#99CCCF',highlight:"+highlight_color+",label: 'Uncompleted Objectives'},"
+      -item = 2
+
+    :javascript
+    jQuery(function() {
+      var data, myNewChart;
+      var data = [#{string1}]
+      var options = {
+        responsive : true,
+      }
+      var myNewChart = new Chart($("#canvas").get(0).getContext("2d")).Pie(data,options);
+      document.getElementById('js-legend').innerHTML = myNewChart.generateLegend();
+    });
+
+
+  -else
+    %h3 You don't have any employees.
+-else
+  %h3 You are not authorised to view this page

@@ -1,0 +1,134 @@
+- content_for :title, "Home"
+- minion_count = @minions.count
+-# - puts " =======  minion details: #{@minions_details}"
+
+.row
+  -if current_user.manager.present? or current_user.admin.present? or current_user.manager_id.present?
+    .col-md-12
+      %h1
+        %span{class:"glyphicon glyphicon-home"}
+        Dashboard
+    .col-md-6
+      .panel.panel-primary
+        .panel-heading
+          Company Values
+          -if current_user.admin?
+            = link_to '<i class="fa fa-cog"></i> Edit'.html_safe, company_values_path, class: 'btn btn-default pull-right'
+            .clearfix
+        .panel-body
+          .flexslider{}
+            %ul.slides
+              -@values.each do |value|
+
+                -button_class = getFaColour(value.colour)
+                %li
+                  %a.btn.btn-lg.btn-vals{:class => button_class, style:"width:220px"}
+                    %span{:class => "fa fa-" + value.icon}
+                    =value.company_value
+    -if (@top_boss)
+      .col-md-6
+        .panel.panel-success
+          .panel-heading Request Training
+          .panel-body
+            You are not managed by anyone so cannot request training
+    -else
+      -if can?(:create, Request) and not(@top_boss)
+        .col-md-6
+          .panel.panel-success
+            .panel-heading Request Training
+            .panel-body
+              -if @request_options.length > 0
+                -if @request_options_minus.length > 0
+                  =render(partial:'request_form')
+                -else
+                  Training request limit has been reached
+              -else
+                An admin user needs to create training categories
+
+    -if can?(:destroy, Objective)
+      .col-md-6
+        .panel.panel-warning
+          .panel-heading Objectives Completion
+          .panel-body
+            - if minion_count > 0
+              -@minions_details.each do |minion|
+                -total = minion[3] + minion[2]
+                -if total > 0
+                  -completed = (minion[2].to_f/total)*100
+                  -uncompleted = (minion[3].to_f/total)*100
+                  %a.btn.popovers{"data-content" => "<a href='mailto:#{minion[0]}'>#{minion[0]}</a>", "data-toggle" => "popover", :href => "#", :role => "button"} #{minion[4]} #{minion[5]}
+                  .progress
+                    -if completed < 40
+                      .progress-bar.progress-bar-danger{"aria-valuemax" => "100", "aria-valuemin" => "0", "aria-valuenow" => "40", :role => "progressbar", :style => "width: #{completed}%"}
+                        -if completed < 5
+                          %span{:style => "color:#DC143C;"} #{completed.to_i}%
+                        -else
+                          #{completed.to_i}%
+                    -if completed < 70 and completed > 40
+                      .progress-bar.progress-bar-warning{"aria-valuemax" => "100", "aria-valuemin" => "0", "aria-valuenow" => "40", :role => "progressbar", :style => "width: #{completed}%"}
+                        #{completed.to_i}%
+                    -if completed >= 70
+                      .progress-bar.progress-bar-success{"aria-valuemax" => "100", "aria-valuemin" => "0", "aria-valuenow" => "40", :role => "progressbar", :style => "width: #{completed}%"}
+                        #{completed.to_i}%
+                -else
+                  %p{:style => "color:#DC143C"}= "No objecives set for #{minion[4]} #{minion[5]}"
+            -else
+              ="No employees to show"
+
+      -completed = Objective.where(["completed = ?",true]).count
+      -puts completed
+
+      -uncompleted = Objective.where(["completed = ?",false]).count
+      -puts uncompleted
+
+      -string1 = ""
+      -item = 0
+      -colors = ["'#7955A3'","'#99CCCF'","'#DC143C'","'#FF6347'","'#7CFC00'"]
+      -highlight_color = "'#DCF3D8'"
+      -@category_counts.length.times do
+        -string1 = string1+"{value: #{@category_counts[item][1]},color:"+cycle(colors)+",highlight:"+highlight_color+",label: '#{@category_counts[item][0]}'},"
+        -item += 1
+
+    :javascript
+      jQuery(function() {
+        var data, myNewChart;
+        var data = [#{string1}]
+        var options = {
+          responsive : true,
+        }
+        var myNewChart = new Chart($("#canvas").get(0).getContext("2d")).Pie(data,options);
+        document.getElementById('js-legend').innerHTML = myNewChart.generateLegend();
+      });
+
+    -if can?(:edit, Request)
+      .column
+        .col-md-6
+          .panel.panel-info
+            .panel-heading
+              Training Requests Statistics
+              = link_to 'More info', requests_path, class: 'btn btn-default pull-right'
+              .clearfix
+            .panel-body
+              - if (minion_count > 0)
+                -if @category_counts.length != 0
+                  .embed-responsive.embed-responsive-4by3
+                    %canvas#canvas{:class => "embed-responsive-item"}
+                  #js-legend.chart-legend{:style => "list-style: none;"}
+                -else
+                  ="No requests to show"
+              -else
+                ="No employees to show"
+
+  - else
+    .col-md-12
+      .alert.alert-warning{ :style =>"text-align: center; " }
+        %a.close{"aria-label" => "close", "data-dismiss" => "alert", :href => "#"} ×
+        %strong{:style => "font-size: 20px;"} Welcome, #{current_user.givenname} #{current_user.sn}
+        %p{:style => "font-size: 30px;"} Thank you for registering your account
+        %p{:style => "font-size: 20px;"} Please wait whilst an admin user activates your account
+        %p #{current_user.manager} #{current_user.admin} #{current_user.manager_id}
+
+:coffee
+  $ ->
+    $('#show-flash').on 'click', ->
+      $.flashAlert('Hello world!', 'alert-success')
